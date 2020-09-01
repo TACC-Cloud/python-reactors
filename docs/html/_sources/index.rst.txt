@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to SEIR-city's documentation!
-=====================================
+Welcome to Reactors SDK documentation!
+======================================
 
 .. toctree::
    :maxdepth: 2

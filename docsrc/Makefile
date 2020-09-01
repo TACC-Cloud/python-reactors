@@ -8,7 +8,7 @@ SPHINXOPTS    ?= $(GRAPHVIZ_DOT_ARGS)
 SPHINXBUILD   ?= sphinx-build
 PKGDIR        ?= ../src/reactors_sdk
 SOURCEDIR     = .
-BUILDDIR      = _build
+BUILDDIR      = ../docs
 GITHUB_DIR ?= ../docs
 
 # Put it first so that "make" without argument is like "make help".
