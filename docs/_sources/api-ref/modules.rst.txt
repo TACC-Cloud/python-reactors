@@ -1,7 +1,7 @@
-reactors_sdk
-============
+reactors
+========
 
 .. toctree::
    :maxdepth: 4
 
-   reactors_sdk
+   reactors

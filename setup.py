@@ -17,7 +17,7 @@ from setuptools.extension import Extension
 
 # Initialize variables
 repo_url = 'https://github.com/TACC-Cloud/python-reactors'
-pkg_dir = 'src/reactors_sdk'
+pkg_dir = 'src/reactors'
 
 # Create version file
 VERSION = "0.7.0"
@@ -36,14 +36,13 @@ else:
 # Arguments marked as "Required" below must be included for upload to PyPI.
 # Fields marked as "Optional" may be commented out.
 setup(
-    name='reactors_sdk',  # package name
+    name='reactors',  # package name
     version=VERSION,  # Required
     description='Software development kit for Tapis actors',
     long_description=README_contents,
     long_description_content_type='text/markdown',
     url=repo_url,
     author='Matthew W Vaughn, Ethan Ho, Shweta Gopaulakrishnan',
-    author_email='eho@tacc.utexas.edu',
     classifiers=[  # https://pypi.org/classifiers/
         # How mature is this project? Common values are
         #   3 - Alpha
