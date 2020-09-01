@@ -8,7 +8,7 @@ SPHINXOPTS    ?= $(GRAPHVIZ_DOT_ARGS)
 SPHINXBUILD   ?= sphinx-build
 PKGDIR        ?= ../src/reactors_sdk
 SOURCEDIR     = .
-BUILDDIR      = ../docs
+BUILDDIR      = _build
 GITHUB_DIR ?= ../docs
 
 # Put it first so that "make" without argument is like "make help".
@@ -21,7 +21,7 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: clean api-ref Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-	#cp -a "$(BUILDDIR)/$@/" "$(GITHUB_DIR)"
+	cp -a "$(BUILDDIR)/$@/" "$(GITHUB_DIR)"
 
 api-ref:
 	rm -rf $(SOURCEDIR)/$@
