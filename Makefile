@@ -53,16 +53,16 @@ git:
 # Build Docker image
 ####################################
 PYTEST_OPTS ?= -s -vvv
-.PHONY: image shell tests tests-pytest clean clean-image clean-tests dist/$(PKG)-$(VERSION).tar.gz
+.PHONY: image shell tests tests-pytest clean clean-image clean-tests
+
+sdist: dist/$(PKG)-$(VERSION).tar.gz
 
 dist/$(PKG)-$(VERSION).tar.gz: setup.py | $(PYTHON)
 	$(PYTHON) setup.py sdist -q
 
-image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz requirements-stable.txt | docker
+image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
 	cp $(word 2, $^) .
-	docker build --build-arg SDIST=$(PKG)-$(VERSION) \
-		--build-arg REQUIREMENTS=$(word 3, $^) \
-		-t $(IMAGE_DOCKER) -f $< .
+	docker build --build-arg SDIST=$(word 2, $^) -t $(IMAGE_DOCKER) -f $< .
 	rm $(word 2, $^) $(PKG)-$(VERSION).tar.gz
 
 ####################################
