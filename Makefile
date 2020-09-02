@@ -2,6 +2,9 @@ PYTHON ?= python3
 PREF_SHELL ?= bash
 GITREF=$(shell git rev-parse --short HEAD)
 GITREF_FULL=$(shell git rev-parse HEAD)
+AGAVE_CREDS ?= ${HOME}/.agave/current
+PYTEST_OPTS ?= -s -vvv
+DOT_ENV ?= ./.env
 
 ####################################
 # Docker image & dist
@@ -14,13 +17,11 @@ IMAGE_ORG ?= enho
 IMAGE_NAME ?= $(PKGL)
 IMAGE_TAG ?= $(VERSION)
 IMAGE_DOCKER ?= $(IMAGE_ORG)/$(IMAGE_NAME):$(IMAGE_TAG)
-DOCKER_OPTS ?= --rm -it
 
 ####################################
 # Sanity checks
 ####################################
-
-PROGRAMS := git docker $(PYTHON) singularity tox
+PROGRAMS := git docker $(PYTHON) singularity tox jq
 .PHONY: $(PROGRAMS)
 .SILENT: $(PROGRAMS)
 
@@ -30,7 +31,7 @@ docker:
 		echo "\n[ERROR] Could not communicate with docker daemon. You may need to run with sudo.\n"; \
 		exit 1; \
 	fi
-$(PYTHON) poetry singularity:
+$(PYTHON) poetry singularity jq:
 	$@ --help &> /dev/null; \
 	if [ ! $$? -eq 0 ]; then \
 		echo "[ERROR] $@ does not seem to be on your path. Please install $@"; \
@@ -52,7 +53,6 @@ git:
 ####################################
 # Build Docker image
 ####################################
-PYTEST_OPTS ?= -s -vvv
 .PHONY: image shell tests tests-pytest clean clean-image clean-tests
 
 sdist: dist/$(PKG)-$(VERSION).tar.gz
@@ -66,15 +66,19 @@ image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
 ####################################
 # Tests
 ####################################
-.PHONY: pytest-native
+.PHONY: pytest-native $(DOT_ENV)
 
-tests: pytest-native
+$(DOT_ENV): | jq
+	$(PREF_SHELL) scripts/get_agave_creds.sh > $@
+
+pytest-docker: image $(DOT_ENV) | docker
+	docker run --rm -t --env-file $(word 2, $^) $(IMAGE_DOCKER) \
+		pytest $(PYTEST_OPTS) /$(PKG)-$(VERSION)/tests
 
 pytest-native: | $(PYTHON)
 	PYTHONPATH=./src $(PYTHON) -m pytest $(PYTEST_OPTS)
 
-pytest-docker: image | docker
-	docker run --rm -t $(IMAGE_DOCKER) pytest /$(PKG)-$(VERSION)/tests
+tests: pytest-native
 
 shell: image | docker
 	docker run --rm -it $(IMAGE_DOCKER) bash
