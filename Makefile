@@ -61,9 +61,7 @@ dist/$(PKG)-$(VERSION).tar.gz: setup.py | $(PYTHON)
 	$(PYTHON) setup.py sdist -q
 
 image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
-	cp $(word 2, $^) .
 	docker build --build-arg SDIST=$(word 2, $^) -t $(IMAGE_DOCKER) -f $< .
-	rm $(word 2, $^) $(PKG)-$(VERSION).tar.gz
 
 ####################################
 # Tests
@@ -74,6 +72,9 @@ tests: pytest-native
 
 pytest-native: | $(PYTHON)
 	PYTHONPATH=./src $(PYTHON) -m pytest $(PYTEST_OPTS)
+
+pytest-docker: image | docker
+	docker run --rm -t $(IMAGE_DOCKER) pytest /$(PKG)-$(VERSION)/tests
 
 shell: image | docker
 	docker run --rm -it $(IMAGE_DOCKER) bash

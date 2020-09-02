@@ -7,6 +7,7 @@ jmespath>=0.9.3
 petname>=2.2
 python-jsonschema-objects>=0.3.1
 tenacity>=5.0.2
+git://github.com/Julian/jsonschema@v3.0.0a3#egg=jsonschema
 ####################
 # TACC-maintained  #
 ####################
