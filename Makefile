@@ -54,12 +54,12 @@ git:
 ####################################
 # Build Docker image
 ####################################
-.PHONY: image shell tests tests-pytest clean clean-image clean-tests
+.PHONY: sdist dist/$(PKG)-$(VERSION).tar.gz image shell tests pytest-docker pytest-native clean clean-tests
 
 sdist: dist/$(PKG)-$(VERSION).tar.gz
 
 dist/$(PKG)-$(VERSION).tar.gz: setup.py | $(PYTHON)
-	$(PYTHON) setup.py sdist -q
+	$(PYTHON) $< sdist -q
 
 image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
 	docker build --build-arg SDIST=$(word 2, $^) -t $(IMAGE_DOCKER) -f $< .
