@@ -8,6 +8,7 @@ sys.path.insert(0, PARENT)
 sys.path.append('/reactors')
 
 
+@pytest.mark.skip
 def test_linked_reactors_present():
     '''Ensure critical properties are present and the right class'''
     r = Reactor()

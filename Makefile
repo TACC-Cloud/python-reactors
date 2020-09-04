@@ -4,6 +4,7 @@ GITREF=$(shell git rev-parse --short HEAD)
 GITREF_FULL=$(shell git rev-parse HEAD)
 AGAVE_CREDS ?= ${HOME}/.agave/current
 PYTEST_OPTS ?= -s -vvv
+PYTEST_DIR ?= tests
 DOT_ENV ?= ./.env
 
 ####################################
@@ -71,17 +72,22 @@ image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
 $(DOT_ENV): | jq
 	$(PREF_SHELL) scripts/get_agave_creds.sh > $@
 
-pytest-docker: image $(DOT_ENV) | docker
-	docker run --rm -t --env-file $(word 2, $^) $(IMAGE_DOCKER) \
-		pytest $(PYTEST_OPTS) /$(PKG)-$(VERSION)/tests
+pytest-docker: clean image $(DOT_ENV) | docker
+	docker run --rm -t \
+		-v ${HOME}/.agave:/root/.agave \
+		$(IMAGE_DOCKER) \
+		python3 -m pytest $(PYTEST_OPTS) /$(PKG)-$(VERSION)/$(PYTEST_DIR)
+		#--env-file $(word 2, $^) \
 
-pytest-native: | $(PYTHON)
-	PYTHONPATH=./src $(PYTHON) -m pytest $(PYTEST_OPTS)
+pytest-native: clean | $(PYTHON)
+	PYTHONPATH=./src $(PYTHON) -m pytest $(PYTEST_OPTS) $(PYTEST_DIR)
 
 tests: pytest-native
 
 shell: image | docker
-	docker run --rm -it $(IMAGE_DOCKER) bash
+	docker run --rm -it \
+	-v ${HOME}/.agave:/root/.agave \
+	$(IMAGE_DOCKER) bash
 
 clean: clean-tests
 
@@ -99,6 +105,4 @@ clean-tests:
 
 docs:
 	cd docsrc && make html
-
-
 
