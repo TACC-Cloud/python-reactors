@@ -37,14 +37,14 @@ ENV _REACTOR_TEMP=${SCRATCH}
 # Install components from Python SDK, which is still maintained in the
 # base-images repo, but is being prepared to move to a standalone repository
 
+# requirements.txt for the client-side SDK
+COPY ${REQUIREMENTS} /
+RUN pip install -qr /${REQUIREMENTS}
+
 # The main client-side SDK. Adds extended capability and utility functions
 # to the Python runtime.
 ADD ${SDIST} /
 RUN pip install -q /reactors-*
-
-# requirements.txt for the client-side SDK
-COPY ${REQUIREMENTS} /
-RUN pip install -qr /${REQUIREMENTS}
 
 # Track to latest SD2 datacatalog
 # RUN pip3 install --upgrade git+https://github.com/SD2E/python-datacatalog.git@${DATACATALOG_BRANCH}
