@@ -32,3 +32,19 @@ Ethan Ho & Matt Vaughn:
     * Most of these utils take an Agave client as first argument anyway
 * Port Ethan's `pipeline_rx_utils` package to `agaveutils`
     * Agave glob function?
+
+## Questions for Matt
+
+* Caveats of reverting to bottom up testing?
+    * SDK passes tests for a single (or small subset of) environments
+    * Require base images to pass SDK tests for each env
+* Currently, running tests for SDK mounts the `~/.agave` directory. Could we loosen this restriction, and only require an `_abaco_access_token` env?
+    * I believe one would also need, minimally, a username and API server URL
+    * I believe this mimics the production env
+* In the Slack thread, you hinted at a discrepancy between an `env.yml` and `usage.yml`; could you expand on this thought a bit?
+> So, maybe we don't computationally process an extra file like env.yml - instead maybe we do usage.yml
+
+* What do we think about making this file JSON schema, e.g. `env.jsonschema`?
+    * Have the option of [embedding](https://json-schema.org/understanding-json-schema/structuring.html) the `message.jsonschema` in the `message_dict` field of the broader `env.jsonschema`
+    * Reactors are already have schema validation methods
+    * Would a schema format provide necessary and sufficient information about the required fields in the context?
