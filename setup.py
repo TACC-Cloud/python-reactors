@@ -64,9 +64,7 @@ setup(
     package_data={},
     include_package_data=True,
     python_requires='>=3.6, <4',
-    install_requires=[
-        'agavepy',
-    ],
+    install_requires=[],
     extras_require={
         'dev': ['pytest'],
         'test': ['pytest']
