@@ -17,3 +17,5 @@ pycodestyle==2.3.1
 # Move to this while we are developing the Reactors package so we can sync w/ updates to AgavePy 
 git+https://github.com/TACC/agavepy@master
 # agavepy==1.0.0a10
+pytz
+validators
