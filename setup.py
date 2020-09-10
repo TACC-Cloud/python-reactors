@@ -100,6 +100,7 @@ setup(
     packages=find_packages("src", exclude=[]),
     install_requires=get_requirements()[0],
     dependency_links=get_requirements()[1],
+    data_files=[('', ['requirements.txt'])],
     package_data={},
     include_package_data=True,
     python_requires='>=3.6, <4',
