@@ -72,7 +72,7 @@ image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
 $(DOT_ENV): | jq
 	$(PREF_SHELL) scripts/get_agave_creds.sh > $@
 
-pytest-docker: clean image $(DOT_ENV) | docker
+pytest-docker: clean image | docker
 	docker run --rm -t \
 		-v ${HOME}/.agave:/root/.agave \
 		$(IMAGE_DOCKER) \
