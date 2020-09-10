@@ -7,7 +7,7 @@ jmespath>=0.9.3
 petname>=2.2
 python-jsonschema-objects>=0.3.1
 tenacity>=5.0.2
-git+https://github.com/Julian/jsonschema@v3.0.0a3#egg=jsonschema
+jsonschema@git+https://github.com/Julian/jsonschema@v3.0.0a3#egg=jsonschema
 ####################
 # TACC-maintained  #
 ####################
@@ -15,5 +15,5 @@ tacconfig>=0.5.2
 requests_futures>=0.9.7
 pycodestyle==2.3.1
 # Move to this while we are developing the Reactors package so we can sync w/ updates to AgavePy
-git+https://github.com/TACC/agavepy@master
+agavepy@git+https://github.com/TACC/agavepy@master
 # agavepy==1.0.0a10

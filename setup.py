@@ -32,46 +32,21 @@ def get_readme(fp='./README.md'):
         return str("")
 
 def get_requirements(fp='./requirements.txt'):
-    """Parse requirements from requirements.txt. Returns tuple of
-    `install_requires` and `dependency_links`, respectively.
+    """Parse requirements from requirements.txt. Returns list for
+    `install_requires`.
     """
-
-    def remove_prefix(s, prefix):
-        if s.startswith(prefix):
-            start = len(prefix)
-        else:
-            start = 0
-        return s[start:]
-
-    def remove_prefixes(s, prefixes):
-        for prefix in prefixes:
-            s = remove_prefix(s, prefix)
-        return s
-
-
-    link_prefixes = ("git+", "svn+", "hg+", "-e ")
     comment_prefixes = ("#")
-
-    links = list()
     requires = list()
 
     # Read requirements.txt to list of lines
     with open(fp) as f:
         req_raw = f.read().splitlines()
 
-    # Iterate over lines
     for req in req_raw:
-        is_link = any([req.startswith(prefix) for prefix in link_prefixes])
         is_comment = any([req.startswith(prefix) for prefix in comment_prefixes])
-
-        if is_comment:
-            pass
-        elif is_link:
-            links.append(remove_prefixes(req, link_prefixes))
-        else:
+        if not is_comment:
             requires.append(req)
-
-    return (requires, links)
+    return requires
 
 
 setup(
@@ -98,8 +73,7 @@ setup(
     keywords='sdk tapis actors reactors',
     package_dir={'':'src'},
     packages=find_packages("src", exclude=[]),
-    install_requires=get_requirements()[0],
-    dependency_links=get_requirements()[1],
+    install_requires=get_requirements(),
     data_files=[('', ['requirements.txt'])],
     package_data={},
     include_package_data=True,
