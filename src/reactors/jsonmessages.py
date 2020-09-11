@@ -1,52 +1,94 @@
+"""Classes and functions for working with and validating JSON messages
+"""
+import glob
+import functools
 import json
+import jsonschema
 import os
-from jsonschema import validate, FormatChecker, ValidationError
+import re
+import requests
+import validators
 
+class formatChecker(jsonschema.FormatChecker):
+    """Enables python-jsonschema to validate ``format`` fields"""
+    def __init__(self):
+        jsonschema.FormatChecker.__init__(self)
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PWD = os.getcwd()
-ROOT = '/'
-MESSAGE_SCHEMA = os.path.join(HERE, 'message.jsonschema')
-
-
-def _validate_return_bool(object_json, schema_json, permissive=True):
-
-        class formatChecker(FormatChecker):
-            def __init__(self):
-                FormatChecker.__init__(self)
-
-        try:
-            validate(object_json, schema_json, format_checker=formatChecker())
-            return True
-        except Exception as e:
-            if permissive is True:
-                return False
-            else:
-                raise Exception(e)
-
-
-def validate_message(messagedict,
-                     messageschema=MESSAGE_SCHEMA,
-                     permissive=True):
+@functools.lru_cache(maxsize=32)
+def find_schema_files():
+    """Searches defined filesystem locations for candidate JSON schema files
     """
-    Validate dictonary derived from JSON string against a schema
+    schema_files = []
+    DIRS = [os.path.join(os.getcwd(), 'schemas'), os.getcwd(), '/schemas', '/']
+    for d in DIRS:
+        result = glob.glob(os.path.join(d, '*.jsonschema'))
+        schema_files.extend(result)
+    return schema_files
 
-    Positional arguments:
-    messagedict - dict - JSON-derived object
+@functools.lru_cache(maxsize=32)
+def fetch_schema_from_url(url):
+    """Fetches a schema document from a URL.
+    """
+    r = requests.get(url)
+    r.raise_for_status
+    return r.json()
 
-    Keyword arguments:
-    messageschema - str - path to the requisite JSON schema file
-    permissive - bool - swallow validation errors [True]
+def load_schema(schema):
+    """Returns a materialized schema from dict, URL, or file.
+    """
+    if isinstance(schema, str):
+        if validators.url(schema):
+            return fetch_schema_from_url(schema)
+        else:
+            # remove file://
+            schema = re.sub('^file://', '', schema)
+            with open(schema) as schemaf:
+                return json.loads(schemaf.read())
+    # TODO - accept filehandle
+    elif isinstance(schema, dict):
+        # Enforce that the dict loads as JSON
+        return json.loads(json.dumps(schema))
+    else:
+        raise ValueError('Value passed for schema must be dict, url, or filename')  
+
+def get_schema_identifier(schema):
+    """Returns an identifying string from a JSON schema.
     """
     try:
-        with open(messageschema) as schema:
-            schema_json = json.loads(schema.read())
-    except Exception as e:
-        if permissive is False:
-            raise Exception("Schema error", e)
-        else:
-            return False
+        # TODO - consider adding other methods to formulate an identifier
+        return schema.get('$id')
+    except KeyError:
+        raise ValueError('Schema is missing an $id field')
 
-    return _validate_return_bool(messagedict,
-                                 schema_json,
-                                 permissive=permissive)
+def validate_message(message, schema, permissive=True):
+    """Validates that a message conforms to the given schema.
+    """
+    try:
+
+        jsonschema.validate(message, load_schema(schema), format_checker=formatChecker())
+        return True
+    except Exception:
+        if permissive is True:
+            return False
+        else:
+            raise
+
+def classify_message(message, schemas, allow_multiple=False, permissive=True):
+    """Classifies which (if any) provided schemas a message matches.
+    """
+    classifications = []
+    for s in schemas:
+        try:
+            schema_dict = load_schema(s)
+            validate_message(message, schema_dict, permissive=False)
+            classifications.append(get_schema_identifier(schema_dict))
+        except Exception:
+            if permissive:
+                pass
+            else:
+                raise
+    if len(classifications) > 1 and allow_multiple is False:
+        raise ValueError('Message matches >1 ({}) schemas'.format(len(classifications)))
+    if len(classifications) == 0 and permissive is False:
+        raise ValueError('Message matches no schemas')
+    return classifications
