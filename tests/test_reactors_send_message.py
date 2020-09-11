@@ -10,8 +10,8 @@ sys.path.append('/reactors')
 
 
 @pytest.mark.parametrize("actor_id, message, success", [
-    ('gO0JeWaBM4p3J', {'text': 'gO0JeWaBM4p3J'}, True),
-    ('sd2eadm-listener', {'text': 'sd2eadm-listener'}, True),
+    ('4xvmNVBxeEDRN', {'text': '4xvmNVBxeEDRN'}, True),
+    # ('sd2eadm-listener', {'text': 'sd2eadm-listener'}, True),
     ('meep-meep-meep', {'text': 'meep-meep-meep'}, False)])
 def test_reactors_send_message(actor_id, message, success):
     r = Reactor()

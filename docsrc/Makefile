@@ -6,7 +6,7 @@
 GRAPHVIZ_DOT_ARGS ?= -D graphviz_dot_args="-Gratio=compress"
 SPHINXOPTS    ?= $(GRAPHVIZ_DOT_ARGS)
 SPHINXBUILD   ?= sphinx-build
-PKGDIR        ?= ../src/reactors_sdk
+PKGDIR        ?= ../src/reactors
 SOURCEDIR     = .
 BUILDDIR      = _build
 GITHUB_DIR ?= ../docs
