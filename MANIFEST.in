@@ -1,2 +1,3 @@
 graft tests
 include src/**/*.yml
+include src/reactors/schemas/*.jsonschema
