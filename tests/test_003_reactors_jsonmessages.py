@@ -10,21 +10,19 @@ import testdata
 def test_data():
     return testdata.AbacoJSONmessages().data()
 
-
+@pytest.mark.skip
 def test_validate_schema():
     '''Ensure at least one schema can validate'''
-    pytest.skip()
     r = Reactor()
-    messagedict = json.loads('{"key": "value"}')
-    valid = r.validate_message(messagedict,
-                               messageschema='/message.jsonschema',
+    message = json.loads('{"key": "value"}')
+    valid = r.validate_message(message,
+                               schema='/message.jsonschema',
                                permissive=False)
     assert valid is True
 
-
+@pytest.mark.skip
 def test_abacoschemas(test_data):
     '''Test all known Abaco schemas'''
-    pytest.skip()
     r = Reactor()
     exceptions = []
     for comp in test_data:
@@ -34,7 +32,7 @@ def test_abacoschemas(test_data):
         validates = comp.get('validates')
         try:
             r.validate_message(mdict,
-                               messageschema=schem,
+                               schema=schem,
                                permissive=False)
         except Exception as e:
             # The message did not validate tho we expected it to
