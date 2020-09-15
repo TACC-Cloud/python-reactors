@@ -1,6 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "title": "AbacoMessageEmail",
+    "$id": "abaco_json_email",
     "description": "Outgoing Email Message",
     "type": "object",
     "properties": {
