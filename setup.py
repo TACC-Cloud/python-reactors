@@ -78,10 +78,6 @@ setup(
     package_data={},
     include_package_data=True,
     python_requires='>=3.6, <4',
-<<<<<<< HEAD
-=======
-    install_requires=[],
->>>>>>> fix_context
     extras_require={
         'dev': ['pytest'],
         'test': ['pytest']
