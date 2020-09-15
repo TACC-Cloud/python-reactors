@@ -8,7 +8,9 @@ import pytz
 from tacconfig import config as tacconfig
 
 NAMESPACE = 'TACC'
-CONFIG_LOCS = ['/', os.getcwd()]
+HERE = os.path.dirname(os.path.abspath(__file__))
+# Search path for config.yml is root, module path, pwd
+CONFIG_LOCS = ['/', HERE, os.getcwd()]
 
 __all__ = ['parse_boolean', 'read_config', 'get_redaction_strings', 'get_host_ip']
 
