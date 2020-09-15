@@ -1,19 +1,13 @@
-from __future__ import unicode_literals
+import pytest
 import os
 import sys
 
 from attrdict import AttrDict
 from agavepy.agave import Agave
-from builtins import str
 from logging import Logger
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PARENT = os.path.dirname(HERE)
-sys.path.insert(0, PARENT)
-sys.path.append('/reactors')
-import pytest
-from reactors.utils import Reactor, ABACO_VARS_MAP
-
+from reactors.runtime import Reactor
+from reactors.abaco import ABACO_CONTEXT_MAP
 
 def test_init():
     '''Ensure various properties are present and the right class'''
@@ -28,21 +22,40 @@ def test_init():
     assert isinstance(r.logger, Logger)
 
 
-def test_localonly_true(monkeypatch):
+def test_localonly_true_1(monkeypatch):
     '''Check LOCALONLY x Reactor.local set -> True'''
-    monkeypatch.setenv('LOCALONLY', 1)
+    monkeypatch.setenv('LOCALONLY', '1')
     r = Reactor()
     rlocal = r.local
     assert rlocal is True
 
+def test_localonly_true_yes(monkeypatch):
+    '''Check LOCALONLY x Reactor.local set -> True'''
+    monkeypatch.setenv('LOCALONLY', 'yes')
+    r = Reactor()
+    rlocal = r.local
+    assert rlocal is True
 
-def test_localonly_false(monkeypatch):
+def test_localonly_false_empty(monkeypatch):
     '''Check LOCALONLY x Reactor.local unset -> False'''
-    monkeypatch.setenv('LOCALONLY', None)
+    monkeypatch.setenv('LOCALONLY', '')
     r = Reactor()
     rlocal = r.local
     assert rlocal is False
 
+def test_localonly_false_0(monkeypatch):
+    '''Check LOCALONLY x Reactor.local unset -> False'''
+    monkeypatch.setenv('LOCALONLY', '0')
+    r = Reactor()
+    rlocal = r.local
+    assert rlocal is False
+
+def test_localonly_false_no(monkeypatch):
+    '''Check LOCALONLY x Reactor.local unset -> False'''
+    monkeypatch.setenv('LOCALONLY', 'no')
+    r = Reactor()
+    rlocal = r.local
+    assert rlocal is False
 
 def test_username_from_env(monkeypatch):
     '''Can we pick up username from ENV'''
@@ -108,5 +121,5 @@ def test_env_from_mock():
     srv = r.client.api_server
     assert os.environ.get('_abaco_api_server', None) == srv
     assert os.environ.get('_abaco_access_token', None) == tok
-    for k, v in ABACO_VARS_MAP.items():
+    for k, v in ABACO_CONTEXT_MAP.items():
         assert v in os.environ.keys()

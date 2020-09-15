@@ -176,7 +176,7 @@ class AgaveKeyValStore(object):
 
         e.g.) _agavedb/keyname#username => keyname
         """
-        assert isinstance(keyname, basestring), \
+        assert isinstance(keyname, str), \
             "key type must be string or unicode (type: {})".format(
                 self._type(keyname))
 
@@ -444,7 +444,7 @@ class AgaveKeyValStore(object):
 
     def _value_is_valid(self, value):
         '''Value must be a string. Others may be supported later.'''
-        assert isinstance(value, basestring), \
+        assert isinstance(value, str), \
             "value must be string or unicode (type: {})".format(
                 self._type(value))
         assert len(value) <= _MAX_VAL_BYTES, \
@@ -455,7 +455,7 @@ class AgaveKeyValStore(object):
         '''Enforce key naming restrictions'''
 
         # type
-        assert isinstance(key, basestring), \
+        assert isinstance(key, str), \
             "key type must be string or unicode (type: {})".format(
                 self._type(key))
 
@@ -548,7 +548,7 @@ class AgaveKeyValStore(object):
                 "Both username and permission are required"
             assert isinstance(acl['permission'], dict), \
                 "Permission must be a dict"
-            assert isinstance(acl['username'], basestring), \
+            assert isinstance(acl['username'], str), \
                 "Username must be string or unicode"
             assert set(acl['permission'].keys()) == set(VALID_PEMS) or \
                 set(acl['permission'].keys()) <= set(VALID_PEMS), \

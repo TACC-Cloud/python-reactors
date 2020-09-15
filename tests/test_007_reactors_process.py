@@ -1,15 +1,8 @@
+import pytest
 import os
 import sys
-from builtins import int
-from past.builtins import basestring
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PARENT = os.path.dirname(HERE)
-sys.path.insert(0, PARENT)
-sys.path.append('/reactors')
-import pytest
-from reactors.utils import process
-
+from reactors import process
 
 def test_process_run(caplog, capsys, monkeypatch):
     '''Ensure various properties are present and the right class'''
@@ -22,8 +15,8 @@ def test_process_run(caplog, capsys, monkeypatch):
 
     assert isinstance(result.return_code, int)
     assert isinstance(result.elapsed_msec, (int, float))
-    assert isinstance(result.cmdline, (basestring))
-    assert isinstance(result.output, (basestring))
+    assert isinstance(result.cmdline, (str))
+    assert isinstance(result.output, (str))
     # PATH is going to be in all ENVs
     assert 'PATH' in result.output
     assert result.return_code == 0
