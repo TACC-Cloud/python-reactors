@@ -1,14 +1,10 @@
-import json
+import pytest
 import os
 import sys
-HERE = os.path.dirname(os.path.abspath(__file__))
-PARENT = os.path.dirname(HERE)
-sys.path.insert(0, PARENT)
-sys.path.append('/reactors')
-import pytest
-from reactors.utils import Reactor
-import testdata
+import json
 
+from reactors.runtime import Reactor
+import testdata
 
 @pytest.fixture(scope='session')
 def test_data():

@@ -1,22 +1,11 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from future.standard_library import install_aliases
-install_aliases()
-
+import pytest
 import os
 import sys
+
 import petname
 import re
-import pytest
-from past.builtins import basestring
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-PARENT = os.path.dirname(HERE)
-sys.path.insert(0, PARENT)
-sys.path.append('/reactors')
-from reactors.uniqueid import get_id
-from reactors.utils import Reactor
-
+from reactors.runtime import Reactor
+from reactors.abaco import new_hashid
 
 @pytest.fixture(scope='session')
 def fake_version():

@@ -1,11 +1,6 @@
+import pytest
 import os
 import sys
-import pytest
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-PARENT = os.path.dirname(HERE)
-sys.path.insert(0, PARENT)
-sys.path.insert(0, HERE)
 
 from reactors.agaveutils.entity import is_appid
 

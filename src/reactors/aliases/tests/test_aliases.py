@@ -90,7 +90,7 @@ def test_set(alias_store, fake_alias, fake_alias_prefixed, fake_actor_id):
     response = alias_store.set_alias(
         alias=fake_alias, name=fake_actor_id)
     assert response in fake_alias_prefixed
-    assert isinstance(response, basestring)
+    assert isinstance(response, str)
 
 
 def test_get_aliases(alias_store, fake_alias, fake_actor_id):
@@ -99,9 +99,9 @@ def test_get_aliases(alias_store, fake_alias, fake_actor_id):
     aliases = alias_store.get_aliases()
 #    assert aliases == 'moof'
     assert isinstance(aliases, list)
-    assert isinstance(fake_alias, basestring)
+    assert isinstance(fake_alias, str)
     for test_alias in aliases:
-        assert isinstance(test_alias, basestring)
+        assert isinstance(test_alias, str)
     assert set([fake_alias]).issubset(set(aliases)) or \
         set([fake_alias]) == set(aliases)
 
@@ -110,7 +110,7 @@ def test_get_name(alias_store, fake_alias, fake_actor_id):
     '''General test of get_name'''
     response = alias_store.get_name(alias=fake_alias)
     assert response in fake_actor_id
-    assert isinstance(response, basestring)
+    assert isinstance(response, str)
 
 
 def test_get_name_non_existent(alias_store):
@@ -168,7 +168,7 @@ def test_set_unicode_alias(alias_store, fake_alias,
     response = alias_store.set_alias(
         alias=unicode_fake_alias, name=fake_actor_id)
     assert response in fake_alias_prefixed
-    assert isinstance(response, basestring)
+    assert isinstance(response, str)
 
 
 def test_set_unicode_value(alias_store, fake_alias,
@@ -179,7 +179,7 @@ def test_set_unicode_value(alias_store, fake_alias,
     response = alias_store.set_alias(
         alias=fake_alias, name=unicode_fake_actor_id)
     assert response in fake_alias_prefixed
-    assert isinstance(response, basestring)
+    assert isinstance(response, str)
 
 
 def test_rem_all_aliases(alias_store, fake_alias):

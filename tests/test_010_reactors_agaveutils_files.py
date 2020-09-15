@@ -1,12 +1,7 @@
+import pytest
 import os
 import sys
-from builtins import int
-from past.builtins import basestring
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PARENT = os.path.dirname(HERE)
-sys.path.insert(0, PARENT)
-import pytest
 from requests.exceptions import HTTPError
 from reactors.runtime import Reactor
 from reactors import agaveutils

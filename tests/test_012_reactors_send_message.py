@@ -1,14 +1,11 @@
-from reactors.utils import Reactor
-from agavepy.agave import AgaveError
 import pytest
 import os
 import sys
-HERE = os.path.dirname(os.path.abspath(__file__))
-PARENT = os.path.dirname(HERE)
-sys.path.insert(0, PARENT)
-sys.path.append('/reactors')
 
+from agavepy.agave import AgaveError
+from reactors.utils import Reactor
 
+@pytest.mark.skip
 @pytest.mark.parametrize("actor_id, message, success", [
     ('4xvmNVBxeEDRN', {'text': '4xvmNVBxeEDRN'}, True),
     # ('sd2eadm-listener', {'text': 'sd2eadm-listener'}, True),
