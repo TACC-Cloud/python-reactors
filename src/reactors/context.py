@@ -4,8 +4,13 @@ import functools
 import glob
 import json
 import os
-import importlib
 from .jsonmessages import validate_message, load_schema
+
+# Use backport of importlib.resources for python<3.7
+try:
+    from importlib import resources as il_resources
+except ImportError:
+    import importlib_resources as il_resources
 
 
 def find_context_schema_files():
@@ -37,9 +42,10 @@ def union_context_schema(user_context_schema=None):
 def get_pkg_schema(namespace, filename):
     """Reads a JSON-formatted file with name `filename` that exists in a
     package `namespace`, and returns parsed file contents as a dict. Uses
-    `importlib.resources` to discover package resources.
+    `importlib.resources` (or backport for python<3.7) to discover
+    package resources.
     """
-    with importlib.resources.open_text(namespace, filename) as f:
+    with il_resources.open_text(namespace, filename) as f:
         schema = json.load(f)
     return schema
 
