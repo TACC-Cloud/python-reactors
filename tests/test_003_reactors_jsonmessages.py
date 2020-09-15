@@ -3,16 +3,18 @@ import os
 import sys
 import json
 
+import jsonschema
 from reactors.runtime import Reactor
+from reactors import jsonmessages
 import testdata
 
 @pytest.fixture(scope='session')
 def test_data():
     return testdata.AbacoJSONmessages().data()
 
-@pytest.mark.skip
-def test_validate_schema():
-    '''Ensure at least one schema can validate'''
+# @pytest.mark.skip
+def test_validate_named_message_jsonschema():
+    '''Ensure singular message.jsonschema will validate'''
     r = Reactor()
     message = json.loads('{"key": "value"}')
     valid = r.validate_message(message,
@@ -20,24 +22,69 @@ def test_validate_schema():
                                permissive=False)
     assert valid is True
 
-@pytest.mark.skip
-def test_abacoschemas(test_data):
-    '''Test all known Abaco schemas'''
+# @pytest.mark.skip
+def test_validate_message_jsonschema():
+    '''Ensure singular message.jsonschema can be picked up via filesystem search'''
     r = Reactor()
-    exceptions = []
-    for comp in test_data:
-        mdict = comp.get('object', {})
-        schem = os.path.join('/abacoschemas', comp.get('schema'))
-        # perm = True
-        validates = comp.get('validates')
-        try:
-            r.validate_message(mdict,
-                               schema=schem,
+    message = json.loads('{"key": "value"}')
+    valid = r.validate_message(message,
                                permissive=False)
-        except Exception as e:
-            # The message did not validate tho we expected it to
-            if validates is True:
-                exceptions.append(e)
+    assert valid is True
 
-    if len(exceptions) > 0:
-        raise Exception("Exceptions: {}".format(exceptions))
+def test_validate_message_jsonschema_throws_exception():
+    '''Ensure ValidationError can be raised'''
+    r = Reactor()
+    message = []
+    with pytest.raises(jsonschema.ValidationError):
+        valid = r.validate_message(message,
+                                permissive=False)
+
+def test_fetch_schema_from_url():
+    '''Test that schema can be retrieved from URL reference'''
+    sch = jsonmessages.load_schema('https://json.schemastore.org/appveyor')
+    assert isinstance(sch, dict)
+
+@pytest.mark.parametrize("reference, success", [
+    ('https://json.schemastore.org/appveyor', True),
+    ('https://json.schemastore.org/dummy-appveyor', False),
+    ('file:///message.jsonschema', True),
+    ('/message.jsonschema', True),
+    ('/message.txt', False),
+    ('meep-meep-meep', False)])
+def test_load_schema(reference, success):
+    '''Test that schemas can be loaded from URL and file references'''
+    if success is True:
+        sch = jsonmessages.load_schema(reference)
+        assert isinstance(sch, dict)
+    else:
+        with pytest.raises(Exception):
+            sch = jsonmessages.load_schema(reference)
+
+def test_find_schema_files():
+    '''Test that >1 schema files can be discovered in the test environment'''
+    schema_files = jsonmessages.find_schema_files()
+    assert len(schema_files) > 1
+
+# def test_get_schema_identifier():
+#     schemas = []
+#     for sch in schemas:
+#         jsonmessages.get_schema_identifier(sch)
+
+def test_classify_simple_json_message():
+    '''Test that simple JSON can be classified with the generic schema'''
+    r = Reactor()
+    message = json.loads('{"aljsydgflajsgd": "FKJHFKJLJHGL345678"}')
+    matches = jsonmessages.classify_message(message, 
+                                            permissive=True)
+    assert len(matches) == 1
+    assert 'abaco_json_message' in matches
+
+
+def test_classify_email_json_message():
+    '''Test that an email message can be classified with the generic and email message schema'''
+    r = Reactor()
+    message = json.loads('{"to": "tacc@email.tacc.cloud"}')
+    matches = jsonmessages.classify_message(message)
+    assert len(matches) >= 1
+    assert 'abaco_json_email' in matches
+

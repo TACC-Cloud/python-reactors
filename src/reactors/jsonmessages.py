@@ -73,9 +73,12 @@ def validate_message(message, schema, permissive=True):
         else:
             raise
 
-def classify_message(message, schemas, allow_multiple=False, permissive=True):
+def classify_message(message, schemas=None, allow_multiple=True, permissive=True):
     """Classifies which (if any) provided schemas a message matches.
     """
+    if schemas is None:
+        schemas = find_schema_files()
+        
     classifications = []
     for s in schemas:
         try:
