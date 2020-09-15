@@ -475,21 +475,21 @@ class Reactor(object):
                                                  exceptions))
 
     def validate_message(self,
-                         messagedict,
-                         messageschema=MESSAGE_SCHEMA,
+                         message,
+                         schema=MESSAGE_SCHEMA,
                          permissive=True):
         """
         Validate dictonary derived from JSON against a JSON schema
 
         Positional arguments:
-        messagedict - dict - JSON-derived object
+        message - dict - JSON-derived object
 
         Keyword arguments:
-        messageschema - str - path to the requisite JSON schema file
+        schema - str - path to the requisite JSON schema file
         permissive - bool - swallow validation errors [True]
         """
-        return jsonmessages.validate_message(messagedict,
-                                             messageschema=messageschema,
+        return jsonmessages.validate_message(message,
+                                             schema=schema,
                                              permissive=permissive)
 
     def create_webhook(self, permission='EXECUTE', maxuses=-1, actorId=None):
