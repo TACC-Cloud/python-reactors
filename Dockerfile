@@ -13,7 +13,6 @@ ARG LANGUAGE=python3
 ARG VERSION=0.8.1
 ARG SDIST
 ARG SDK_HOME=/reactors
-ARG REQUIREMENTS=requirements.txt
 ARG SCRATCH=/mnt/ephemeral-01
 ARG AGAVEPY_BRANCH=master
 ARG DATACATALOG_BRANCH=v2.0.0
@@ -36,10 +35,6 @@ ENV _REACTOR_TEMP=${SCRATCH}
 
 # Install components from Python SDK, which is still maintained in the
 # base-images repo, but is being prepared to move to a standalone repository
-
-# requirements.txt for the client-side SDK
-COPY ${REQUIREMENTS} /
-RUN pip install -qr /${REQUIREMENTS}
 
 # The main client-side SDK. Adds extended capability and utility functions
 # to the Python runtime.
