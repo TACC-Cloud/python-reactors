@@ -75,6 +75,8 @@ $(DOT_ENV): | jq
 pytest-docker: clean image | docker
 	docker run --rm -t \
 		-v ${HOME}/.agave:/root/.agave \
+		-v ${PWD}/tests/data/abacoschemas:/schemas:ro \
+		-v ${PWD}/tests/data/message.jsonschema:/message.jsonschema:ro \
 		$(IMAGE_DOCKER) \
 		python3 -m pytest $(PYTEST_OPTS) /$(PKG)-$(VERSION)/$(PYTEST_DIR)
 		#--env-file $(word 2, $^) \
@@ -87,6 +89,8 @@ tests: pytest-native
 shell: image | docker
 	docker run --rm -it \
 	-v ${HOME}/.agave:/root/.agave \
+		-v ${PWD}/tests/data/abacoschemas:/schemas:ro \
+		-v ${PWD}/tests/data/message.jsonschema:/message.jsonschema:ro \
 	$(IMAGE_DOCKER) bash
 
 clean: clean-tests
