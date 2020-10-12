@@ -1,8 +1,9 @@
 """Run subprocesses from within Python"""
 import subprocess
-from datetime import datetime
-from attrdict import AttrDict
 import warnings
+from datetime import datetime
+
+from attrdict import AttrDict
 
 DEFAULT_TIMEOUT = 60  # 1 minute
 

@@ -1,8 +1,9 @@
 import json
-import requests
 import logging
 import logging.handlers
 import traceback
+
+import requests
 
 
 class LogstashPlaintextHandler(logging.Handler):

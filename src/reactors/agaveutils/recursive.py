@@ -1,9 +1,9 @@
 '''Recursively apply permission grants using AgavePy'''
+import logging
 import os
 import sys
-import logging
-from time import sleep
 from random import random
+from time import sleep
 
 __version__ = '0.1.0'
 

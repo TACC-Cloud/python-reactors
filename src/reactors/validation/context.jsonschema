@@ -1,16 +1,8 @@
-"""Classes and functions for working with and validating the Reactor context
-"""
-import functools
-import glob
-import json
-import os
-from .jsonmessages import validate_message, load_schema
-
-BASE_CONTEXT_SCHEMA = '''
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"$id": "AbacoBaseContext",
-	"title": "Baseline Abaco Context",
+	"$id": "Default",
+	"title": "Abaco Default Context",
+	"description": "Private variables from the Abaco platform",
 	"type": "object",
 	"properties": {
 		"MSG": {
@@ -88,40 +80,3 @@ BASE_CONTEXT_SCHEMA = '''
 	"required": ["MSG"],
 	"additionalProperties": true
 }
-'''
-
-UNION_SCHEMA_TEMPLATE = '''
-{
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"$id": "AbacoUnionContext",
-	"title": "Union of Base and User-provided environment contexts",
-	"allOf": []
-}
-'''
-
-def find_context_schema_files():
-    """Searches defined filesystem locations for a context.jsonschema
-    """
-    schema_files = []
-    DIRS = [os.path.join(os.getcwd(), 'schemas'), os.getcwd(), '/schemas', '/']
-    for d in DIRS:
-        result = glob.glob(os.path.join(d, 'context.jsonschema'))
-        schema_files.extend(result)
-    return schema_files
-
-def union_context_schema(user_context_schema=None):
-    """Generates a union schema between the user-provided and base context schemas.
-    """
-    if user_context_schema is None:
-        user_context_schemas = find_context_schema_files()
-        if len(user_context_schemas) > 0:
-            user_context_schema = user_context_schemas[0]
-    schema = json.loads(UNION_SCHEMA_TEMPLATE)
-    base_context_schema = json.loads(BASE_CONTEXT_SCHEMA)
-    # Performs an outer merge on the provided schemas
-    schema['allOf'].append(base_context_schema)
-    if user_context_schema is not None:
-        # TODO - force allow additional properties
-        schema['allOf'].append(user_context_schema)
-    return schema
-    

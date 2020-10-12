@@ -17,7 +17,7 @@ repo_url = 'https://github.com/TACC-Cloud/python-reactors'
 pkg_dir = 'src/reactors'
 
 # Create version file
-version = "0.7.0"
+version = "0.8.0"
 with open(os.path.join(pkg_dir,'version.py'), 'w') as f:
     contents = "# THIS FILE IS GENERATED FROM SETUP.PY\nversion = '{0}'".format(version)
     f.write(contents)

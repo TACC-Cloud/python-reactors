@@ -2,8 +2,6 @@
 """
 import datetime
 import os
-import requests
-import pytz
 
 from tacconfig import config as tacconfig
 
@@ -12,7 +10,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # Search path for config.yml is root, module path, pwd
 CONFIG_LOCS = ['/', HERE, os.getcwd()]
 
-__all__ = ['parse_boolean', 'read_config', 'get_redaction_strings', 'get_host_ip']
+__all__ = ['parse_boolean', 'read_config', 'get_redaction_strings']
 
 def parse_boolean(s):
     """Parse values of Python basic types into equivalent Boolean."""
@@ -24,8 +22,8 @@ def parse_boolean(s):
     elif isinstance(s, (int, float)):
         return bool(s)
     elif isinstance(s, str):
-        BOOLEAN_TRUE_STRINGS = ('true', 'on', 'ok', 'y', 'yes', '1')
-        BOOLEAN_FALSE_STRINGS = ('false', 'off', 'n', 'no', '0', '')
+        BOOLEAN_TRUE_STRINGS = ('t', 'true', 'on', 'ok', 'y', 'yes', '1')
+        BOOLEAN_FALSE_STRINGS = ('f', 'false', 'off', 'n', 'no', '0', '')
         s = s.strip().lower()
         if s in BOOLEAN_TRUE_STRINGS:
             return True
@@ -120,22 +118,3 @@ def get_redaction_strings(redactions=None, agave_client=None, namespace=None):
         envstrings = list(set(envstrings))
 
         return envstrings
-
-def get_host_ip():
-    ip = '127.0.0.1'
-    
-    try:
-        ip = requests.request('GET', 'http://myip.dnsomatic.com').text
-    except Exception:
-        pass
-
-    return ip
-
-def utcnow():
-    """
-    Return a text-formatted UTC date
-
-    example: 2018-01-05T18:40:55.290790+00:00
-    """
-    t = datetime.datetime.now(tz=pytz.utc)
-    return t.isoformat()

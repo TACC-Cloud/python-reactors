@@ -1,8 +1,9 @@
 import json
-import requests
 import logging
 import logging.handlers
 import traceback
+
+import requests
 from requests_futures.sessions import FuturesSession
 
 # Adapted from https://github.com/loggly/loggly-python-handler/blob/master/loggly/handlers.py
