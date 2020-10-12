@@ -74,7 +74,7 @@ setup(
     package_dir={'':'src'},
     packages=find_packages("src", exclude=[]),
     install_requires=get_requirements(),
-    data_files=[('', ['requirements.txt'])],
+    data_files=[('', ['requirements.txt']), ('': ['*.jsonschema']), ('': ['config.yml'])],
     package_data={},
     include_package_data=True,
     python_requires='>=3.6, <4',
