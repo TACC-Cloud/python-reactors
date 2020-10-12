@@ -77,3 +77,18 @@ class Validation(BaseReactor):
             binary_valid = True
 
         return context_valid and message_valid and binary_valid
+
+    def classify_binary(self):
+        """Determine what kind of binary was sent
+        """
+        return validation.binary.classify_binary(self.binary)
+
+    def classify_context(self):
+        """Determine which schemas match the current context
+        """
+        return validation.context.classify_context(self.context)
+
+    def classify_message(self):
+        """Determine which schemas match the current JSON message
+        """
+        return validation.message.classify_message(self.message)
