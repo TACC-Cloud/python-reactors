@@ -118,3 +118,28 @@ def get_redaction_strings(redactions=None, agave_client=None, namespace=None):
         envstrings = list(set(envstrings))
 
         return envstrings
+
+def env_vars_from_config(config, namespace=None):
+    if namespace is None:
+        namespace = NAMESPACE
+
+    env_vars = []
+
+    for level1 in config.keys():
+        if (config.get(level1) is None) or (type(config.get(level1)) is str):
+            env_var = "_".join([namespace, level1]).upper()
+            env_vars.append(env_var)
+        elif type(config[level1]) is dict:
+            for level2 in config[level1].keys():
+                if (config[level1][level2] is None) or (type(config[level1][level2])) is str:
+                    env_var = '_'.join([namespace, level1, level2]).upper()
+                    env_vars.append(env_var)
+
+    return env_vars
+
+def config_files():
+    cfs = []
+    for d in CONFIG_LOCS:
+        if os.path.exists(os.path.join(d, 'config.yml')):
+            cfs.append(os.path.join(d, 'config.yml'))
+    return cfs

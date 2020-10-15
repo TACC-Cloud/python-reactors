@@ -6,15 +6,14 @@ import hashlib
 import json
 import os
 import re
-"""Implements JSON document and schema operations
-"""
 import jsonschema
 import requests
 import validators
 
 __all__ = ['find_schema_files', 'schema_from_url', 'load_schema', 
            'validate_document', 'classify_document', 'schema_ids', 
-           'schema_id', 'id_for_schema', 'formatChecker']
+           'schema_id', 'id_for_schema', 'formatChecker', 
+           'vars_from_schema', 'load_schemas']
 
 FILENAME_GLOB = '*.jsonschema'
 DIRNAME = 'schemas'
@@ -128,6 +127,29 @@ def load_schema(schema, inject_id=True, force_additional_properties=False):
 
     return schema_obj
 
+def load_schemas(schemas, inject_id=True, force_additional_properties=False):
+    """
+    Loads list of schema URLs, file paths, and dictionaries
+
+    Arguments
+        schemas (list): List of schema references
+        inject_id (bool): Whether to force the schema to contain an $id property
+        force_additional_properties (bool): Whether to force the schema to accept additional properties
+
+    Returns:
+        list: A list of JSON schemas
+
+    On error:
+        N/A
+    """
+
+    loaded = []
+    if not isinstance(schemas):
+        schemas = [schemas]
+    for s in schemas:
+        loaded.append(load_schema(s, inject_id=inject_id, force_additional_properties=force_additional_properties))
+    return loaded
+
 def schema_id(schema):
     """Returns the identifier from a JSON schema.
     """
@@ -207,3 +229,23 @@ def classify_document(message, schemas=None, min_allowed=1, max_allowed=-1, perm
             raise
 
     return matched_schemas
+
+def vars_from_schema(schema, filter_private=False, private_prefix='_'):
+    """Transforms a JSON schema into list of dict representations
+    
+    Note: This does not (and cannot) resolve JSON $ref subproperties
+    """
+    props = schema.get('properties', {})
+    vars = []
+    reqd = schema.get('required', [])
+    for k, v in props.items():
+        if filter_private is False or not k.startswith(private_prefix):
+            rep = {}
+            rep = {'id': k, 'type': v.get('type', None), 'description': v.get('description', None)}
+            if k in reqd:
+                rep['required'] = True
+            else:
+                rep['required'] = False
+            vars.append(rep)
+    return vars
+
