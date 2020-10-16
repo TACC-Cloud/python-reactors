@@ -13,12 +13,12 @@ import validators
 __all__ = ['find_schema_files', 'schema_from_url', 'load_schema', 
            'validate_document', 'classify_document', 'schema_ids', 
            'schema_id', 'id_for_schema', 'formatChecker', 
-           'vars_from_schema', 'load_schemas']
+           'vars_from_schema', 'load_schemas', 'is_default']
 
 FILENAME_GLOB = '*.jsonschema'
 DIRNAME = 'schemas'
 ID_PROPERTY = '$id'
-
+DEFAULT_ID = 'Default'
 
 class formatChecker(jsonschema.FormatChecker):
     """Enables python-jsonschema to validate ``format`` fields"""
@@ -80,6 +80,12 @@ def id_for_schema(schema_as_dict):
     hl = hashlib.sha256()
     hl.update(serialized.encode('utf-8'))
     return 'autogen://' + hl.digest().hex()
+
+def is_default(schema_as_dict):
+    """Return true if a JSONschema is the built-in default
+    """
+    return id_for_schema(schema_as_dict) == DEFAULT_ID
+
 
 def schema_from_dict(sdict, inject_id=True):
     schema = json.loads(json.dumps(sdict))        
@@ -241,11 +247,12 @@ def vars_from_schema(schema, filter_private=False, private_prefix='_'):
     for k, v in props.items():
         if filter_private is False or not k.startswith(private_prefix):
             rep = {}
-            rep = {'id': k, 'type': v.get('type', None), 'description': v.get('description', None)}
+            rep = {'id': k, 'type': v.get('type', None), 
+                   'description': v.get('description', None),
+                   'default': v.get('default', None)}
             if k in reqd:
                 rep['required'] = True
             else:
                 rep['required'] = False
             vars.append(rep)
     return vars
-
