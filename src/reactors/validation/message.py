@@ -4,7 +4,7 @@ import json
 import os
 
 from .jsondoc import (FILENAME_GLOB, classify_document, find_schema_files,
-                      validate_document)
+                      validate_document, load_schema, example)
 
 ROOT = '/'
 HERE = os.path.dirname(os.path.abspath(__file__))

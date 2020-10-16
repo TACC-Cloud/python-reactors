@@ -6,9 +6,11 @@ import hashlib
 import json
 import os
 import re
+
 import jsonschema
 import requests
 import validators
+from hypothesis_jsonschema import from_schema
 
 __all__ = ['find_schema_files', 'schema_from_url', 'load_schema', 
            'validate_document', 'classify_document', 'schema_ids', 
@@ -256,3 +258,17 @@ def vars_from_schema(schema, filter_private=False, private_prefix='_'):
                 rep['required'] = False
             vars.append(rep)
     return vars
+
+def example(schema, remote_refs=False):
+    """Uses Hypothesis to generate an example document from a schema
+
+    Does not currently support schemas with remote URI references
+    """
+    # It should be possible to implement a resolved schema using 
+    # resolve_all_refs with a custom LocalResolver that implements resolve_remote 
+    # https://github.com/Zac-HD/hypothesis-jsonschema/blob/master/src/hypothesis_jsonschema/_canonicalise.py
+    #
+    # I have tried this but jsonschema.RefResolver seems to have some flakiness, so 
+    # tabling this for now
+    sch = load_schema(schema)
+    return from_schema(sch).example()
