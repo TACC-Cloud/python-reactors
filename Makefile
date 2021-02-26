@@ -4,7 +4,7 @@ GITREF=$(shell git rev-parse --short HEAD)
 GITREF_FULL=$(shell git rev-parse HEAD)
 AGAVE_CREDS ?= ${HOME}/.agave/current
 PYTEST_OPTS ?= -s -vvv
-PYTEST_DIR ?= tests
+PYTEST_DIR ?= tests/test_000_imports.py
 DOT_ENV ?= ./.env
 
 ####################################
@@ -109,4 +109,3 @@ clean-tests:
 
 docs:
 	cd docsrc && make html
-

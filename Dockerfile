@@ -39,7 +39,7 @@ ENV _REACTOR_TEMP=${SCRATCH}
 # The main client-side SDK. Adds extended capability and utility functions
 # to the Python runtime.
 ADD ${SDIST} /
-RUN pip install -q /reactors-*
+RUN pip install -q flake8 requests_futures /reactors-*
 
 # Track to latest SD2 datacatalog
 # RUN pip3 install --upgrade git+https://github.com/SD2E/python-datacatalog.git@${DATACATALOG_BRANCH}
