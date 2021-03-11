@@ -7,8 +7,8 @@ from tacconfig import config as tacconfig
 
 NAMESPACE = 'TACC'
 HERE = os.path.dirname(os.path.abspath(__file__))
-# Search path for config.yml is root, module path, pwd
-CONFIG_LOCS = ['/', HERE, os.getcwd()]
+# Search path for config.yml is module path, /, /etc, pwd
+CONFIG_LOCS = [HERE, '/', '/etc', os.getcwd()]
 
 __all__ = ['parse_boolean', 'read_config', 'get_redaction_strings']
 

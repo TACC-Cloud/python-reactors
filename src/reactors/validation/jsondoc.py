@@ -6,10 +6,12 @@ import hashlib
 import json
 import os
 import re
+import warnings
 
 import jsonschema
 import requests
 import validators
+from hypothesis.errors import NonInteractiveExampleWarning
 from hypothesis_jsonschema import from_schema
 
 __all__ = ['find_schema_files', 'schema_from_url', 'load_schema', 
@@ -270,5 +272,10 @@ def example(schema, remote_refs=False):
     #
     # I have tried this but jsonschema.RefResolver seems to have some flakiness, so 
     # tabling this for now
+
+    # NOTE: Hypothesis warns us against using `.example()` However, we
+    # are not using hypothesis in a conventional manner, and therefore this
+    # warning does not apply here
+    warnings.filterwarnings('ignore', category=NonInteractiveExampleWarning)
     sch = load_schema(schema)
     return from_schema(sch).example()
