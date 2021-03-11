@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "AbacoMessageEmail",
+    "$id": "abaco_json_email",
+    "description": "Outgoing Email Message",
+    "type": "object",
+    "properties": {
+        "from": {
+            "type": "string",
+            "format": "email"
+        },
+        "to": {
+            "type": "string",
+            "format": "email"
+        },
+        "subject": {
+            "type": "string",
+            "maxLength": 128
+        },
+        "body": {
+            "type": "string",
+            "maxLength": 4096
+        }
+    },
+    "required": ["to"]
+}

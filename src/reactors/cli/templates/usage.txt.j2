@@ -1,0 +1,65 @@
+USAGE: {{ docstr }}
+This container image implements an Abaco function that can 
+be run independently as follows:
+
+  % docker run -it --env {{ cli_envs_str }} {{ image_repo }}
+
+{% if req_vars %}Environment Variables
+---------------------
+{% for item in req_vars %}
+  - {{ item.id }}{% if item.required %}*{% endif %} ({{ item.type }}) - {{ item.description }} [{{item.default}}]{% endfor %}
+{% else %}Environment Variable Sets
+-------------------------
+
+This function accepts the following environment variable sets:
+{% for item in contexts %}
+Set {{ loop.index }}: schema.$id=='{{ item.id }}'
+Variables:{% for p in item.vars %}
+  - {{ p.id }}{% if p.required %}*{% endif %} ({{ p.type }}) - {{ p.description }} [{{p.default}}]{% endfor %}
+{% endfor %}{% endif %}
+Note: Required variables are marked with an asterisk*
+
+Please refer to https://tacc-cloud.github.io/python-reactors/usage/parameters for details
+
+{% if ex_sch %}JSON Message
+------------
+
+The function accepts a JSON message (passed as MSG) conforming to schema:
+{{ ex_sch }}
+
+Example: {{ ex_msg }}
+{% else %}JSON Message Formats
+--------------------
+
+This function accepts and can validate JSON-formatted values
+for 'MSG' that validate to the following JSON schemas:
+{% for item in messages %}
+  - Message schema.$id: {{ item.id }}
+    File: {{ item.file}}
+    Example: {{ item.example }}
+{% endfor %}{% endif %}
+Please refer to https://tacc-cloud.github.io/python-reactors/usage/messages for details.
+
+Tapis Client
+------------
+
+A Tapis client may be configured by passing these variables:
+
+  * {{ tapis.api_server }} - API server URL
+  * {{ tapis.api_token }} - Oauth2 access token
+
+Please refer to https://tacc-cloud.github.io/python-reactors/usage/tapis for details.
+
+Configuration
+-------------
+
+The current configuration established by '/config.yml' is:
+
+---
+{{ union_config_yml }}
+Keys in this configuration can be overridden by setting environment 
+variables at run time. The following variables are supported:
+{% for item in config_vars %}
+  * {{ item }}{% endfor %}
+
+Please refer to https://tacc-cloud.github.io/python-reactors/usage/config for details.

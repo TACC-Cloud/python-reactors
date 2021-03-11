@@ -1,0 +1,6 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "Default",
+    "title": "Abaco Default JSON Message",
+    "type": "object"
+}

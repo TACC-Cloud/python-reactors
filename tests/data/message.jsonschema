@@ -1,5 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "abaco_json_message",
     "title": "AbacoJSONMessage",
     "description": "Generic Abaco JSON message",
     "type": "object"

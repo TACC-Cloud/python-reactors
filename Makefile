@@ -2,6 +2,10 @@ PYTHON ?= python3
 PREF_SHELL ?= bash
 GITREF=$(shell git rev-parse --short HEAD)
 GITREF_FULL=$(shell git rev-parse HEAD)
+AGAVE_CREDS ?= ${HOME}/.agave/current
+PYTEST_OPTS ?= -s -vvv
+PYTEST_DIR ?= tests
+DOT_ENV ?= ./.env
 
 ####################################
 # Docker image & dist
@@ -14,13 +18,11 @@ IMAGE_ORG ?= enho
 IMAGE_NAME ?= $(PKGL)
 IMAGE_TAG ?= $(VERSION)
 IMAGE_DOCKER ?= $(IMAGE_ORG)/$(IMAGE_NAME):$(IMAGE_TAG)
-DOCKER_OPTS ?= --rm -it
 
 ####################################
 # Sanity checks
 ####################################
-
-PROGRAMS := git docker $(PYTHON) singularity tox
+PROGRAMS := git docker $(PYTHON) singularity tox jq
 .PHONY: $(PROGRAMS)
 .SILENT: $(PROGRAMS)
 
@@ -30,7 +32,7 @@ docker:
 		echo "\n[ERROR] Could not communicate with docker daemon. You may need to run with sudo.\n"; \
 		exit 1; \
 	fi
-$(PYTHON) poetry singularity:
+$(PYTHON) poetry singularity jq:
 	$@ --help &> /dev/null; \
 	if [ ! $$? -eq 0 ]; then \
 		echo "[ERROR] $@ does not seem to be on your path. Please install $@"; \
@@ -52,31 +54,47 @@ git:
 ####################################
 # Build Docker image
 ####################################
-PYTEST_OPTS ?= -s -vvv
-.PHONY: image shell tests tests-pytest clean clean-image clean-tests dist/$(PKG)-$(VERSION).tar.gz
+.PHONY: sdist dist/$(PKG)-$(VERSION).tar.gz image shell tests pytest-docker pytest-native clean clean-tests
+
+sdist: dist/$(PKG)-$(VERSION).tar.gz
 
 dist/$(PKG)-$(VERSION).tar.gz: setup.py | $(PYTHON)
-	$(PYTHON) setup.py sdist -q
+	$(PYTHON) $< sdist -q
 
-image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz requirements-stable.txt | docker
-	cp $(word 2, $^) .
-	docker build --build-arg SDIST=$(PKG)-$(VERSION) \
-		--build-arg REQUIREMENTS=$(word 3, $^) \
-		-t $(IMAGE_DOCKER) -f $< .
-	rm $(word 2, $^) $(PKG)-$(VERSION).tar.gz
+image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
+	docker build --build-arg SDIST=$(word 2, $^) -t $(IMAGE_DOCKER) -f $< .
+
+public-image: Dockerfile.public dist/$(PKG)-$(VERSION).tar.gz | docker
+	docker build -f Dockerfile.public --build-arg SDIST=$(word 2, $^) -t sd2e/reactors:standalone .
 
 ####################################
 # Tests
 ####################################
-.PHONY: pytest-native
+.PHONY: pytest-native $(DOT_ENV)
+
+$(DOT_ENV): | jq
+	$(PREF_SHELL) scripts/get_agave_creds.sh > $@
+
+pytest-docker: clean image | docker
+	docker run --rm -t \
+		-v ${HOME}/.agave:/root/.agave \
+		-v ${PWD}/tests/data/abacoschemas:/schemas:ro \
+		-v ${PWD}/tests/data/message.jsonschema:/message.jsonschema:ro \
+		$(IMAGE_DOCKER) \
+		python3 -m pytest $(PYTEST_OPTS) /$(PKG)-$(VERSION)/$(PYTEST_DIR)
+		#--env-file $(word 2, $^) \
+
+pytest-native: clean | $(PYTHON)
+	PYTHONPATH=./src $(PYTHON) -m pytest $(PYTEST_OPTS) $(PYTEST_DIR)
 
 tests: pytest-native
 
-pytest-native: | $(PYTHON)
-	PYTHONPATH=./src $(PYTHON) -m pytest $(PYTEST_OPTS)
-
 shell: image | docker
-	docker run --rm -it $(IMAGE_DOCKER) bash
+	docker run --rm -it \
+	-v ${HOME}/.agave:/root/.agave \
+		-v ${PWD}/tests/data/abacoschemas:/schemas:ro \
+		-v ${PWD}/tests/data/message.jsonschema:/message.jsonschema:ro \
+	$(IMAGE_DOCKER) bash
 
 clean: clean-tests
 
@@ -94,6 +112,4 @@ clean-tests:
 
 docs:
 	cd docsrc && make html
-
-
 
