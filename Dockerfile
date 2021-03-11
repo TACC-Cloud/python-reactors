@@ -41,13 +41,9 @@ ENV _REACTOR_TEMP=${SCRATCH}
 ADD ${SDIST} /
 RUN pip install -q /reactors-*
 
-# Track to latest SD2 datacatalog
-# RUN pip3 install --upgrade git+https://github.com/SD2E/python-datacatalog.git@${DATACATALOG_BRANCH}
-
-# JSONschema 3.x RC
-# RUN pip3 install --upgrade git+git://github.com/Julian/jsonschema@v3.0.0a3#egg=jsonschema
-
-CMD ['/bin/bash']
+CMD ["python3", "-m", "reactor.cli", "run"]
 
 # Close out making absolutely sure that work directory is set
 WORKDIR ${SCRATCH}
+
+# ONBUILD
