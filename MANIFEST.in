@@ -1,3 +1,2 @@
 graft tests
-include src/**/*.yml
-include src/**/**/*.jsonschema
+recursive-include src *.txt.j2 *.jsonschema *.yml
