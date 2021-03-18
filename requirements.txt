@@ -2,7 +2,7 @@ arrow>=0.12.1
 hashids>=1.2.0
 petname>=2.2
 tenacity>=5.0.2
-jsonschema@git+https://github.com/Julian/jsonschema@v3.0.0a3#egg=jsonschema
+jsonschema>=3.0.2
 tacconfig>=0.5.4
 # Move to this while we are developing the Reactors package so we can sync w/ updates to AgavePy
 agavepy@git+https://github.com/TACC/agavepy@master
