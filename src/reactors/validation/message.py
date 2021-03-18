@@ -2,9 +2,13 @@
 """
 import json
 import os
+import warnings
+
+from hypothesis.errors import NonInteractiveExampleWarning
+from hypothesis_jsonschema import from_schema
 
 from .jsondoc import (FILENAME_GLOB, classify_document, find_schema_files,
-                      validate_document)
+                      is_default, load_schema, validate_document)
 
 ROOT = '/'
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -58,3 +62,25 @@ def validate(message, permissive=True):
             return False
         else:
             raise ValueError("Unable to validate message")
+
+def example(schema, remote_refs=False):
+    """Uses Hypothesis to generate an example document from a schema
+
+    Does not currently support schemas with remote URI references
+    """
+    # It should be possible to implement a resolved schema using 
+    # resolve_all_refs with a custom LocalResolver that implements resolve_remote 
+    # https://github.com/Zac-HD/hypothesis-jsonschema/blob/master/src/hypothesis_jsonschema/_canonicalise.py
+    #
+    # I have tried this but jsonschema.RefResolver seems to have some flakiness, so 
+    # tabling this for now
+
+    # NOTE: Hypothesis warns us against using `.example()` However, we
+    # are not using hypothesis in a conventional manner, and therefore this
+    # warning does not apply here
+    warnings.filterwarnings('ignore', category=NonInteractiveExampleWarning)
+    sch = load_schema(schema)
+    if is_default(sch):
+        return dict()
+    else:
+        return from_schema(sch).example()

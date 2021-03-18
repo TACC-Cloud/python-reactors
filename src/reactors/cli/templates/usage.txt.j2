@@ -1,98 +1,65 @@
-USAGE
-=====
-This container image implements an Abaco function:
-{{ docstr }}
-It is runnable outside Abaco as follows:
+USAGE: {{ docstr }}
+This container image implements an Abaco function that can 
+be run independently as follows:
 
-  docker run -it --env var=val REPO
+  % docker run -it --env {{ cli_envs_str }} {{ image_repo }}
 
-Parameters
-----------
-
-Abaco passes parameters into the function via URL parameters:
-
-  curl -XPOST https://api.tacc.cloud/actors/v2/message?foo=bar
-
-In this example, an environment variable 'FOO' will be set in the 
-container runtime with a value of 'bar'. To allow an Abaco function 
-to be run independently, this can be emulated by setting environment 
-variables when running the function container.
-
-  docker run --env FOO=bar <container> <command>
-
-A function developer may specify one or more valid sets of 
-parameters for use within the function. These parameter sets
-can be validated or classified using built-in functions from 
-the Reactors module.
+{% if req_vars %}Environment Variables
+---------------------
+{% for item in req_vars %}
+  - {{ item.id }}{% if item.required %}*{% endif %} ({{ item.type }}) - {{ item.description }} [{{item.default}}]{% endfor %}
+{% else %}Environment Variable Sets
+-------------------------
 
 This function accepts the following environment variable sets:
 {% for item in contexts %}
-Context schema.$id: {{ item.id }}
-File: {{ item.file}}
-Parameters:{% for p in item.vars %}
-  * {{ p.id }} desc: {{ p.description }}; type: {{ p.type }}; required: {{ p.required }}{% endfor %}
-{% endfor %}
-Please note that variable sets beyond 'Default' must also contain the 
-variables specified in 'Default', such as 'MSG'.
+Set {{ loop.index }}: schema.$id=='{{ item.id }}'
+Variables:{% for p in item.vars %}
+  - {{ p.id }}{% if p.required %}*{% endif %} ({{ p.type }}) - {{ p.description }} [{{p.default}}]{% endfor %}
+{% endfor %}{% endif %}
+Note: Required variables are marked with an asterisk*
 
-JSON Messages
--------------
+Please refer to https://tacc-cloud.github.io/python-reactors/usage/parameters for details
 
-Abaco accepts JSON-formatted messages that are transmitted to the 
-container runtime via the 'MSG' environment variable. They can, 
-in turn, be validated or classified using built-in methods from 
-the Reactors module.
+{% if ex_sch %}JSON Message
+------------
 
-  curl -XPOST -H "Content-Type: application/json" \
-       -d '{"message": {"foo": "bar"}}' \
-       https://api.tacc.cloud/actors/v2/messages
+The function accepts a JSON message (passed as MSG) conforming to schema:
+{{ ex_sch }}
 
-This function accepts and can validate JSON-formatted values 
+Example: {{ ex_msg }}
+{% else %}JSON Message Formats
+--------------------
+
+This function accepts and can validate JSON-formatted values
 for 'MSG' that validate to the following JSON schemas:
 {% for item in messages %}
-  * Message schema.$id: {{ item.id }}
+  - Message schema.$id: {{ item.id }}
     File: {{ item.file}}
-{% endfor %}
-
-Configuration
--------------
-
-The Reactor object provided by this SDK and usable within the function
-is configured via files found at:
-{% for item in config_locs %}
-  * {{ item }}{% endfor %}
-
-If this current function utilizes this feature of the SDK, its 
-current configuration is:
-
----
-{{ union_config_yml }}
-
-First- or second level keys in the configuration can be overridden 
-by setting environment variables at run time. The following 
-variables are supported:
-{% for item in env_vars %}
-  * {{ item }}{% endfor %}
-
+    Example: {{ item.example }}
+{% endfor %}{% endif %}
+Please refer to https://tacc-cloud.github.io/python-reactors/usage/messages for details.
 
 Tapis Client
 ------------
-
-This function may require an active Tapis client. One is automatically 
-provided by Abaco but can be injected at run time by providing either 
-a credentials file or setting environment variables.
-
-Credentials File
-~~~~~~~~~~~~~~~~
-
-A Tapis client may be configured by volume mounting a credentials file:
-
-  docker run -it -v ${HOME}/.agave:/root/.agave REPO
-
-Environment Variables
-~~~~~~~~~~~~~~~~~~~~~
 
 A Tapis client may be configured by passing these variables:
 
   * {{ tapis.api_server }} - API server URL
   * {{ tapis.api_token }} - Oauth2 access token
+
+Please refer to https://tacc-cloud.github.io/python-reactors/usage/tapis for details.
+
+Configuration
+-------------
+
+The current configuration established by '/config.yml' is:
+
+---
+{{ union_config_yml }}
+Keys in this configuration can be overridden by setting environment 
+variables at run time. The following variables are supported:
+{% for item in config_vars %}
+  * {{ item }}{% endfor %}
+
+Please refer to https://tacc-cloud.github.io/python-reactors/usage/config for details.

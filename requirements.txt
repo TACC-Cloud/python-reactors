@@ -9,5 +9,6 @@ tacconfig>=0.5.4
 agavepy@git+https://github.com/TACC/agavepy@master
 # agavepy==1.0.0a10
 pytz>=2020.1
-validators>=0.18.1
-Jinja2
+validators==0.18.1
+Jinja2==2.11.2
+hypothesis_jsonschema==0.18.0

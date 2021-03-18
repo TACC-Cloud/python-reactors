@@ -6,19 +6,23 @@ import hashlib
 import json
 import os
 import re
+import warnings
+
 import jsonschema
 import requests
 import validators
+from hypothesis.errors import NonInteractiveExampleWarning
+from hypothesis_jsonschema import from_schema
 
 __all__ = ['find_schema_files', 'schema_from_url', 'load_schema', 
            'validate_document', 'classify_document', 'schema_ids', 
            'schema_id', 'id_for_schema', 'formatChecker', 
-           'vars_from_schema', 'load_schemas']
+           'vars_from_schema', 'load_schemas', 'is_default']
 
 FILENAME_GLOB = '*.jsonschema'
 DIRNAME = 'schemas'
 ID_PROPERTY = '$id'
-
+DEFAULT_ID = 'Default'
 
 class formatChecker(jsonschema.FormatChecker):
     """Enables python-jsonschema to validate ``format`` fields"""
@@ -80,6 +84,12 @@ def id_for_schema(schema_as_dict):
     hl = hashlib.sha256()
     hl.update(serialized.encode('utf-8'))
     return 'autogen://' + hl.digest().hex()
+
+def is_default(schema_as_dict):
+    """Return true if a JSONschema is the built-in default
+    """
+    return id_for_schema(schema_as_dict) == DEFAULT_ID
+
 
 def schema_from_dict(sdict, inject_id=True):
     schema = json.loads(json.dumps(sdict))        
@@ -241,7 +251,9 @@ def vars_from_schema(schema, filter_private=False, private_prefix='_'):
     for k, v in props.items():
         if filter_private is False or not k.startswith(private_prefix):
             rep = {}
-            rep = {'id': k, 'type': v.get('type', None), 'description': v.get('description', None)}
+            rep = {'id': k, 'type': v.get('type', None), 
+                   'description': v.get('description', None),
+                   'default': v.get('default', None)}
             if k in reqd:
                 rep['required'] = True
             else:
@@ -249,3 +261,21 @@ def vars_from_schema(schema, filter_private=False, private_prefix='_'):
             vars.append(rep)
     return vars
 
+def example(schema, remote_refs=False):
+    """Uses Hypothesis to generate an example document from a schema
+
+    Does not currently support schemas with remote URI references
+    """
+    # It should be possible to implement a resolved schema using 
+    # resolve_all_refs with a custom LocalResolver that implements resolve_remote 
+    # https://github.com/Zac-HD/hypothesis-jsonschema/blob/master/src/hypothesis_jsonschema/_canonicalise.py
+    #
+    # I have tried this but jsonschema.RefResolver seems to have some flakiness, so 
+    # tabling this for now
+
+    # NOTE: Hypothesis warns us against using `.example()` However, we
+    # are not using hypothesis in a conventional manner, and therefore this
+    # warning does not apply here
+    warnings.filterwarnings('ignore', category=NonInteractiveExampleWarning)
+    sch = load_schema(schema)
+    return from_schema(sch).example()
