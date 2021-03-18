@@ -7,7 +7,8 @@ def test_module_imports():
     # TODO
     # from reactors import abaco
     from reactors import agaveutils
-    from reactors import config
+    # TODO
+    # from reactors import config
     # TODO
     # from reactors import context
     # from reactors import jsonmessages
