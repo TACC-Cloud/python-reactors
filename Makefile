@@ -62,7 +62,7 @@ dist/$(PKG)-$(VERSION).tar.gz: setup.py | $(PYTHON)
 	$(PYTHON) $< sdist -q
 
 image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
-	docker build --build-arg SDIST=$(word 2, $^) -t $(IMAGE_DOCKER) -f $< .
+	docker build --progress plain --build-arg SDIST=$(word 2, $^) -t $(IMAGE_DOCKER) -f $< .
 
 ####################################
 # Tests
