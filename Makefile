@@ -4,7 +4,7 @@ GITREF=$(shell git rev-parse --short HEAD)
 GITREF_FULL=$(shell git rev-parse HEAD)
 AGAVE_CREDS ?= ${HOME}/.agave/current
 PYTEST_OPTS ?= -s -vvv
-PYTEST_DIR ?= tests
+PYTEST_DIR ?= tests/test_000_imports.py
 DOT_ENV ?= ./.env
 
 ####################################
@@ -62,7 +62,7 @@ dist/$(PKG)-$(VERSION).tar.gz: setup.py | $(PYTHON)
 	$(PYTHON) $< sdist -q
 
 image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
-	docker build --build-arg SDIST=$(word 2, $^) -t $(IMAGE_DOCKER) -f $< .
+	docker build --progress plain --build-arg SDIST=$(word 2, $^) -t $(IMAGE_DOCKER) -f $< .
 
 public-image: Dockerfile.public dist/$(PKG)-$(VERSION).tar.gz | docker
 	docker build -f Dockerfile.public --build-arg SDIST=$(word 2, $^) -t sd2e/reactors:standalone .
@@ -112,4 +112,3 @@ clean-tests:
 
 docs:
 	cd docsrc && make html
-

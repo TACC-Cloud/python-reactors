@@ -4,8 +4,8 @@ petname>=2.2
 tenacity>=5.0.2
 jsonschema>=3.0.0
 tacconfig>=0.5.4
-# Move to this while we are developing the Reactors package so we can sync w/ updates to AgavePy 
 agavepy@git+https://github.com/TACC/agavepy@master
+requests_futures>=0.9.7
 # agavepy==1.0.0a10
 pytz>=2020.1
 validators==0.18.1
