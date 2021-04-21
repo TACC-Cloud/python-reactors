@@ -22,7 +22,7 @@ RUN mkdir -p ${SCRATCH} && \
 
 RUN pip uninstall -y agavepy
 ADD ${SDIST} /
-ADD reactor.py /reactor.py
+ADD src/reactor.py /reactor.py
 RUN pip install --upgrade -q /reactors-*
 
 # Onbuild support
