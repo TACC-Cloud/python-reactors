@@ -65,7 +65,7 @@ image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
 	docker build --build-arg SDIST=$(word 2, $^) -t $(IMAGE_DOCKER) -f $< .
 
 public-image: Dockerfile.public dist/$(PKG)-$(VERSION).tar.gz | docker
-	docker build -f Dockerfile.public --build-arg SDIST=$(word 2, $^) -t sd2e/reactors:standalone .
+	docker build -f Dockerfile.public --build-arg SDIST=$(word 2, $^) -t tacc/reactors:python3 .
 
 ####################################
 # Tests

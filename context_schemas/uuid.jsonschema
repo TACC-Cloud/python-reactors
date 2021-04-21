@@ -1,0 +1,12 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "RequiresUUID",
+	"type": "object",
+	"properties": {
+		"UUID": {
+			"type": "string"
+		}
+    },
+	"required": ["UUID"],
+	"additionalProperties": true
+}
