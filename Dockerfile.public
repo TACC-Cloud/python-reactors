@@ -1,4 +1,4 @@
-FROM sd2e/python3:ubuntu17
+FROM python:3.7
 
 ARG SCRATCH=/mnt/ephemeral-01
 ARG SDIST
@@ -22,8 +22,8 @@ RUN mkdir -p ${SCRATCH} && \
 
 RUN pip uninstall -y agavepy
 ADD ${SDIST} /
+ADD src/reactor.py /reactor.py
 RUN pip install --upgrade -q /reactors-*
-RUN pip install requests_futures
 
 # Onbuild support
 ONBUILD ADD requirements.txt /tmp/requirements.txt
@@ -32,7 +32,7 @@ ONBUILD ADD reactor.py /
 ONBUILD ADD config.yml /
 ONBUILD ADD message.jsonschema context.jsonschema* /
 
-CMD ["python3", "-m", "reactor.cli", "run"]
+CMD ["python3", "-m", "reactors.cli", "run"]
 
 # Close out making absolutely sure that work directory is set
 WORKDIR ${SCRATCH}

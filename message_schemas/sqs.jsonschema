@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AWS SQS",
+    "$id": "AWS_SQS",
+    "description": "An AWS-like SQS notification",
+    "type": "object",
+    "properties": {
+        "Key": {
+            "type": "string",
+            "format": "uri",
+            "description": "An object-store equivalent to a file path."
+        }
+    },
+    "required": ["Key"]
+}
