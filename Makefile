@@ -2,7 +2,6 @@ PYTHON ?= python3
 PREF_SHELL ?= bash
 GITREF=$(shell git rev-parse --short HEAD)
 GITREF_FULL=$(shell git rev-parse HEAD)
-AGAVE_CREDS ?= ${HOME}/.agave/current
 PYTEST_OPTS ?= -s -vvv
 PYTEST_DIR ?= tests/test_000_imports.py
 DOT_ENV ?= ./.env
@@ -14,7 +13,7 @@ DOT_ENV ?= ./.env
 VERSION = $(shell python setup.py --version)
 PKG = $(shell python setup.py --name)
 PKGL = $(shell echo $(PKG) | tr '[:upper:]' '[:lower:]')
-IMAGE_ORG ?= enho
+IMAGE_ORG ?= tacc
 IMAGE_NAME ?= $(PKGL)
 IMAGE_TAG ?= $(VERSION)
 IMAGE_DOCKER ?= $(IMAGE_ORG)/$(IMAGE_NAME):$(IMAGE_TAG)
@@ -61,19 +60,13 @@ sdist: dist/$(PKG)-$(VERSION).tar.gz
 dist/$(PKG)-$(VERSION).tar.gz: setup.py | $(PYTHON)
 	$(PYTHON) $< sdist -q
 
-image: Dockerfile.public dist/$(PKG)-$(VERSION).tar.gz | docker
+image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
 	docker build --progress plain --build-arg SDIST=$(word 2, $^) -t $(IMAGE_DOCKER) -f $< .
-
-public-image: Dockerfile.public dist/$(PKG)-$(VERSION).tar.gz | docker
-	docker build -f Dockerfile.public --build-arg SDIST=$(word 2, $^) -t tacc/reactors:python3 .
 
 ####################################
 # Tests
 ####################################
-.PHONY: pytest-native $(DOT_ENV)
-
-$(DOT_ENV): | jq
-	$(PREF_SHELL) scripts/get_agave_creds.sh > $@
+.PHONY: pytest-native pytest-docker tests shell clean 
 
 pytest-docker: clean image | docker
 	docker run --rm -t \
@@ -82,12 +75,11 @@ pytest-docker: clean image | docker
 		-v ${PWD}/tests/data/message.jsonschema:/message.jsonschema:ro \
 		$(IMAGE_DOCKER) \
 		bash -c "(python3 -m pip install -q pytest && python3 -m pytest $(PYTEST_OPTS) /$(PKG)-$(VERSION)/$(PYTEST_DIR))"
-		#--env-file $(word 2, $^) \
 
 pytest-native: clean | $(PYTHON)
 	PYTHONPATH=./src $(PYTHON) -m pytest $(PYTEST_OPTS) $(PYTEST_DIR)
 
-tests: pytest-native
+tests: pytest-native pytest-docker
 
 shell: image | docker
 	docker run --rm -it \
@@ -96,13 +88,7 @@ shell: image | docker
 		-v ${PWD}/tests/data/message.jsonschema:/message.jsonschema:ro \
 	$(IMAGE_DOCKER) bash
 
-clean: clean-tests
-
-clean-rmi: image | docker
-	echo "Not implemented" && exit 1
-	#docker rmi -f $$(docker images -q --filter=reference="$(IMAGE_ORG)/$(IMAGE_NAME):*" --filter "before=$(IMAGE_DOCKER)")
-
-clean-tests:
+clean: 
 	rm -rf .hypothesis .pytest_cache __pycache__ */__pycache__ tmp.* *junit.xml
 
 ####################################
