@@ -3,7 +3,6 @@ FROM ${BASE_IMAGE}
 
 # Build args
 ARG SDIST
-ARG DEFAULT_ACTOR_CONTEXT=/tmp/default_actor_context
 ARG PYTHON=python3
 ARG SCRATCH=/mnt/ephemeral-01
 ENV SCRATCH=${SCRATCH}
@@ -28,11 +27,26 @@ ADD ${SDIST} /tmp
 RUN pip install --upgrade -q /tmp/reactors-*
 
 # Add default Reactor assets
-ADD src/reactor.py /reactor.py
+ARG CC_BRANCH=main
+# TODO: dedicated template
+ARG CC_DIR=sd2e_base
+ARG CC_DEST=/default_actor_context
+ARG CC_REPO=https://github.com/TACC-Cloud/cc-tapis-v2-actors.git
+RUN ${PYTHON} -m pip install cookiecutter && \
+    cd "$(dirname ${CC_DEST})" && \
+    ${PYTHON} -m cookiecutter --no-input -fc ${CC_BRANCH} --directory ${CC_DIR} \
+		${CC_REPO} name=${CC_DEST} alias=${CC_DEST} && \
+    # Copy assets to expected dirs
+    cp ${CC_DEST}/reactor.py / && \
+    cp ${CC_DEST}/config.yml / && \
+    # cp ${CC_DEST}/*.jsonschema* / && \
+    cp -r ${CC_DEST}/*_schemas / && \
+    # Install default pip dependencies
+    ${PYTHON} -m pip install --ignore-installed -r ${CC_DEST}/requirements.txt
 
 # Add Reactor assets on build
 ONBUILD ADD requirements.txt /tmp/requirements.txt
-ONBUILD RUN ${PYTHON} -m pip3 install -r /tmp/requirements.txt
+ONBUILD RUN ${PYTHON} -m pip install -r /tmp/requirements.txt
 ONBUILD ADD reactor.py /
 ONBUILD ADD config.yml /
 ONBUILD ADD message.jsonschema context.jsonschema* /
