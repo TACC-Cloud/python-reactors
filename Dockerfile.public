@@ -1,8 +1,11 @@
-FROM python:3.7
+ARG BASE_IMAGE=python:3.7-buster
+FROM ${BASE_IMAGE}
 
-ARG SCRATCH=/mnt/ephemeral-01
+# Build args
 ARG SDIST
-
+ARG DEFAULT_ACTOR_CONTEXT=/tmp/default_actor_context
+ARG PYTHON=python3
+ARG SCRATCH=/mnt/ephemeral-01
 ENV SCRATCH=${SCRATCH}
 
 # Force locale to UTF-8
@@ -20,14 +23,16 @@ RUN mkdir -p ${SCRATCH} && \
     chmod a+rwx ${SCRATCH} && \
     chmod g+rwxs ${SCRATCH}
 
-RUN pip uninstall -y agavepy
-ADD ${SDIST} /
-ADD src/reactor.py /reactor.py
-RUN pip install --upgrade -q /reactors-*
+# Install Reactors SDK
+ADD ${SDIST} /tmp
+RUN pip install --upgrade -q /tmp/reactors-*
 
-# Onbuild support
+# Add default Reactor assets
+ADD src/reactor.py /reactor.py
+
+# Add Reactor assets on build
 ONBUILD ADD requirements.txt /tmp/requirements.txt
-ONBUILD RUN pip3 install -r /tmp/requirements.txt
+ONBUILD RUN ${PYTHON} -m pip3 install -r /tmp/requirements.txt
 ONBUILD ADD reactor.py /
 ONBUILD ADD config.yml /
 ONBUILD ADD message.jsonschema context.jsonschema* /
