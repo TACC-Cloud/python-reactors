@@ -23,8 +23,8 @@ RUN mkdir -p ${SCRATCH} && \
     chmod g+rwxs ${SCRATCH}
 
 # Install Reactors SDK
-ADD ${SDIST} /tmp
-RUN pip install --upgrade -q /tmp/reactors-*
+ADD ${SDIST} /
+RUN pip install --upgrade -q /reactors-*
 
 # Add default Reactor assets
 ARG CC_BRANCH=main

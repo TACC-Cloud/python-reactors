@@ -61,7 +61,7 @@ sdist: dist/$(PKG)-$(VERSION).tar.gz
 dist/$(PKG)-$(VERSION).tar.gz: setup.py | $(PYTHON)
 	$(PYTHON) $< sdist -q
 
-image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
+image: Dockerfile.public dist/$(PKG)-$(VERSION).tar.gz | docker
 	docker build --progress plain --build-arg SDIST=$(word 2, $^) -t $(IMAGE_DOCKER) -f $< .
 
 public-image: Dockerfile.public dist/$(PKG)-$(VERSION).tar.gz | docker
@@ -81,7 +81,7 @@ pytest-docker: clean image | docker
 		-v ${PWD}/tests/data/abacoschemas:/schemas:ro \
 		-v ${PWD}/tests/data/message.jsonschema:/message.jsonschema:ro \
 		$(IMAGE_DOCKER) \
-		python3 -m pytest $(PYTEST_OPTS) /$(PKG)-$(VERSION)/$(PYTEST_DIR)
+		bash -c "(python3 -m pip install -q pytest && python3 -m pytest $(PYTEST_OPTS) /$(PKG)-$(VERSION)/$(PYTEST_DIR))"
 		#--env-file $(word 2, $^) \
 
 pytest-native: clean | $(PYTHON)
