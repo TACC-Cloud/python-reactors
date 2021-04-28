@@ -2,16 +2,16 @@ name: Docker publish
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
+    # Publish `main` as Docker `latest` image.
     branches:
-      - master
+      - main
     paths-ignore:
       - '**.md'
 
   pull_request:
-    # run tests only for pull requests to `master`
+    # run tests only for pull requests to `main`
     branches:
-      - master
+      - main
     paths-ignore:
       - '**.md'
 
