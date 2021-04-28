@@ -34,20 +34,20 @@ jobs:
   python-package:
     strategy:
       matrix:
-        python-version: [ '3.x', 'pypy-3.7' ]
+        python-version: [ '3.x', '3.7' ]
     name: Build and test Python package in ${{ matrix.python-version }} 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Force locale to UTF-8
         run: |
-          apt-get update 
-          apt-get install -yq locales locales-all
-          apt-get clean
-          export LC_ALL=en_US.UTF-8
-          export LANG=en_US.UTF-8
-          export LANGUAGE=en_US.UTF-8
-      - name: Set up Python 3.7
+          apt-get update -q
+          apt-get install -yq locales locales-all make
+          apt-get clean -q
+          echo "LC_ALL=en_US.UTF-8" >> $GITHUB_ENV
+          echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
+          echo "LANGUAGE=en_US.UTF-8" >> $GITHUB_ENV
+      - name: Set up Python 
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
@@ -55,37 +55,52 @@ jobs:
       - name: Install pytest
         run: python -m pip install -q pytest
       - name: Build sdist
-        run: |
-          echo ${LC_ALL}
-          python setup.py sdist -q
-          # [ ! -f dist/reactors-*.tar.gz ] && echo "could not find sdist" && exit 1
+        run: python setup.py sdist -q
       - name: Install sdist
-        run: python3 -m pip install -q dist/reactors-*.tar.gz 
+        run: python -m pip install -q dist/reactors-*.tar.gz 
       - name: Run pytests
-        run: python3 -m pytest tests/test_000_imports.py
+        run: python -m pytest tests/test_000_imports.py
 
   docker-image:
     name: Build, test, and push Docker image 
     needs: python-package
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ '3.7' ]
     steps:
       
       # Install dependencies
       - uses: actions/checkout@v2
-      - name: Set up Python 3.7
+      - name: Force locale to UTF-8
+        run: |
+          apt-get update -q
+          apt-get install -yq locales locales-all make
+          apt-get clean -q
+          echo "LC_ALL=en_US.UTF-8" >> $GITHUB_ENV
+          echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
+          echo "LANGUAGE=en_US.UTF-8" >> $GITHUB_ENV
+      - name: Set up Python 
         uses: actions/setup-python@v2
         with:
-          python-version: '3.7'
-      - name: Install Tapis CLI
-        run: python -m pip install -q git+https://github.com/TACC-Cloud/tapis-cli
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+      - name: Install pytest
+        run: | 
+          python -m pip install -q --upgrade pip 
+          python -m pip install -q git+https://github.com/TACC-Cloud/tapis-cli
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
       # Build
+      - name: Build sdist
+        run: python setup.py sdist -q
       - name: Build Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
+          build-args: |
+            SDIST=dist/reactors-*.tar.gz
           file: Dockerfile
           pull: true
           push: false
@@ -120,6 +135,8 @@ jobs:
         with:
           context: .
           file: Dockerfile
+          build-args: |
+            SDIST=dist/reactors-*.tar.gz
           push: true
           tags: |
             ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ env.DOCKER_TAG }}
