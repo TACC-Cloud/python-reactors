@@ -28,8 +28,7 @@ RUN pip install --upgrade -q /reactors-*
 
 # Add default Reactor assets
 ARG CC_BRANCH=main
-# TODO: dedicated template
-ARG CC_DIR=sd2e_base
+ARG CC_DIR=tacc_reactors_base
 ARG CC_DEST=/default_actor_context
 ARG CC_REPO=https://github.com/TACC-Cloud/cc-tapis-v2-actors.git
 RUN ${PYTHON} -m pip install cookiecutter && \
