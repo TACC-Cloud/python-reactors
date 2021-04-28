@@ -21,7 +21,7 @@ env:
   DOCKER_USER: enho
   DOCKER_ORG: enho
   DOCKER_REPO: reactors
-  DOCKER_TAG: python3
+  # DOCKER_TAG generated from build matrix
 
   # Tapis credentials for testing
   # TAPIS_PASSWORD accessible via secrets
@@ -67,10 +67,17 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ '3.7' ]
+        include:
+          # - python-version: 3.6
+          #   base-image: python:3.6-buster
+          - python-version: 3.7
+            base-image: python:3.7-buster
+            additional-tags: |
+              ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:python3
+              ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:latest
     steps:
       
-      # Install dependencies
+      # Install build dependencies
       - uses: actions/checkout@v2
       - name: Force locale to UTF-8
         run: |
@@ -93,6 +100,11 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       # Build
+      - name: Generate Docker tag from python version
+        run: |
+          DOCKER_TAG="python${{ matrix.python-version }}"
+          echo "using DOCKER_TAG=${DOCKER_TAG}" 
+          echo "DOCKER_TAG=${DOCKER_TAG}" >> $GITHUB_ENV
       - name: Build sdist
         run: python setup.py sdist -q
       - name: Build Docker image
@@ -101,8 +113,10 @@ jobs:
           context: .
           build-args: |
             SDIST=dist/reactors-*.tar.gz
+            BASE_IMAGE=${{ matrix.base-image }}
           file: Dockerfile
           pull: true
+          load: true
           push: false
           tags: ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ env.DOCKER_TAG }}
 
@@ -137,7 +151,8 @@ jobs:
           file: Dockerfile
           build-args: |
             SDIST=dist/reactors-*.tar.gz
+            BASE_IMAGE=${{ matrix.base-image }}
           push: true
           tags: |
             ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ env.DOCKER_TAG }}
-            ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:latest
+            ${{ matrix.additional-tags }}
