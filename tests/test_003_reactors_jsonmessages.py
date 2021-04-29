@@ -5,7 +5,7 @@ import json
 
 import jsonschema
 from reactors.runtime import Reactor
-from reactors.validation import jsondoc as jsonmessages
+from reactors.validation import jsondoc as jsonmessages, message as message_module
 import testdata
 
 @pytest.fixture(scope='session')
@@ -74,7 +74,7 @@ def test_classify_simple_json_message():
     '''Test that simple JSON can be classified with the generic schema'''
     r = Reactor()
     message = json.loads('{"aljsydgflajsgd": "FKJHFKJLJHGL345678"}')
-    matches = jsonmessages.classify_message(message, 
+    matches = message_module.classify_message(message, 
                                             permissive=True)
     assert len(matches) == 1
     assert 'abaco_json_message' in matches
@@ -84,7 +84,7 @@ def test_classify_email_json_message():
     '''Test that an email message can be classified with the generic and email message schema'''
     r = Reactor()
     message = json.loads('{"to": "tacc@email.tacc.cloud"}')
-    matches = jsonmessages.classify_message(message)
+    matches = message_module.classify_message(message)
     assert len(matches) >= 1
     assert 'abaco_json_email' in matches
 
