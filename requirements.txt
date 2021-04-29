@@ -10,3 +10,4 @@ pytz>=2020.1
 validators==0.18.1
 Jinja2==2.11.2
 requests_futures
+hypothesis
