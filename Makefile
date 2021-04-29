@@ -3,7 +3,7 @@ PREF_SHELL ?= bash
 GITREF=$(shell git rev-parse --short HEAD)
 GITREF_FULL=$(shell git rev-parse HEAD)
 PYTEST_OPTS ?= -s -vvv
-PYTEST_DIR ?= tests/test_000_imports.py
+PYTEST_DIR ?= tests
 DOT_ENV ?= ./.env
 
 ####################################
