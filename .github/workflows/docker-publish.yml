@@ -22,13 +22,6 @@ env:
   DOCKER_ORG: tacc
   DOCKER_REPO: reactors
 
-  # Tapis credentials for testing
-  # TAPIS_PASSWORD accessible via secrets
-  # TODO: non-SD2 client
-  TAPIS_BASE_URL: https://api.sd2e.org/
-  TAPIS_USER: sd2etest
-  TAPIS_CLIENT: _cli-sd2e-actions-python-reactors
-
 jobs:
   build-test-push:
     name: Build, test, and push Docker image 
@@ -64,15 +57,20 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - name: Install pip dependencies
-        run: | 
-          python -m pip install -q --upgrade pip pytest
-          python -m pip install -q git+https://github.com/TACC-Cloud/tapis-cli
+        run: python -m pip install -q --upgrade pip pytest
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      # Build image
+      # Build and test sdist
       - name: Build sdist
         run: python setup.py sdist -q
+      - name: Install sdist
+        run: python -m pip install -q dist/reactors-*.tar.gz
+      # TODO: all pytests
+      - name: Run pytests
+        run: python -m pytest tests/test_000_imports.py
+
+      # Build image and test default CMD
       - name: Build Docker image
         uses: docker/build-push-action@v2
         with:
@@ -85,22 +83,8 @@ jobs:
           load: true
           push: false
           tags: ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ matrix.image-tag }}
-
-      # Test image CMD
-      - name: Authenticate Tapis client
-        run: |
-          touch ~/.tapis_firstrun
-          tapis auth init --no-git --no-registry \
-            --client-name $TAPIS_CLIENT --api-server $TAPIS_BASE_URL \
-            --username $TAPIS_USER --password ${{ secrets.TAPIS_PASSWORD }} 
       - name: Test image using default CMD
-        run: |
-          TAPIS_TOKEN="$(tapis auth show -f json | jq -rc .access_token)"
-          [ -z $TAPIS_TOKEN ] && echo failed to generate Tapis access token && exit 1
-          docker run --rm \
-            -e _abaco_access_token=${TAPIS_TOKEN} \
-            -e _abaco_api_server=${TAPIS_BASE_URL} \
-            ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ matrix.image-tag }}
+        run: docker run --rm ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ matrix.image-tag }}
 
       # Push to DockerHub
       - name: Login to DockerHub
