@@ -9,5 +9,4 @@ requests_futures>=0.9.7
 pytz>=2020.1
 validators==0.18.1
 Jinja2==2.11.2
-hypothesis_jsonschema>=0.18.0
 requests_futures
