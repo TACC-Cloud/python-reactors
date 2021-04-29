@@ -32,25 +32,14 @@ jobs:
         include:
           - python-version: 3.6
             base-image: python:3.6-buster
-            image-tag: python3.6
+            tags: python3.6
           - python-version: 3.7
             base-image: python:3.7-buster
-            image-tag: python3.7
-            additional-tags: |
-              ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:python3
-              ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:latest
+            tags: python3.7,python3,latest
     steps:
 
       # Install build dependencies
       - uses: actions/checkout@v2
-      - name: Force locale to UTF-8
-        run: |
-          sudo apt-get update -q
-          sudo apt-get install -yq locales locales-all make
-          sudo apt-get clean -q
-          echo "LC_ALL=en_US.UTF-8" >> $GITHUB_ENV
-          echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
-          echo "LANGUAGE=en_US.UTF-8" >> $GITHUB_ENV
       - name: Set up Python 
         uses: actions/setup-python@v2
         with:
@@ -70,6 +59,16 @@ jobs:
         run: python -m pytest tests
 
       # Build image and test default CMD
+      - name: Generate env.DOCKER_TAGS and env.PRIMARY_TAG
+        run: |
+          DOCKER_TAGS=$(echo "${{ matrix.tags }}" | \
+            sed -e 's/\,/,${{ env.DOCKER_ORG }}\/${{ env.DOCKER_REPO }}:/g' | \
+            sed -e 's/^/${{ env.DOCKER_ORG }}\/${{ env.DOCKER_REPO }}:/g')
+          PRIMARY_TAG=$(echo ${DOCKER_TAGS} | sed -e 's/,.*$//g')
+          echo "using DOCKER_TAGS=${DOCKER_TAGS}"
+          echo "using PRIMARY_TAG=${PRIMARY_TAG}"
+          echo "DOCKER_TAGS=${DOCKER_TAGS}" >> $GITHUB_ENV
+          echo "PRIMARY_TAG=${PRIMARY_TAG}" >> $GITHUB_ENV
       - name: Build Docker image
         uses: docker/build-push-action@v2
         with:
@@ -81,9 +80,9 @@ jobs:
           pull: true
           load: true
           push: false
-          tags: ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ matrix.image-tag }}
+          tags: ${{ env.DOCKER_TAGS }}
       - name: Test image using default CMD
-        run: docker run --rm ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ matrix.image-tag }}
+        run: docker run --rm ${{ env.PRIMARY_TAG }}
 
       # Push to DockerHub
       - name: Login to DockerHub
@@ -102,6 +101,4 @@ jobs:
             SDIST=dist/reactors-*.tar.gz
             BASE_IMAGE=${{ matrix.base-image }}
           push: true
-          tags: |
-            ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ matrix.image-tag }}
-            ${{ matrix.additional-tags }}
+          tags: ${{ env.DOCKER_TAGS }}
