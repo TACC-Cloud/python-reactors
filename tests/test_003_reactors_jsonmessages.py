@@ -5,7 +5,7 @@ import json
 
 import jsonschema
 from reactors.runtime import Reactor
-from reactors import jsonmessages
+from reactors.validation import jsondoc as jsonmessages
 import testdata
 
 @pytest.fixture(scope='session')

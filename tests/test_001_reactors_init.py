@@ -7,7 +7,7 @@ from agavepy.agave import Agave
 from logging import Logger
 
 from reactors.runtime import Reactor
-from reactors.abaco import ABACO_CONTEXT_MAP
+from reactors.runtime.abaco import ABACO_CONTEXT_MAP
 
 def test_init():
     '''Ensure various properties are present and the right class'''
