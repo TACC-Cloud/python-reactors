@@ -3,7 +3,7 @@ import os
 import sys
 
 from agavepy.agave import AgaveError
-from reactors.utils import Reactor
+from reactors.runtime import Reactor
 
 @pytest.mark.skip
 @pytest.mark.parametrize("actor_id, message, success", [
