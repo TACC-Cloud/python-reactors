@@ -1,6 +1,9 @@
 """Derived Reactor class implementing webhooks and nonces
 """
+import json
 from reactors import agaveutils
+from requests.exceptions import HTTPError
+from agavepy.errors import AgaveError
 
 from .base import BaseReactor
 
