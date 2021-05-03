@@ -5,7 +5,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 from reactors.config import config_files, env_vars_from_config, read_config
 from reactors.runtime import Reactor
 from reactors.validation.context import find_context_schema_files
-from reactors.validation.jsondoc import (example, load_schema, schema_id,
+from reactors.validation.jsondoc import (load_schema, schema_id,
                                          vars_from_schema)
 from reactors.validation.message import find_message_schema_files
 
@@ -13,9 +13,7 @@ from .run import docstring, load_function
 
 
 def usage(args=None):
-    env = Environment(
-        loader=PackageLoader('reactors.cli', 'templates')
-    )
+    env = Environment(loader=PackageLoader('reactors.cli', 'templates'))
     template = env.get_template('usage.txt.j2')
 
     image_repo = '<NAMESPACE/REPO:TAG>'
@@ -35,17 +33,15 @@ def usage(args=None):
     for msf in msgsch_locs:
         ms = load_schema(msf)
         msid = schema_id(ms)
-        msx = json.dumps(example(ms), separators=(',', ':'))
-        mdoc = {'file': msf, 'id': msid, 'vars': [], 'schema': ms, 'example': msx}
+        msx = '{}'
+        mdoc = {'file': msf, 'id': msid, 'vars': [], 'schema': ms}
         msgs.append(mdoc)
 
     # Example message
     if len(msgs) <= 2:
         ms = msgs[0]['schema']
         ex_sch = json.dumps(ms, indent=2)
-        ex_msg = json.dumps(example(ms), separators=(',', ':'))
     else:
-        ex_msg = None
         ex_sch = None
 
     # Env Var Sets
@@ -57,9 +53,9 @@ def usage(args=None):
         csvars = vars_from_schema(cs, filter_private=True)
         cdoc = {'file': csf, 'id': csid, 'vars': csvars, 'schema': cs}
         ctxts.append(cdoc)
-    
+
     # Env Vars
-    # We compute and display this if the number of 
+    # We compute and display this if the number of
     # contexts is limited to 2 or less, which implies
     # the default (which cannot be overridden) and one more
     if len(ctxts) <= 2:
@@ -69,8 +65,8 @@ def usage(args=None):
         for c in ctxts:
             for v in c['vars']:
                 if True:
-                #if v['required']:
-                    req_vars.append(v)    
+                    #if v['required']:
+                    req_vars.append(v)
                     val = v.get('default', None)
                     if val is None:
                         if len(v.get('examples', [])) > 0:
@@ -81,7 +77,8 @@ def usage(args=None):
                     if v.get('id') != 'MSG':
                         cli_envs.append('{0}="{1}"'.format(v.get('id'), val))
                     else:
-                        cli_envs.append('MSG=\'{0}\''.format(ex_msg))
+                        cli_envs.append(
+                            'MSG=\'{<JSON MESSAGE>}\''.format(ex_msg))
         cli_envs_str = ' '.join(cli_envs)
     else:
         req_vars = None
@@ -90,12 +87,22 @@ def usage(args=None):
 
     # CONFIG.YML
     config_locs = config_files()
-    union_config_yml = yaml.dump(dict(read_config(namespace=Reactor.CONFIG_NAMESPACE)))
-    config_vars = env_vars_from_config(read_config(namespace=Reactor.CONFIG_NAMESPACE), namespace=Reactor.CONFIG_NAMESPACE)
+    union_config_yml = yaml.dump(
+        dict(read_config(namespace=Reactor.CONFIG_NAMESPACE)))
+    config_vars = env_vars_from_config(
+        read_config(namespace=Reactor.CONFIG_NAMESPACE),
+        namespace=Reactor.CONFIG_NAMESPACE)
     config_vars.sort()
 
-    print(template.render(docstr=docstr, contexts=ctxts, messages=msgs, 
-                          config_locs=config_locs, config_vars=config_vars, 
-                          union_config_yml=union_config_yml, tapis=tapis, 
-                          req_vars=req_vars, ex_msg=ex_msg, ex_sch=ex_sch,
-                          cli_envs_str=cli_envs_str, image_repo=image_repo))
+    print(
+        template.render(docstr=docstr,
+                        contexts=ctxts,
+                        messages=msgs,
+                        config_locs=config_locs,
+                        config_vars=config_vars,
+                        union_config_yml=union_config_yml,
+                        tapis=tapis,
+                        req_vars=req_vars,
+                        ex_sch=ex_sch,
+                        cli_envs_str=cli_envs_str,
+                        image_repo=image_repo))

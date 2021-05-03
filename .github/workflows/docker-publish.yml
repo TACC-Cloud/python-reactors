@@ -40,6 +40,14 @@ jobs:
 
       # Install build dependencies
       - uses: actions/checkout@v2
+      - name: Force locale to UTF-8
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -yq locales locales-all make
+          sudo apt-get clean -q
+          echo "LC_ALL=en_US.UTF-8" >> $GITHUB_ENV
+          echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
+          echo "LANGUAGE=en_US.UTF-8" >> $GITHUB_ENV
       - name: Set up Python 
         uses: actions/setup-python@v2
         with:

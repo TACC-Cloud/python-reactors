@@ -27,7 +27,6 @@ Please refer to https://tacc-cloud.github.io/python-reactors/usage/parameters fo
 The function accepts a JSON message (passed as MSG) conforming to schema:
 {{ ex_sch }}
 
-Example: {{ ex_msg }}
 {% else %}JSON Message Formats
 --------------------
 
@@ -36,7 +35,6 @@ for 'MSG' that validate to the following JSON schemas:
 {% for item in messages %}
   - Message schema.$id: {{ item.id }}
     File: {{ item.file}}
-    Example: {{ item.example }}
 {% endfor %}{% endif %}
 Please refer to https://tacc-cloud.github.io/python-reactors/usage/messages for details.
 

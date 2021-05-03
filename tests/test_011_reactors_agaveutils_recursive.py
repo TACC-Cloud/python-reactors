@@ -2,7 +2,7 @@ import pytest
 import os
 import sys
 
-from reactors.utils import Reactor
+from reactors.runtime import Reactor
 from reactors.agaveutils.recursive import PemAgent, __version__
 
 

@@ -5,7 +5,7 @@ import sys
 import petname
 import re
 from reactors.runtime import Reactor
-from reactors.abaco import new_hashid
+from reactors.runtime.abaco import new_hashid
 
 @pytest.fixture(scope='session')
 def fake_version():
