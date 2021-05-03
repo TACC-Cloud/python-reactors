@@ -92,7 +92,10 @@ jobs:
           push: false
           tags: ${{ env.DOCKER_TAGS }}
       - name: Test image using default CMD
-        run: docker run --rm ${{ env.PRIMARY_TAG }}
+        run: |
+          docker run --rm ${{ env.PRIMARY_TAG }}
+          docker run --rm ${{ env.PRIMARY_TAG }} python3 -m reactors.cli usage
+          docker run --rm ${{ env.PRIMARY_TAG }} python3 -m reactors.cli run
 
       # Push to DockerHub
       - name: Login to DockerHub
