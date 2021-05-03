@@ -76,10 +76,16 @@ pytest-docker: clean image | docker
 		$(IMAGE_DOCKER) \
 		bash -c "(python3 -m pip install -q pytest && python3 -m pytest $(PYTEST_OPTS) /$(PKG)-$(VERSION)/$(PYTEST_DIR))"
 
+test-cli-docker: clean image | docker
+	docker run --rm -t \
+		-v ${HOME}/.agave:/root/.agave \
+		$(IMAGE_DOCKER) \
+		bash -c "(python3 -m reactors.cli usage && python3 -m reactors.cli run)"
+
 pytest-native: clean | $(PYTHON)
 	PYTHONPATH=./src $(PYTHON) -m pytest $(PYTEST_OPTS) $(PYTEST_DIR)
 
-tests: pytest-native pytest-docker
+tests: test-cli-docker pytest-docker 
 
 shell: image | docker
 	docker run --rm -it \
