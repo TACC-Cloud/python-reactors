@@ -3,7 +3,6 @@ FROM ${BASE_IMAGE}
 
 # Build args
 ARG SDIST
-ARG PYTHON=python3
 ARG SCRATCH=/mnt/ephemeral-01
 ENV SCRATCH=${SCRATCH}
 
@@ -31,9 +30,9 @@ ARG CC_BRANCH=main
 ARG CC_DIR=tacc_reactors_base
 ARG CC_DEST=/default_actor_context
 ARG CC_REPO=https://github.com/TACC-Cloud/cc-tapis-v2-actors.git
-RUN ${PYTHON} -m pip install cookiecutter && \
+RUN python3 -m pip install cookiecutter && \
     cd "$(dirname ${CC_DEST})" && \
-    ${PYTHON} -m cookiecutter --no-input -fc ${CC_BRANCH} --directory ${CC_DIR} \
+    python3 -m cookiecutter --no-input -fc ${CC_BRANCH} --directory ${CC_DIR} \
 		${CC_REPO} name=${CC_DEST} alias=${CC_DEST} && \
     # Copy assets to expected dirs
     cp ${CC_DEST}/reactor.py / && \
@@ -41,11 +40,11 @@ RUN ${PYTHON} -m pip install cookiecutter && \
     # cp ${CC_DEST}/*.jsonschema* / && \
     cp -r ${CC_DEST}/*_schemas / && \
     # Install default pip dependencies
-    ${PYTHON} -m pip install --ignore-installed -r ${CC_DEST}/requirements.txt
+    python3 -m pip install --ignore-installed -r ${CC_DEST}/requirements.txt
 
 # Add Reactor assets on build
 ONBUILD ADD requirements.txt /tmp/requirements.txt
-ONBUILD RUN ${PYTHON} -m pip install -r /tmp/requirements.txt
+ONBUILD RUN python3 -m pip install -r /tmp/requirements.txt
 ONBUILD ADD reactor.py /
 ONBUILD ADD config.yml /
 ONBUILD ADD message.jsonschema context.jsonschema* /
