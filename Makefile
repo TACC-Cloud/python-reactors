@@ -31,6 +31,11 @@ image: Dockerfile
 ####################################
 .PHONY: pytest-docker test-cli-docker tests shell clean 
 
+tests: test-cli-docker pytest-docker pytest-native
+
+pytest-native tox:
+	tox --
+
 pytest-docker: clean image 
 	docker run --rm -t \
 		-v ${HOME}/.agave:/root/.agave \
@@ -45,8 +50,6 @@ test-cli-docker: clean image
 		-v ${HOME}/.agave:/root/.agave \
 		$(IMAGE_DOCKER) \
 		bash -c "(python3 -m reactors.cli usage && python3 -m reactors.cli run)"
-
-tests: test-cli-docker pytest-docker
 
 shell: image 
 	docker run --rm -it \
