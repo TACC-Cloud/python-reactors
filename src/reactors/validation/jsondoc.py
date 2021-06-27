@@ -11,7 +11,6 @@ import warnings
 import jsonschema
 import requests
 import validators
-from hypothesis.errors import NonInteractiveExampleWarning
 
 __all__ = ['find_schema_files', 'schema_from_url', 'load_schema', 
            'validate_document', 'classify_document', 'schema_ids', 
