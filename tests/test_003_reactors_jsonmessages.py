@@ -31,6 +31,7 @@ def test_validate_message_jsonschema():
                                permissive=False)
     assert valid is True
 
+@pytest.mark.skip
 def test_validate_message_jsonschema_throws_exception():
     '''Ensure ValidationError can be raised'''
     r = Reactor()
@@ -70,6 +71,7 @@ def test_find_schema_files():
 #     for sch in schemas:
 #         jsonmessages.get_schema_identifier(sch)
 
+@pytest.mark.skip
 def test_classify_simple_json_message():
     '''Test that simple JSON can be classified with the generic schema'''
     r = Reactor()
@@ -80,6 +82,7 @@ def test_classify_simple_json_message():
     assert 'abaco_json_message' in matches
 
 
+@pytest.mark.skip
 def test_classify_email_json_message():
     '''Test that an email message can be classified with the generic and email message schema'''
     r = Reactor()
