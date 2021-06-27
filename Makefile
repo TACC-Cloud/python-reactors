@@ -53,28 +53,24 @@ git:
 ####################################
 # Build Docker image
 ####################################
-.PHONY: sdist dist/$(PKG)-$(VERSION).tar.gz image shell tests pytest-docker pytest-native clean clean-tests
+.PHONY: image
 
-sdist: dist/$(PKG)-$(VERSION).tar.gz
-
-dist/$(PKG)-$(VERSION).tar.gz: setup.py | $(PYTHON)
-	$(PYTHON) $< sdist -q
-
-image: Dockerfile dist/$(PKG)-$(VERSION).tar.gz | docker
-	docker build --progress plain --build-arg SDIST=$(word 2, $^) -t $(IMAGE_DOCKER) -f $< .
+image: Dockerfile 
+	docker build --progress plain -t $(IMAGE_DOCKER) -f $< .
 
 ####################################
 # Tests
 ####################################
-.PHONY: pytest-native pytest-docker tests shell clean 
+.PHONY: pytest-docker test-cli-docker tests shell clean 
 
 pytest-docker: clean image | docker
 	docker run --rm -t \
 		-v ${HOME}/.agave:/root/.agave \
 		-v ${PWD}/tests/data/abacoschemas:/schemas:ro \
 		-v ${PWD}/tests/data/message.jsonschema:/message.jsonschema:ro \
+		-v ${PWD}/$(PYTEST_DIR):/tmp/$(PKG)-$(VERSION)/$(PYTEST_DIR) \
 		$(IMAGE_DOCKER) \
-		bash -c "(python3 -m pip install -q pytest && python3 -m pytest $(PYTEST_OPTS) /$(PKG)-$(VERSION)/$(PYTEST_DIR))"
+		bash -c "(python3 -m pip install -q pytest && python3 -m pytest $(PYTEST_OPTS) /tmp/$(PKG)-$(VERSION)/$(PYTEST_DIR))"
 
 test-cli-docker: clean image | docker
 	docker run --rm -t \
@@ -82,10 +78,7 @@ test-cli-docker: clean image | docker
 		$(IMAGE_DOCKER) \
 		bash -c "(python3 -m reactors.cli usage && python3 -m reactors.cli run)"
 
-pytest-native: clean | $(PYTHON)
-	PYTHONPATH=./src $(PYTHON) -m pytest $(PYTEST_OPTS) $(PYTEST_DIR)
-
-tests: test-cli-docker pytest-docker 
+tests: test-cli-docker pytest-docker
 
 shell: image | docker
 	docker run --rm -it \

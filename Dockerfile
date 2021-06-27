@@ -2,7 +2,6 @@ ARG BASE_IMAGE=python:3.7-buster
 FROM ${BASE_IMAGE}
 
 # Build args
-ARG SDIST
 ARG SCRATCH=/mnt/ephemeral-01
 ENV SCRATCH=${SCRATCH}
 
@@ -22,8 +21,8 @@ RUN mkdir -p ${SCRATCH} && \
     chmod g+rwxs ${SCRATCH}
 
 # Install Reactors SDK
-ADD ${SDIST} /
-RUN pip install --upgrade -q /reactors-*
+ADD dist /tmp/reactors-dist
+RUN pip install -q /tmp/reactors-dist/*.whl
 
 # Add default Reactor assets
 ARG CC_BRANCH=main
