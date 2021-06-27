@@ -4,8 +4,6 @@ import json
 import os
 import warnings
 
-from hypothesis.errors import NonInteractiveExampleWarning
-
 from .jsondoc import (FILENAME_GLOB, classify_document, find_schema_files,
                       is_default, load_schema, validate_document)
 

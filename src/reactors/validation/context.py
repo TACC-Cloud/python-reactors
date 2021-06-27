@@ -94,14 +94,3 @@ def validate(context, permissive=True):
             return False
         else:
             raise ValueError("Unable to validate context")
-
-def example(schema, remote_refs=False):
-    """Uses Hypothesis to generate an example document from a schema
-
-    Does not currently support schemas with remote URI references
-    """
-    # It should be possible to implement a resolved schema using 
-    # resolve_all_refs with a custom LocalResolver that implements resolve_remote 
-    # https://github.com/Zac-HD/hypothesis-jsonschema/blob/master/src/hypothesis_jsonschema/_canonicalise.py
-    sch = allof_schema(load_schema(schema))
-    return from_schema(sch).example()
