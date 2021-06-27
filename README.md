@@ -1,5 +1,7 @@
 # Tapis Actors SDK
 
+[![Docker publish](https://github.com/TACC-Cloud/python-reactors/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/TACC-Cloud/python-reactors/actions/workflows/docker-publish.yml)
+
 This repository contains the software development kit (SDK) for [Tapis Actors](https://tapis.readthedocs.io/en/latest/technical/actors.html).
 
 ## Installation
