@@ -1,9 +1,11 @@
 [tool.poetry]
 name = "reactors"
 version = "0.8.0"
-description = ""
-authors = ["Ethan Ho <eho@tacc.utexas.edu>"]
+description = "Software development kit for Tapis actors"
+authors = ["Matthew W Vaughn", "Shweta Gopaulakrishnan", "Ethan Ho <eho@tacc.utexas.edu>"]
 license = "bsd-2-clause"
+include = ["src/**/*.yml", "src/**/*.jsonschema", "src/**/*.j2"]
+
 
 [tool.poetry.dependencies]
 python = ">=3.6"
