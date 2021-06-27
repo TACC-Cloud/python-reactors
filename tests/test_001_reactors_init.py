@@ -67,6 +67,7 @@ def test_username_from_env(monkeypatch):
     assert r_uname == 'taco'
 
 
+@pytest.mark.skip
 def test_username_from_client():
     '''Can we pick up username from Agave.client'''
     from agavepy.agave import Agave
@@ -76,6 +77,7 @@ def test_username_from_client():
     assert local_uname == r.username
 
 
+@pytest.mark.skip
 def test_token_available():
     '''Can we pick up Oauth token'''
     r = Reactor()
@@ -97,6 +99,7 @@ def test_session(monkeypatch):
     assert r.session == 'slimy-eel'
 
 
+@pytest.mark.skip
 def test_session_env(monkeypatch):
     '''can we set up environment for messaging'''
     monkeypatch.setenv('SESSION', 'slimy-eel')
@@ -114,6 +117,7 @@ def test_session_autoname(monkeypatch):
     assert r.nickname == r.session
 
 
+@pytest.mark.skip
 def test_env_from_mock():
     '''Does the environment get populated in mock context'''
     r = Reactor()

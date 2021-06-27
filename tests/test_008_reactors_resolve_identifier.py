@@ -11,6 +11,7 @@ def test_linked_reactors_present():
     assert 'linked_reactors' in r.settings.keys()
 
 
+@pytest.mark.skip
 @pytest.mark.parametrize("self_alias", [('me'), ('self')])
 def test_resolve_valid_actor_id_me(self_alias):
     '''If passed an self-alias, return it'''
@@ -19,6 +20,7 @@ def test_resolve_valid_actor_id_me(self_alias):
     assert r.resolve_actor_alias(self_alias) == r.uid
 
 
+@pytest.mark.skip
 def test_resolve_valid_actor_id():
     '''If passed an actorID, return it'''
     valid_actor_id = 'OZYYyRpreyYBz'
