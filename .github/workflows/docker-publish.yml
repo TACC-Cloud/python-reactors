@@ -54,19 +54,17 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - name: Install pip dependencies
-        run: python -m pip install -q --upgrade pip pytest
+        run: python -m pip install -q --upgrade pip poetry
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      # Build and test sdist
-      - name: Build sdist
-        run: python setup.py sdist -q
-      - name: Install sdist
-        run: python -m pip install -q dist/reactors-*.tar.gz
-      # TODO: enable all pytests once passing locally
-      # TODO: tapis auth init
+      # Build and test dist
+      # TODO: Tapis auth
       - name: Run pytests
-        run: python -m pytest tests/test_000_imports.py
+        run: |
+          poetry install
+          poetry run python3 -m pytest tests/test_000_imports.py
+      - run: poetry build
 
       # Build image and test default CMD
       - name: Generate env.DOCKER_TAGS and env.PRIMARY_TAG
