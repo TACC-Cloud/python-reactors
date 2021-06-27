@@ -11,6 +11,11 @@ from reactors.validation.message import find_message_schema_files
 
 from .run import docstring, load_function
 
+# TODO
+# DEBUG
+# ex_msg is not defined
+ex_msg = str()
+
 
 def usage(args=None):
     env = Environment(loader=PackageLoader('reactors.cli', 'templates'))
@@ -78,7 +83,7 @@ def usage(args=None):
                         cli_envs.append('{0}="{1}"'.format(v.get('id'), val))
                     else:
                         cli_envs.append(
-                            'MSG=\'{<JSON MESSAGE>}\''.format(ex_msg))
+                            'MSG=\'{0}\''.format(ex_msg))
         cli_envs_str = ' '.join(cli_envs)
     else:
         req_vars = None
