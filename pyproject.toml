@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "reactors"
+version = "0.8.0"
+description = "Software development kit for Tapis actors"
+authors = ["Matthew W Vaughn", "Shweta Gopaulakrishnan", "Ethan Ho <eho@tacc.utexas.edu>"]
+license = "bsd-2-clause"
+include = ["src/**/*.yml", "src/**/*.jsonschema", "src/**/*.j2"]
+
+
+[tool.poetry.dependencies]
+python = ">=3.6"
+agavepy = {git = "https://github.com/TACC/agavepy", rev = "master"}
+requests_futures = ">=0.9.7"
+pytz = "^2021.1"
+petname = ">=2.2"
+jsonschema = ">=3.0.0"
+hashids = ">=1.2.0"
+tacconfig = ">=0.5.4"
+validators = "^0.18.2"
+
+[tool.poetry.dev-dependencies]
+hypothesis = "^6.14.0"
+pytest = "^6.2.4"
+pytest-pythonpath = "^0.7.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,4 +1,0 @@
-graft tests
-include src/**/*.yml
-include src/**/**/*.jsonschema
-include src/**/**/**/*.j2
