@@ -63,7 +63,7 @@ jobs:
       - name: Run pytests
         run: |
           poetry install
-          poetry run python3 -m pytest tests/test_000_imports.py
+          poetry run python3 -m pytest 
       - run: poetry build
 
       # Build image and test default CMD
