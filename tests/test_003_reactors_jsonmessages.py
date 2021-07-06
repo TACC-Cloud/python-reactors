@@ -6,11 +6,7 @@ import json
 import jsonschema
 from reactors.runtime import Reactor
 from reactors.validation import jsondoc as jsonmessages, message as message_module
-import testdata
 
-@pytest.fixture(scope='session')
-def test_data():
-    return testdata.AbacoJSONmessages().data()
 
 # @pytest.mark.skip
 def test_validate_named_message_jsonschema():
