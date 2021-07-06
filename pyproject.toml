@@ -26,3 +26,8 @@ pytest-pythonpath = "^0.7.3"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+markers = [
+    "tapis_auth: require cached Agave/Tapis v2 auth",
+]
