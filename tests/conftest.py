@@ -23,7 +23,7 @@ def token_v3() -> str:
 	raise NotImplementedError()
 
 
-@pytest.fixture(scope='class')
+@pytest.fixture()
 def abaco_api_server(monkeypatch):
 	"""Sets value of env variable `_abaco_api_server`."""
 	api_server = 'https://api.tacc.utexas.edu/'
@@ -32,7 +32,7 @@ def abaco_api_server(monkeypatch):
 	monkeypatch.delenv("_abaco_api_server")
 
 
-@pytest.fixture(scope='class')
+@pytest.fixture()
 def abaco_username(monkeypatch):
 	"""Sets value of env variable `_abaco_username`."""
 	username = 'eho'
@@ -40,9 +40,8 @@ def abaco_username(monkeypatch):
 	yield
 	monkeypatch.delenv("_abaco_username")
 
-
-@pytest.fixture(scope='class')
-def abaco_access_token(monkeypatch, cache_v2):
+@pytest.fixture()
+def abaco_access_token(monkeypatch):
 	"""Sets value of env variable `_abaco_access_token`."""
 	token = ''
 	monkeypatch.setenv("_abaco_access_token", token)
