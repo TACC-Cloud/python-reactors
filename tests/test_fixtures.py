@@ -1,10 +1,11 @@
 import os
 import pytest
 from agavepy.agave import Agave
+from reactors.runtime import Reactor
 
 
 @pytest.mark.tapis_auth
-class TestFixtures:
+class TestAuthFixtures:
     
 	def test_client_v2(self, client_v2):
 		"""Test fixture `client_v2`"""
@@ -34,3 +35,13 @@ class TestFixtures:
 		"""Test fixture `abaco_access_token`"""
 		assert abaco_access_token is None
 		assert '_abaco_access_token' in os.environ
+
+
+@pytest.mark.tapis_auth
+class TestReactorFixtures:
+
+	def test_r(self, r):
+		"""Test fixture `r`"""
+		assert isinstance(r, Reactor)
+		# check that client is active
+		_ = r.client.apps.list()
