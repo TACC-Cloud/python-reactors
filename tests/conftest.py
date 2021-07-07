@@ -1,8 +1,12 @@
+import logging
 from typing import MappingView
 import pytest
 from pathlib import Path
+import polling2
 from agavepy.agave import Agave
 from reactors.runtime import Reactor
+
+from .fixtures.live import *
 
 
 @pytest.fixture
@@ -58,3 +62,14 @@ def r() -> Reactor:
     initialized from Tapis v2 credentials in env vars.
     """
     return Reactor()
+
+
+@pytest.fixture
+@pytest.mark.usefixtures(('abaco_access_token', 'abaco_username', 'abaco_api_server'))
+def actor() -> str:
+    """Returns an instantiated Reactor instance with a bare `client` attribute
+    initialized from Tapis v2 credentials in env vars.
+    """
+    return Reactor()
+
+# -------------
