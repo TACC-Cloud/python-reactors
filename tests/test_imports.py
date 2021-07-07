@@ -1,6 +1,5 @@
 import pytest
-import os
-import sys
+
 
 def test_module_imports():
     from reactors.runtime import Reactor
@@ -13,4 +12,3 @@ def test_module_imports():
     # from reactors import context
     # from reactors import jsonmessages
     from reactors import version
-    return True
