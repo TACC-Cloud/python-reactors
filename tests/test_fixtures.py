@@ -48,7 +48,7 @@ class TestReactorFixtures:
 
 
 @pytest.mark.tapis_auth
-class TestTapisFixtures:
+class TestLiveFixtures:
     """Test fixtures that provide Tapis entities (apps, actors, files, etc.)
     for integration testing.
     """

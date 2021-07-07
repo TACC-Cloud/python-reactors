@@ -1,20 +1,30 @@
 import logging
 import pytest
 import polling2
+from collections.abc import Mapping, Iterable
 
 
-def actor_exists(client, body: dict) -> dict:
-    for actor in client.actors.list():
-        if all(actor[k] == body[k] for k in body):
-            logging.debug(f"found match for body with actorId {actor['id']}")
-            return actor
-    logging.debug(f"no matches for body")
+def entity_exists(body: Mapping, entities: Iterable) -> dict:
+    """Check if all items in `body` match items in any element of `entities`.
+    Returns first match as a dict, or an empty dict if no match is found.
+    """
+    for entity in entities:
+        if all(entity[k] == body[k] for k in body):
+            return entity
     return dict()
 
 
+def actor_exists(client, body: Mapping) -> dict:
+    return entity_exists(body, client.actors.list())
+
+
+def app_exists(client, body: Mapping) -> dict:
+    return entity_exists(body, client.apps.list())
+
+
 @pytest.fixture
-def actor_wc(client_v2):
-    """description"""
+def actor_wc(client_v2) -> dict:
+    """Deploys a word count actor if one does not already exist."""
     body = {
         "image": "abacosamples/wc", 
         "description": "Actor that counts words."
@@ -25,9 +35,15 @@ def actor_wc(client_v2):
     actor = actor if actor else client_v2.actors.add(body=body)
 
     # poll until actor's status is READY
-    polling2.poll(
-        target=lambda: client_v2.actors.get(actorId=actor['id'])['status'], 
-        check_success=lambda x: x == 'READY', 
+    return polling2.poll(
+        target=lambda: client_v2.actors.get(actorId=actor['id']), 
+        check_success=lambda x: x['status'] == 'READY', 
         step=5, 
         timeout=20
     )
+
+
+@pytest.fixture
+def app(client_v2) -> dict:
+    """Deploys a live app if one does not already exist."""
+    raise NotImplementedError()
