@@ -2,6 +2,7 @@ import os
 import pytest
 from agavepy.agave import Agave
 from reactors.runtime import Reactor
+from collections.abc import Callable
 
 
 @pytest.mark.tapis_auth
@@ -44,7 +45,16 @@ class TestAuthFixtures:
 
 @pytest.mark.tapis_auth
 class TestReactorFixtures:
-    pass
+    
+    def test_R(self, R):
+        assert isinstance(R, Callable)
+        r = R()
+        assert isinstance(r, Reactor)
+
+    def test_r(self, r):
+        assert isinstance(r, Reactor)
+        for var in ('_abaco_username', '_abaco_api_server', '_abaco_access_token'):
+            assert var in os.environ
 
 
 @pytest.mark.tapis_auth
