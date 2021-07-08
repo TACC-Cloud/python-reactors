@@ -11,5 +11,5 @@ def r(abaco_env) -> Reactor:
 
 @pytest.fixture
 def R(abaco_env) -> type:
-	"""Returns Reactor constructor"""
+	"""Returns Reactor constructor, with Abaco runtime envs"""
 	return Reactor
