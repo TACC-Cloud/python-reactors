@@ -10,6 +10,6 @@ def r(abaco_env) -> Reactor:
 
 
 @pytest.fixture
-def R() -> Callable:
+def R(abaco_env) -> type:
 	"""Returns Reactor constructor"""
 	return Reactor
