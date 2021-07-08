@@ -44,6 +44,24 @@ def actor_wc(client_v2) -> dict:
 
 
 @pytest.fixture
-def app(client_v2) -> dict:
-    """Deploys a live app if one does not already exist."""
+def execution_system(client_v2) -> dict:
+    """Creates a private executions system"""
     raise NotImplementedError()
+
+
+@pytest.fixture
+def storage_system(client_v2) -> dict:
+    """Creates a private storage system"""
+    raise NotImplementedError()
+
+
+@pytest.fixture
+def file(client_v2, storage_system) -> dict:
+    """Deploys a live app if one does not already exist."""
+    raise NotImplementedError("requires an executionSystem")
+
+
+@pytest.fixture
+def app(client_v2, execution_system) -> dict:
+    """Deploys a live app if one does not already exist."""
+    raise NotImplementedError("requires an executionSystem")

@@ -36,15 +36,15 @@ class TestAuthFixtures:
         assert abaco_access_token is None
         assert '_abaco_access_token' in os.environ
 
+    def test_abaco_env(self, abaco_env):
+        """Test fixture `abaco_env`"""
+        for var in ('_abaco_username', '_abaco_api_server', '_abaco_access_token'):
+            assert var in os.environ
+
 
 @pytest.mark.tapis_auth
 class TestReactorFixtures:
-
-    def test_r(self, r):
-        """Test fixture `r`"""
-        assert isinstance(r, Reactor)
-        # check that client is active
-        _ = r.client.apps.list()
+    pass
 
 
 @pytest.mark.tapis_auth
@@ -53,6 +53,4 @@ class TestLiveFixtures:
     for integration testing.
     """
 
-    def test_actor_wc(self, actor_wc):
-        """Test fixture `actor_wc`"""
-        pass
+    pass

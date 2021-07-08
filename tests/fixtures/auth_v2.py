@@ -26,24 +26,27 @@ def token_v3() -> str:
 def abaco_api_server(monkeypatch, client_v2):
     """Sets value of env variable `_abaco_api_server`."""
     # api_server = 'https://api.tacc.utexas.edu/'
-    api_server = client_v2.api_server
-    monkeypatch.setenv("_abaco_api_server", api_server)
-    yield
-    monkeypatch.delenv("_abaco_api_server")
+    monkeypatch.setenv("_abaco_api_server", client_v2.api_server)
+    return
 
 
 @pytest.fixture()
 def abaco_username(monkeypatch, client_v2):
     """Sets value of env variable `_abaco_username`."""
-    username = client_v2.username
-    monkeypatch.setenv("_abaco_username", username)
-    yield
-    monkeypatch.delenv("_abaco_username")
+    monkeypatch.setenv("_abaco_username", client_v2.username)
+    return
 
 
 @pytest.fixture()
 def abaco_access_token(monkeypatch, token_v2):
     """Sets value of env variable `_abaco_access_token`."""
     monkeypatch.setenv("_abaco_access_token", token_v2)
-    yield
-    monkeypatch.delenv("_abaco_access_token")
+    return
+
+
+@pytest.fixture()
+def abaco_env(abaco_access_token, abaco_api_server, abaco_username):
+    """Invokes upstream fixtures that mock environment vars in the Abaco
+    runtime.
+    """
+    pass
