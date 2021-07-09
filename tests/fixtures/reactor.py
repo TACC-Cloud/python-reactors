@@ -27,7 +27,7 @@ def R_tp_opt(R_bare) -> type:
         TAPIS_OPTIONAL = True
 
         def __init__(self, *args, **kwargs):
-            super(R_tp_opt, self).__init__(*args, **kwargs)
+            super(R_tp_opt, self).__init__(*args, tapis_optional=self.TAPIS_OPTIONAL, **kwargs)
             self.client = None
         
     return R_tp_opt
