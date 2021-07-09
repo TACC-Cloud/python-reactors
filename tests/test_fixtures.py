@@ -54,11 +54,21 @@ class TestReactorFixtures:
     def test_r(self, r):
         assert isinstance(r, Reactor)
 
+    def test_R_tp_opt(self, R_tp_opt):
+        assert isinstance(R_tp_opt, Callable)
+        assert R_tp_opt.TAPIS_OPTIONAL is True
+        r = R_tp_opt()
+        assert isinstance(r, Reactor)
+
+    def test_r_tp_opt(self, r_tp_opt):
+        assert isinstance(r_tp_opt, Reactor)
+        assert r_tp_opt.TAPIS_OPTIONAL is True
+        assert r_tp_opt.client is None
+
 
 @pytest.mark.tapis_auth
 class TestLiveFixtures:
     """Test fixtures that provide Tapis entities (apps, actors, files, etc.)
     for integration testing.
     """
-
     pass
