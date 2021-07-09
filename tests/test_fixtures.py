@@ -59,6 +59,7 @@ class TestReactorFixtures:
         assert R_tp_opt.TAPIS_OPTIONAL is True
         r = R_tp_opt()
         assert isinstance(r, Reactor)
+        assert r.client is None
 
     def test_r_tp_opt(self, r_tp_opt):
         assert isinstance(r_tp_opt, Reactor)

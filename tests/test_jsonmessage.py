@@ -4,6 +4,11 @@ import jsonschema
 from reactors.validation import jsondoc as jsonmessages, message as message_module
 
 
+@pytest.fixture
+def r(r_bare):
+    return r_bare
+
+
 def test_validate_named_message_jsonschema(r):
     '''Ensure singular message.jsonschema will validate'''
     message = json.loads('{"key": "value"}')
