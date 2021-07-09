@@ -46,13 +46,13 @@ class TestAuthFixtures:
 @pytest.mark.tapis_auth
 class TestReactorFixtures:
     
-    def test_R(self, R):
-        assert isinstance(R, Callable)
-        r = R()
+    def test_R_bare(self, R_bare):
+        assert isinstance(R_bare, Callable)
+        r = R_bare()
         assert isinstance(r, Reactor)
 
-    def test_r(self, r):
-        assert isinstance(r, Reactor)
+    def test_r_bare(self, r_bare):
+        assert isinstance(r_bare, Reactor)
 
     def test_R_tp_opt(self, R_tp_opt):
         assert isinstance(R_tp_opt, Callable)

@@ -3,26 +3,37 @@ from reactors.runtime import Reactor
 from collections.abc import Callable
 
 
+
 @pytest.fixture
-def R() -> type:
-    """Returns Reactor constructor"""
+def R_bare() -> type:
+    """Returns bare Reactor constructor"""
     return Reactor
 
 
 @pytest.fixture
-def r(R) -> Reactor:
-    """Returns Reactor instance"""
-    return R()
+def r_bare(R_bare) -> Reactor:
+    """Returns bare Reactor instance"""
+    return R_bare()
 
 
 @pytest.fixture
-def R_tp_opt(R) -> type:
+def R(R_bare) -> type:
+    return R_bare
+
+
+@pytest.fixture
+def r(r_bare) -> Reactor:
+    return r_bare
+
+
+@pytest.fixture
+def R_tp_opt(R_bare) -> type:
     """Returns Reactor constructor, with Tapis optional. Note that the 
     constructor will still attempt to load client using `abaco.load_client`,
     so instances might have active client depending on env.
     """
-    R.TAPIS_OPTIONAL = True
-    return R
+    R_bare.TAPIS_OPTIONAL = True
+    return R_bare
 
 
 @pytest.fixture
