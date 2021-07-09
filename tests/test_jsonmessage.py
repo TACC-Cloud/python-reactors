@@ -5,8 +5,8 @@ from reactors.validation import jsondoc as jsonmessages, message as message_modu
 
 
 @pytest.fixture
-def r(r_bare):
-    return r_bare
+def r(r_tp_opt):
+    return r_tp_opt
 
 
 def test_validate_named_message_jsonschema(r):
