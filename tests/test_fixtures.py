@@ -50,15 +50,9 @@ class TestReactorFixtures:
         assert isinstance(R, Callable)
         r = R()
         assert isinstance(r, Reactor)
-        for var in ('_abaco_username', '_abaco_api_server', '_abaco_access_token'):
-            assert var in os.environ
-        _ = r.client.apps.list()
 
     def test_r(self, r):
         assert isinstance(r, Reactor)
-        for var in ('_abaco_username', '_abaco_api_server', '_abaco_access_token'):
-            assert var in os.environ
-        _ = r.client.apps.list()
 
 
 @pytest.mark.tapis_auth
