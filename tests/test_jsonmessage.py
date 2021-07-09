@@ -27,9 +27,9 @@ def test_fetch_schema_from_url():
 @pytest.mark.parametrize("reference, success", [
     ('https://json.schemastore.org/appveyor', True),
     ('https://json.schemastore.org/dummy-appveyor', False),
-    # ('file:///message.jsonschema', True),
-    # ('/message.jsonschema', True),
-    ('/message.txt', False),
+    ('file://tests/data/message.jsonschema', True),
+    ('tests/data/message.jsonschema', True),
+    ('tests/data/message.txt', False),
     ('meep-meep-meep', False)])
 def test_load_schema(reference, success):
     '''Test that schemas can be loaded from URL and file references'''
