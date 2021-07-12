@@ -17,8 +17,7 @@ on:
 
 env:
   # Docker image
-  # DOCKER_PASSWORD accessible via secrets
-  DOCKER_USER: tacc
+  # DOCKER_PASSWORD and DOCKER_USER accessible via secrets
   DOCKER_ORG: tacc
   DOCKER_REPO: reactors
 
@@ -99,7 +98,7 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v1 
         with:
-          username: ${{ env.DOCKER_USER }}
+          username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Push image to DockerHub
         if: github.event_name != 'pull_request'
