@@ -7,6 +7,7 @@ import re
 from reactors.runtime import Reactor
 from reactors.runtime.abaco import new_hashid
 
+
 @pytest.fixture(scope='session')
 def fake_version():
     return u'1.0.0'
@@ -36,14 +37,12 @@ def fake_alias_versioned_prefixed(fake_alias_prefixed, fake_version):
 def fake_actor_id():
     return new_hashid()
 
-@pytest.mark.skip
 def test_createkey(fake_alias, fake_alias_prefixed):
     '''Ensure various properties are present and the right class'''
     r = Reactor()
     new_alias = r.aliases._createkey(fake_alias)
     assert new_alias in fake_alias_prefixed
 
-@pytest.mark.skip
 def test_set_alias(fake_alias, fake_alias_prefixed, fake_actor_id):
     r = Reactor()
     response = r.aliases.set_alias(
@@ -52,14 +51,12 @@ def test_set_alias(fake_alias, fake_alias_prefixed, fake_actor_id):
     assert isinstance(response, str)
 
 
-@pytest.mark.skip
 def test_get_alias(fake_alias, fake_actor_id):
     r = Reactor()
     response = r.aliases.get_name(alias=fake_alias)
     assert response in fake_actor_id
     assert isinstance(response, str)
 
-@pytest.mark.skip
 def test_get_me(monkeypatch, fake_alias, fake_actor_id):
     monkeypatch.setenv('_abaco_actor_id', fake_actor_id)
     r = Reactor()
@@ -73,7 +70,6 @@ def test_get_me(monkeypatch, fake_alias, fake_actor_id):
     assert isinstance(response, str)
 
 
-@pytest.mark.skip
 def test_get_aliases(fake_alias, fake_actor_id):
     '''Ensure various properties are present and the right class'''
     r = Reactor()
@@ -87,7 +83,6 @@ def test_get_aliases(fake_alias, fake_actor_id):
     # assert (set(aliases) == set([fake_alias])) or \
     #     (set[fake_alias] in set(aliases))
 
-@pytest.mark.skip
 def test_rem(fake_alias):
     r = Reactor()
     response = r.aliases.rem_alias(alias=fake_alias)
