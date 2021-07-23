@@ -22,7 +22,7 @@ def app_exists(client, body: Mapping) -> dict:
     return entity_exists(body, client.apps.list())
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def actor_wc(client_v2) -> dict:
     """Deploys a word count actor if one does not already exist."""
     body = {
@@ -43,25 +43,25 @@ def actor_wc(client_v2) -> dict:
     )
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def execution_system(client_v2) -> dict:
     """Creates a private executions system"""
     raise NotImplementedError()
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def storage_system(client_v2) -> dict:
     """Creates a private storage system"""
     raise NotImplementedError()
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def file(client_v2, storage_system) -> dict:
     """Deploys a live app if one does not already exist."""
     raise NotImplementedError("requires an executionSystem")
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def app(client_v2, execution_system) -> dict:
     """Deploys a live app if one does not already exist."""
     raise NotImplementedError("requires an executionSystem")
