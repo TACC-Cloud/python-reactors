@@ -4,9 +4,13 @@ from reactors.runtime import Reactor
 
 
 @pytest.fixture(scope='session')
-def client_v2():
+def tenant_id():
+    return 'tacc.prod'
+
+
+@pytest.fixture(scope='session')
+def client_v2(tenant_id):
     """Returns active Agave v2 client from credentials cache."""
-    tenant_id = 'tacc.prod'
     return Agave._restore_cached(tenant_id=tenant_id)
 
 

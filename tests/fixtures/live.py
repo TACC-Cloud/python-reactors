@@ -24,7 +24,9 @@ def app_exists(client, body: Mapping) -> dict:
 
 @pytest.fixture(scope='session')
 def actor_wc(client_v2) -> dict:
-    """Deploys a word count actor if one does not already exist."""
+    """Deploys a word count actor if one does not already exist.
+    TODO: consider adding a teardown routine
+    """
     body = {
         "image": "abacosamples/wc", 
         "description": "Actor that counts words."
@@ -32,7 +34,11 @@ def actor_wc(client_v2) -> dict:
 
     # try to find registered actor if exists, and add it if it does not
     actor = actor_exists(client_v2, body)
-    actor = actor if actor else client_v2.actors.add(body=body)
+    if actor:
+        logging.debug(f"actor with body '{body}' already exists (ID={actor['id']}")
+    else:
+        logging.debug(f"adding new actor with body '{body}'...")
+        actor = client_v2.actors.add(body=body)
 
     # poll until actor's status is READY
     return polling2.poll(
