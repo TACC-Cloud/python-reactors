@@ -43,12 +43,11 @@ def real_actor_id(actor_wc):
 
 
 @pytest.fixture(scope='session')
-def tenant_id():
-    # TODO = Read this from os.environ as PYTEST_NONCES_TENANT_ID
-    return 'sd2e'
+def tenant_id_url_safe(tenant_id):
+    return tenant_id.upper().replace('.', '-')
 
 
-def test_add_delete_nonce(real_actor_id, tenant_id):
+def test_add_delete_nonce(real_actor_id, tenant_id_url_safe):
     '''Ensure various properties are present and the right class'''
     r = Reactor()
     nonce = r.add_nonce(permission='READ', maxuses=1, actorId=real_actor_id)
@@ -56,7 +55,7 @@ def test_add_delete_nonce(real_actor_id, tenant_id):
     nonce_id = nonce.get('id')
     assert nonce_id != ''
     # Nonces include the tenant ID to allow for routing upstream of APIM
-    assert nonce_id.upper().startswith(tenant_id.upper())
+    assert nonce_id.upper().replace('.', '-').startswith(tenant_id_url_safe)
     deleted = r.delete_nonce(nonce_id, actorId=real_actor_id)
     assert deleted is None
 
@@ -73,11 +72,11 @@ def test_list_nonces(real_actor_id):
     r.delete_nonce(nonce_id, actorId=real_actor_id)
 
 
-def test_create_delete_webhook(real_actor_id, tenant_id):
+def test_create_delete_webhook(real_actor_id, tenant_id_url_safe):
     '''Ensure various properties are present and the right class'''
     r = Reactor()
     webhook_uri = r.create_webhook(actorId=real_actor_id)
-    assert tenant_id in webhook_uri
+    assert tenant_id_url_safe in webhook_uri
     assert real_actor_id in webhook_uri
     r.delete_webhook(webhook_uri, actorId=real_actor_id)
 
