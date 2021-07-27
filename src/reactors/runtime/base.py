@@ -24,13 +24,13 @@ class BaseReactor(object):
     def __init__(self, redactions=[], namespace=CONFIG_NAMESPACE, session=None, tapis_optional=TAPIS_OPTIONAL, **kwargs):
 
         # Timestamp
-        self.created = microseconds()  
+        self.created = microseconds()
 
         # Tapis client
         self.client = abaco.load_client(permissive=tapis_optional)
         # Load context, from which we can load client and other bits
         self.context = abaco.load_context(enable_mocks=self.MOCK_ENABLED)
-        # Message 
+        # Message
         self.message = self.context.get('message_dict')
         # TODO - actually implement this
         self.binary = None
@@ -39,12 +39,12 @@ class BaseReactor(object):
         #
         # A session in the Reactors SDK is a linked set of executions
         # that inherit an identifier from their parent. If a reactor doesn't
-        # detect a session on init, it creates one from its nickname. Sessions 
+        # detect a session on init, it creates one from its nickname. Sessions
         # are useful for tracing chains or cycles of executions
         #
-        # The SDK honors two variables: x_session and SESSION. It is also 
+        # The SDK honors two variables: x_session and SESSION. It is also
         # possible to explicitly set 'session' when initializing a Reactor object
-        #         
+        #
         if session is not None and isinstance(session, str):
             self.session = session
             self.nickname = self.session
@@ -53,13 +53,13 @@ class BaseReactor(object):
             self.session = sessions.get_session(self.context, self.nickname)
 
         # Basic properties(property name, context var)
-        for pn, cv in [('uid', 'actor_id'), ('execid', 'execution_id'), 
+        for pn, cv in [('uid', 'actor_id'), ('execid', 'execution_id'),
                      ('workerid', 'worker_id'), ('state', 'state'),
                      ('username', 'username'), ('container_repo', 'actor_repo'),
                      ('actor_name', 'actor_name')]:
             setattr(self, pn, self.context.get(cv))
 
-        # The 'local' property can be used by Reactor authors to add 
+        # The 'local' property can be used by Reactor authors to add
         # conditional behaviors for local usage or testing purposes
         self.local =  parse_boolean(os.environ.get('LOCALONLY'))
 
@@ -74,7 +74,7 @@ class BaseReactor(object):
         self.settings = read_config(update=True, env=True, namespace=namespace)
 
         # Initialize logging
-        self.loggers = AttrDict({'screen': None, 'slack': None})
+        self.loggers = AttrDict({'screen': None, 'slack': None, "loggly": None})
 
         # Fields to send with each structured log response
         log_fields = {'agent': self.uid,
@@ -88,7 +88,7 @@ class BaseReactor(object):
 
         # Build a list of strings to redact from logs
         #
-        # This includes user-defined strings, variables passed to override 
+        # This includes user-defined strings, variables passed to override
         # config.yml, and current Tapis secrets
         redact_strings = get_redaction_strings(
             redactions=redactions, agave_client=self.client, namespace=namespace)
@@ -107,6 +107,11 @@ class BaseReactor(object):
         # Post plaintext logs to Slack (if configured with a webhook)
         self.loggers.slack = logtypes.get_slack_logger(
             self.uid, 'slack', settings=self.settings,
+            redactions=redact_strings)
+
+        # Post logs to Loggly (if configured with a webhook)
+        self.loggers.loggly = logtypes.get_loggly_logger(
+            self.uid, 'loggly', settings=self.settings,
             redactions=redact_strings)
 
         # Alias that allows r.logger to continue working
