@@ -232,7 +232,7 @@ def get_loggly_logger(name,
                                                  fields,
                                                  timestamp)
 
-        networkHandler = LogglyHandler(config, log_token)
+        networkHandler = LogglyHandler(config)
         networkHandler.setFormatter(json_formatter)
         logger.addHandler(networkHandler)
 
