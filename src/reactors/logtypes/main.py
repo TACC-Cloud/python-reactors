@@ -12,6 +12,8 @@ import logging
 
 from .slack import SlackHandler
 from .logstash import LogstashPlaintextHandler
+from .loggly import LogglyHandler
+
 
 # don't redact strings less than this size
 MIN_REDACT_LEN = 4
@@ -98,6 +100,29 @@ def _get_logstash_formatter(name, subname, redactions, fields, timestamp):
     return f
 
 
+
+def _get_loggly_formatter(name, subname, redactions, fields, timestamp):
+    #format = {"loggerName": "%(name)s", "timestamp": "%(asctime)s", "fileName": "%(filename)s",
+     #         "logRecordCreationTime": "%(created)f", "functionName": "%(funcName)s", "levelNo": "%(levelno)s",
+
+    logstruct = {'timestamp': '%(asctime)s',
+                 'message': '%(message)s',
+                 'level': '%(levelno)s',
+                 'lineNo': "%(lineno)d",
+                 "logRecordCreationTime": "%(created)f"}
+
+    for (k, v) in list(fields.items()):
+        logstruct[k] = v
+
+    JSON_FORMAT = json.dumps(logstruct, indent=None, separators=(',', ':'))
+    DATEFORMAT = "%Y-%m-%dT%H:%M:%SZ"
+
+    f = logging.Formatter(fmt=JSON_FORMAT, datefmt=DATEFORMAT)
+    f.converter = time.gmtime
+    f = RedactingFormatter(f, patterns=redactions)
+    return f
+
+
 def get_screen_logger(name,
                       subname=None,
                       settings={},
@@ -171,6 +196,22 @@ def get_slack_logger(name, subname,
     logger.addHandler(slackHandler)
     return logger
 
+
+def get_loggly_logger(name, subname,
+                      settings={},
+                      redactions=[],
+                      timestamp=False):
+
+    '''Returns a logger object that can post to Loggly'''
+    log_level = settings.get('logs', {}).get('level', LOG_LEVEL)
+    #logging.config.fileConfig('loggly.conf')
+    logger = _get_logger(name=name, subname=subname, log_level=log_level)
+    text_formatter = _get_loggly_formatter(name, subname, redactions, timestamp)
+    logglysettings = settings.get('loggly', {})
+    logglyHandler = LogglyHandler(logglysettings)
+    LogglyHandler.setFormatter(text_formatter)
+    logger.addHandler(LogglyHandler)
+    return logger
 
 def get_logger(name, subname=None, log_level=LOG_LEVEL, log_file=None,
                redactions=[], timestamp=False):

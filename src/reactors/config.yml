@@ -13,3 +13,6 @@ logs:
 slack:
   channel: "general"
   webhook: ~
+loggly:
+  customer_token: 74e33723-285c-4cb1-a8e5-356ac3821a1e
+  url: "https://logs-01.loggly.com/inputs/{customer_token}/tag/python"
