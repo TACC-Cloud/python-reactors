@@ -39,15 +39,14 @@ def test_read_logtoken_env(R, monkeypatch):
 
 
 @pytest.mark.tapis_auth
-def test_log_stderr(caplog, capsys):
+def test_log_stderr(r, caplog, capsys):
     '''Verify logging to stderr works'''
     message = 'Hello'
-    r = Reactor()
     r.logger.info(message)
     out, err = capsys.readouterr()
     assert [message] == [rec.message for rec in caplog.records]
-    assert message in err
     assert message not in out
+    assert message in err
 
 
 # def test_logger_logfile(monkeypatch):
@@ -80,14 +79,12 @@ def test_log_redact_env(R, env_name, caplog, capsys, monkeypatch):
 
 
 @pytest.mark.tapis_auth
-@pytest.mark.skipif(sys.version_info.major >= 3,
-                    reason="Test itself is not yet Py3 compatible")
-def test_log_redact_nonce(caplog, capsys, monkeypatch):
+def test_log_redact_nonce(R, caplog, capsys, monkeypatch):
     '''Verify that x-nonce is redacted since it is an impersonation token'''
     message = 'VewyVewySekwit'
     monkeypatch.setenv('x-nonce', message)
     monkeypatch.setenv('_REACTOR_LOGS_LEVEL', 'DEBUG')
-    r = Reactor()
+    r = R()
     r.logger.debug('context: {}'.format(r.context))
     out, err = capsys.readouterr()
     assert message not in err
