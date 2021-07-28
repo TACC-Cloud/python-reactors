@@ -47,9 +47,13 @@ def tenant_id_url_safe(tenant_id):
     return tenant_id.upper().replace('.', '-')
 
 
-def test_add_delete_nonce(real_actor_id, tenant_id_url_safe):
+@pytest.fixture(scope='function')
+def r(r_bare):
+    return r_bare
+
+
+def test_add_delete_nonce(r, real_actor_id, tenant_id_url_safe):
     '''Ensure various properties are present and the right class'''
-    r = Reactor()
     nonce = r.add_nonce(permission='READ', maxuses=1, actorId=real_actor_id)
     assert 'id' in nonce
     nonce_id = nonce.get('id')
