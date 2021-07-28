@@ -10,7 +10,6 @@ import os
 import time
 import logging
 import logging.config
-import loggly.handlers
 
 from os import path
 from .slack import SlackHandler
