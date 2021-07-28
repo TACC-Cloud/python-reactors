@@ -39,9 +39,10 @@ def test_read_logtoken_env(R, monkeypatch):
 
 
 @pytest.mark.tapis_auth
-def test_log_stderr(r, caplog, capsys):
+def test_log_stderr(R, caplog, capsys):
     '''Verify logging to stderr works'''
     message = 'Hello'
+    r = R()
     r.logger.info(message)
     out, err = capsys.readouterr()
     assert [message] == [rec.message for rec in caplog.records]
