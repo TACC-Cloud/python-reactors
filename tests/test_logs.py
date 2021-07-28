@@ -20,7 +20,6 @@ def test_read_logtoken_config(r):
     assert 'token' in r.settings.logs
 
 
-
 def test_non_null_config_settings(r):
     """No items in Reactor.settings.logger are null. For documentation purposes
     """
@@ -28,6 +27,7 @@ def test_non_null_config_settings(r):
         assert item is not None
 
 
+@pytest.mark.tapis_auth
 def test_read_logtoken_env(R, monkeypatch):
     '''Read the API token for log aggregation from environment'''
     monkeypatch.setenv('_REACTOR_LOGS_TOKEN', 'VewyVewySekwit')
