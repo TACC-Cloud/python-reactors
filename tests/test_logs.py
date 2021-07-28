@@ -4,21 +4,26 @@ import sys
 
 from reactors.runtime import Reactor
 
-def test_read_logtoken_config():
-    '''Read the API token for log aggregation from config.yml'''
-    r = Reactor()
-    assert 'token' in r.settings.logs
-
 
 @pytest.fixture
 def R(R_bare):
     return R_bare
 
 
-def test_non_null_config_settings(R):
+@pytest.fixture
+def r(r_bare):
+    return r_bare
+
+
+def test_read_logtoken_config(r):
+    '''Read the API token for log aggregation from config.yml'''
+    assert 'token' in r.settings.logs
+
+
+
+def test_non_null_config_settings(r):
     """No items in Reactor.settings.logger are null. For documentation purposes
     """
-    r = R()
     for item in r.settings.logger.items():
         assert item is not None
 
