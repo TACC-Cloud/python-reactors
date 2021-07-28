@@ -58,9 +58,14 @@ def test_log_stderr(caplog, capsys):
 #     assert message in file.read()
 #     os.remove('testing.log')
 
-def test_log_redact_env(R, caplog, capsys, monkeypatch):
+@pytest.mark.parametrize('env_name', [
+    '_REACTOR_LOGS_TOKEN',
+    '_REACTOR_LOGGER_CLIENT_KEY'
+])
+def test_log_redact_env(R, env_name, caplog, capsys, monkeypatch):
     '''Verify that the text of an override value cannot be logged'''
     monkeypatch.setenv('_REACTOR_REDACT', 'VewyVewySekwit')
+    monkeypatch.setenv(env_name, 'VewyVewySekwit')
     monkeypatch.setenv('_REACTOR_LOGS_LEVEL', 'DEBUG')
     r = R()
     r.logger.debug(r.settings)
