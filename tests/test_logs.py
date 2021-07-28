@@ -95,13 +95,11 @@ def test_log_redact_nonce(caplog, capsys, monkeypatch):
 
 
 @pytest.mark.tapis_auth
-@pytest.mark.skipif(sys.version_info.major >= 3,
-                    reason="Test itself is not yet Py3 compatible")
-def test_log_redact_apitoken(caplog, capsys, monkeypatch):
+def test_log_redact_apitoken(R, caplog, capsys, monkeypatch):
     '''Verify that x-nonce is redacted since it is an impersonation token'''
     monkeypatch.setenv('_REACTOR_LOGS_LEVEL', 'DEBUG')
-    r = Reactor()
-    message = r._token
+    r = R()
+    message = r.client._token
     r.logger.debug('redact this token: {}'.format(message))
     out, err = capsys.readouterr()
     assert message not in err
@@ -109,13 +107,11 @@ def test_log_redact_apitoken(caplog, capsys, monkeypatch):
 
 
 @pytest.mark.tapis_auth
-@pytest.mark.skipif(sys.version_info.major >= 3,
-                    reason="Test itself is not yet Py3 compatible")
-def test_log_redact_inited(caplog, capsys, monkeypatch):
+def test_log_redact_inited(R, caplog, capsys, monkeypatch):
     '''Verify that content of 'redactions' list passed to init() are honored'''
     monkeypatch.setenv('_REACTOR_LOGS_LEVEL', 'DEBUG')
     message = 'Sekwit'
-    r = Reactor(redactions=[message])
+    r = R(redactions=[message])
     r.logger.debug('I have a Very{}Message for you!'.format(message))
     out, err = capsys.readouterr()
     assert message not in err
