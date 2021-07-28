@@ -109,10 +109,10 @@ class BaseReactor(object):
             self.uid, 'slack', settings=self.settings,
             redactions=redact_strings)
 
-        # Post logs to Loggly (if configured with a webhook)
+        # Post logs to Loggly
         self.loggers.loggly = logtypes.get_loggly_logger(
             self.uid, 'loggly', settings=self.settings,
-            redactions=redact_strings)
+            redactions=redact_strings, fields=log_fields)
 
         # Alias that allows r.logger to continue working
         self.logger = self.loggers.screen

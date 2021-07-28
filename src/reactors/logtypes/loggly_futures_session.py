@@ -57,7 +57,7 @@ class LogglyHandler(logging.Handler):
 
         headers = {'Content-type': 'application/json'}
 
-        if post_url is not None and customer_token is not None:
+        if post_url is not None:
             try:
                 # As per https://github.com/ross/requests-futures#working-in-the-background
                 session.post(post_url, json=log_entry,

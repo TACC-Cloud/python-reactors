@@ -9,7 +9,10 @@ import json
 import os
 import time
 import logging
+import logging.config
+import loggly.handlers
 
+from os import path
 from .slack import SlackHandler
 from .logstash import LogstashPlaintextHandler
 from .loggly import LogglyHandler
@@ -63,7 +66,7 @@ class RedactingFormatter(object):
 def _get_logger(name, subname, log_level):
 
     logger_name = '.'.join([name, subname])
-    logger = logging.getLogger(logger_name)
+    logger = logging.getLogger('myLogger')
     logger.setLevel(log_level)
     return logger
 
@@ -102,8 +105,6 @@ def _get_logstash_formatter(name, subname, redactions, fields, timestamp):
 
 
 def _get_loggly_formatter(name, subname, redactions, fields, timestamp):
-    #format = {"loggerName": "%(name)s", "timestamp": "%(asctime)s", "fileName": "%(filename)s",
-     #         "logRecordCreationTime": "%(created)f", "functionName": "%(funcName)s", "levelNo": "%(levelno)s",
 
     logstruct = {'timestamp': '%(asctime)s',
                  'message': '%(message)s',
@@ -215,14 +216,6 @@ def get_loggly_logger(name,
     stderrHandler.setFormatter(text_formatter)
     logger.addHandler(stderrHandler)
 
-    # Create FILE logger (mirror)
-    #log_file = settings.get('logs', {}).get('file', None)
-    #if log_file is not None:
-    #    log_file_path = os.path.join(PWD, log_file)
-    #    fileHandler = logging.FileHandler(log_file_path)
-    #    fileHandler.setFormatter(text_formatter)
-    #    logger.addHandler(fileHandler)
-
     # Create NETWORK logger if log_token present
     log_token = settings.get('loggly', {}).get('customer_token', None)
     config = settings.get('loggly', None)
@@ -236,7 +229,7 @@ def get_loggly_logger(name,
         networkHandler.setFormatter(json_formatter)
         logger.addHandler(networkHandler)
 
-    # TODO: Forward to log aggregator if token is set
+    # TODO: Forward to loggly if token is set
     return logger
 
 
