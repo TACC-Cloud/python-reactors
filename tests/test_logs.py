@@ -80,10 +80,14 @@ def test_log_redact_env(R, env_name, caplog, capsys, monkeypatch):
 
 
 @pytest.mark.tapis_auth
-def test_log_redact_nonce(R, caplog, capsys, monkeypatch):
-    '''Verify that x-nonce is redacted since it is an impersonation token'''
+@pytest.mark.parametrize('attr_name', [
+    'x-nonce',
+    'TAPIS_CLI_REGISTRY_PASSWORD'
+])
+def test_log_redact_attr(R, attr_name, caplog, capsys, monkeypatch):
+    '''Verify that certain attributes that usually contain secrets are redacted'''
     message = 'VewyVewySekwit'
-    monkeypatch.setenv('x-nonce', message)
+    monkeypatch.setenv(attr_name, message)
     monkeypatch.setenv('_REACTOR_LOGS_LEVEL', 'DEBUG')
     r = R()
     r.logger.debug('context: {}'.format(r.context))
