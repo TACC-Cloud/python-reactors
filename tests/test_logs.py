@@ -36,8 +36,6 @@ def test_read_logtoken_env(R, monkeypatch):
     assert r.settings.logs.token == 'VewyVewySekwit'
 
 
-@pytest.mark.skipif(sys.version_info.major >= 3,
-                    reason="Test itself is not yet Py3 compatible")
 def test_log_stderr(caplog, capsys):
     '''Verify logging to stderr works'''
     message = 'Hello'
@@ -60,18 +58,16 @@ def test_log_stderr(caplog, capsys):
 #     assert message in file.read()
 #     os.remove('testing.log')
 
-@pytest.mark.skipif(sys.version_info.major >= 3,
-                    reason="Test itself is not yet Py3 compatible")
-def test_log_redact_env(caplog, capsys, monkeypatch):
+def test_log_redact_env(R, caplog, capsys, monkeypatch):
     '''Verify that the text of an override value cannot be logged'''
     monkeypatch.setenv('_REACTOR_REDACT', 'VewyVewySekwit')
     monkeypatch.setenv('_REACTOR_LOGS_LEVEL', 'DEBUG')
-    r = Reactor()
+    r = R()
     r.logger.debug(r.settings)
     out, err = capsys.readouterr()
-    assert 'VewyVewySekwit' in caplog.text
     assert 'VewyVewySekwit' not in err
     assert 'VewyVewySekwit' not in out
+    assert 'VewyVewySekwit' in caplog.text
 
 
 @pytest.mark.skipif(sys.version_info.major >= 3,
