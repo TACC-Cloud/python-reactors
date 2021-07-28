@@ -53,9 +53,9 @@ def test_add_delete_nonce(real_actor_id, tenant_id_url_safe):
     nonce = r.add_nonce(permission='READ', maxuses=1, actorId=real_actor_id)
     assert 'id' in nonce
     nonce_id = nonce.get('id')
-    assert nonce_id != ''
+    assert nonce_id
     # Nonces include the tenant ID to allow for routing upstream of APIM
-    assert nonce_id.upper().replace('.', '-').startswith(tenant_id_url_safe)
+    assert nonce_id.startswith(tenant_id_url_safe)
     deleted = r.delete_nonce(nonce_id, actorId=real_actor_id)
     assert deleted is None
 
