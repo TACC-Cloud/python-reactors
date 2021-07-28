@@ -27,24 +27,24 @@ def token_v3() -> str:
 
 
 @pytest.fixture(scope='session')
-def abaco_api_server(monkeypatch, client_v2):
+def abaco_api_server(monkeysession, client_v2):
     """Sets value of env variable `_abaco_api_server`."""
     # api_server = 'https://api.tacc.utexas.edu/'
-    monkeypatch.setenv("_abaco_api_server", client_v2.api_server)
+    monkeysession.setenv("_abaco_api_server", client_v2.api_server)
     return
 
 
 @pytest.fixture(scope='session')
-def abaco_username(monkeypatch, client_v2):
+def abaco_username(monkeysession, client_v2):
     """Sets value of env variable `_abaco_username`."""
-    monkeypatch.setenv("_abaco_username", client_v2.username)
+    monkeysession.setenv("_abaco_username", client_v2.username)
     return
 
 
 @pytest.fixture(scope='session')
-def abaco_access_token(monkeypatch, token_v2):
+def abaco_access_token(monkeysession, token_v2):
     """Sets value of env variable `_abaco_access_token`."""
-    monkeypatch.setenv("_abaco_access_token", token_v2)
+    monkeysession.setenv("_abaco_access_token", token_v2)
     return
 
 
