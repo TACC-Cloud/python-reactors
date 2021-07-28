@@ -52,7 +52,7 @@ def r(r_bare):
     return r_bare
 
 
-@pytest.mark.tp_auth
+@pytest.mark.tapis_auth
 def test_add_list_delete_nonce(r, real_actor_id, tenant_id_url_safe):
     '''Create a nonce for an upstream actor, list it, and delete it.'''
     # can add
@@ -76,7 +76,7 @@ def test_add_list_delete_nonce(r, real_actor_id, tenant_id_url_safe):
     assert deleted is None
 
 
-@pytest.mark.tp_auth
+@pytest.mark.tapis_auth
 def test_create_delete_webhook(r, real_actor_id, tenant_id_url_safe):
     '''Can create and delte webhook for an upstream actor'''
     webhook_uri = r.create_webhook(actorId=real_actor_id)
@@ -85,7 +85,7 @@ def test_create_delete_webhook(r, real_actor_id, tenant_id_url_safe):
     r.delete_webhook(webhook_uri, actorId=real_actor_id)
 
 
-@pytest.mark.tp_auth
+@pytest.mark.tapis_auth
 def test_delete_all_nonces(r, real_actor_id):
     '''Can delete all nonces for a live actor'''
     for a in range(5):
