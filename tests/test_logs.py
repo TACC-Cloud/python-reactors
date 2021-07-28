@@ -15,11 +15,13 @@ def r(r_bare):
     return r_bare
 
 
+@pytest.mark.tapis_auth
 def test_read_logtoken_config(r):
     '''Read the API token for log aggregation from config.yml'''
     assert 'token' in r.settings.logs
 
 
+@pytest.mark.tapis_auth
 def test_non_null_config_settings(r):
     """No items in Reactor.settings.logger are null. For documentation purposes
     """
@@ -36,6 +38,7 @@ def test_read_logtoken_env(R, monkeypatch):
     assert r.settings.logs.token == 'VewyVewySekwit'
 
 
+@pytest.mark.tapis_auth
 def test_log_stderr(caplog, capsys):
     '''Verify logging to stderr works'''
     message = 'Hello'
@@ -58,6 +61,7 @@ def test_log_stderr(caplog, capsys):
 #     assert message in file.read()
 #     os.remove('testing.log')
 
+@pytest.mark.tapis_auth
 @pytest.mark.parametrize('env_name', [
     '_REACTOR_LOGS_TOKEN',
     '_REACTOR_LOGGER_CLIENT_KEY'
@@ -75,6 +79,7 @@ def test_log_redact_env(R, env_name, caplog, capsys, monkeypatch):
     assert 'VewyVewySekwit' in caplog.text
 
 
+@pytest.mark.tapis_auth
 @pytest.mark.skipif(sys.version_info.major >= 3,
                     reason="Test itself is not yet Py3 compatible")
 def test_log_redact_nonce(caplog, capsys, monkeypatch):
@@ -89,6 +94,7 @@ def test_log_redact_nonce(caplog, capsys, monkeypatch):
     assert message in caplog.text
 
 
+@pytest.mark.tapis_auth
 @pytest.mark.skipif(sys.version_info.major >= 3,
                     reason="Test itself is not yet Py3 compatible")
 def test_log_redact_apitoken(caplog, capsys, monkeypatch):
@@ -102,6 +108,7 @@ def test_log_redact_apitoken(caplog, capsys, monkeypatch):
     assert message in caplog.text
 
 
+@pytest.mark.tapis_auth
 @pytest.mark.skipif(sys.version_info.major >= 3,
                     reason="Test itself is not yet Py3 compatible")
 def test_log_redact_inited(caplog, capsys, monkeypatch):
