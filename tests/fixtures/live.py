@@ -41,12 +41,20 @@ def actor_wc(client_v2) -> dict:
         actor = client_v2.actors.add(body=body)
 
     # poll until actor's status is READY
-    return polling2.poll(
+    resp = polling2.poll(
         target=lambda: client_v2.actors.get(actorId=actor['id']), 
         check_success=lambda x: x['status'] == 'READY', 
         step=5, 
         timeout=20
     )
+    yield resp
+
+    # delete all nonces for this actor
+    nonces = client_v2.actors.listNonces(actorId=actor['id'])
+    assert isinstance(nonces, list)
+    logging.debug(f"deleting all nonces for fixture actor {actor['id']}")
+    for nonce in nonces:
+        client_v2.actors.deleteNonce(nonceId=nonce.get('id'), actorId=actor['id'])
 
 
 @pytest.fixture(scope='session')
