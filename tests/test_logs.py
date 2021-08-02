@@ -105,7 +105,10 @@ def test_log_redact_apitoken(R, caplog, capsys, monkeypatch):
     '''Verify that x-nonce is redacted since it is an impersonation token'''
     monkeypatch.setenv('_REACTOR_LOGS_LEVEL', 'DEBUG')
     r = R()
-    message = r.client._token
+    if r.client is None:
+        # Tapis optional client
+        return
+    message = r.client._token 
     r.logger.debug('redact this token: {}'.format(message))
     out, err = capsys.readouterr()
     assert message not in err
