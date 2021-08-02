@@ -93,6 +93,7 @@ def test_log_redact_attr(R, attr_name, caplog, capsys, monkeypatch):
     r.logger.debug('context: {}'.format(r.context))
     out, err = capsys.readouterr()
     assert message not in err
+    assert message not in out
     assert message in caplog.text
 
 
