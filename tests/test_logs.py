@@ -5,14 +5,16 @@ import sys
 from reactors.runtime import Reactor
 
 
-@pytest.fixture
-def R(R_bare):
-    return R_bare
+@pytest.fixture(params=['R_tp_opt', 'R_bare'])
+def R(request):
+    """Tests both fixtures `R_tp_opt` and `R_bare`"""
+    return request.getfixturevalue(request.param)
 
 
-@pytest.fixture
-def r(r_bare):
-    return r_bare
+@pytest.fixture(params=['r_tp_opt', 'r_bare'])
+def r(request):
+    """Tests both fixtures `r_tp_opt` and `r_bare`"""
+    return request.getfixturevalue(request.param)
 
 
 @pytest.mark.tapis_auth
