@@ -5,6 +5,22 @@ from reactors.runtime import Reactor
 from collections.abc import Callable
 
 
+def test_change_test_dir(change_test_dir):
+    dirname = os.path.join('tests', 'data')
+    assert os.path.isdir(dirname)
+    og = os.getcwd()
+    change_test_dir(dirname)
+    new = os.getcwd()
+    assert os.path.join(og, dirname) == new
+
+
+def test_change_test_dir_reverted(request, change_test_dir):
+    """Ensure that we are back in the invocation dir after
+    fixture `change_test_dir`.
+    """
+    assert os.path.normpath(os.getcwd()) == os.path.normpath(request.config.invocation_dir)
+
+    
 @pytest.mark.tapis_auth
 class TestAuthFixtures:
     
