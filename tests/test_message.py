@@ -7,6 +7,7 @@ def r(r_bare):
     return r_bare
 
 
+@pytest.mark.tapis_auth
 def test_reactors_send_message(r, actor_wc):
     message = 'hello, world'
     # passes when sending to a real actor
