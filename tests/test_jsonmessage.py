@@ -87,18 +87,16 @@ def test_find_schema_files_no_dup(change_test_dir, static_paths):
     assert len(w_matches) == og_n_matches
 
 
-def test_classify_simple_json_message(R, change_test_dir):
+def test_classify_simple_json_message(change_test_dir):
     '''Test that simple JSON can be classified with the generic schema'''
-    r = R()
     message = json.loads('{"aljsydgflajsgd": "FKJHFKJLJHGL345678"}')
     matches = message_module.classify_message(message, permissive=True)
     assert len(matches) == 1
     assert 'abaco_json_message' in [m['$id'] for m in matches]
 
 
-def test_classify_email_json_message(R, change_test_dir):
+def test_classify_email_json_message(change_test_dir):
     '''Test that an email message can be classified with the generic and email message schema'''
-    r = R()
     message = json.loads('{"to": "tacc@email.tacc.cloud"}')
     matches = message_module.classify_message(message)
     match_ids = list()
