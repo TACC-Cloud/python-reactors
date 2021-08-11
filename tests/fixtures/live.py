@@ -30,7 +30,8 @@ def actor_wc(client_v2) -> dict:
     """
     body = {
         "image": "abacosamples/wc", 
-        "description": "Actor that counts words."
+        "description": "Actor that counts words.",
+        "name": 'actor_wc'
     }
 
     # try to find registered actor if exists, and add it if it does not
