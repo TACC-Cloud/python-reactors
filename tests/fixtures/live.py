@@ -1,6 +1,7 @@
 import logging
 import pytest
 import polling2
+import requests
 from collections.abc import Mapping, Iterable
 
 
@@ -44,6 +45,7 @@ def actor_wc(client_v2) -> dict:
     resp = polling2.poll(
         target=lambda: client_v2.actors.get(actorId=actor['id']), 
         check_success=lambda x: x['status'] == 'READY', 
+        ignore_exceptions=(requests.exceptions.ConnectionError,),
         step=5, 
         timeout=20
     )
