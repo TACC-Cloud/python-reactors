@@ -11,8 +11,11 @@ def change_test_dir(request):
     def func(dirname=None):
         if dirname is None:
             dirname = request.fspath.dirname
+        logging.debug(f"changing dir to {dirname}")
         os.chdir(dirname)
 
     yield func
-    os.chdir(request.config.invocation_dir)
+    og = request.config.invocation_dir
+    logging.debug(f"changing dir to {dirname}")
+    os.chdir(og)
 
