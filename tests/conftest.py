@@ -1,3 +1,4 @@
+import logging
 import pytest
 import os
 from .fixtures.live import *
@@ -16,6 +17,6 @@ def change_test_dir(request):
 
     yield func
     og = request.config.invocation_dir
-    logging.debug(f"changing dir to {dirname}")
+    logging.debug(f"changing dir to {og}")
     os.chdir(og)
 
