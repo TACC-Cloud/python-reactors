@@ -1,3 +1,4 @@
+import os
 import pytest
 import json
 import jsonschema
@@ -46,11 +47,13 @@ def test_load_schema(reference, success):
             sch = jsonmessages.load_schema(reference)
 
 
-@pytest.mark.skip(reason='env specific')
-def test_find_schema_files():
+def test_find_schema_files_static():
     '''Test that >1 schema files can be discovered in the test environment'''
-    schema_files = jsonmessages.find_schema_files()
-    assert len(schema_files) > 1
+    static_paths = [os.path.join('tests', 'data', 'abacoschemas')]
+    for d in static_paths:
+        assert os.path.isdir(d)
+    schema_files = jsonmessages.find_schema_files(static_paths=static_paths)
+    assert len(schema_files) >= 1
 
 
 @pytest.mark.skip
