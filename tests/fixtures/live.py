@@ -35,7 +35,13 @@ def actor_wc(client_v2) -> dict:
     }
 
     # try to find registered actor if exists, and add it if it does not
-    actor = actor_exists(client_v2, body)
+    actor = polling2.poll(
+        target=lambda: actor_exists(client_v2, body),
+        check_success=bool, 
+        ignore_exceptions=(requests.exceptions.ConnectionError,),
+        step=7, 
+        timeout=22
+    )
     if actor:
         logging.debug(f"actor with body '{body}' already exists (ID={actor['id']}")
     else:
@@ -47,8 +53,8 @@ def actor_wc(client_v2) -> dict:
         target=lambda: client_v2.actors.get(actorId=actor['id']), 
         check_success=lambda x: x['status'] == 'READY', 
         ignore_exceptions=(requests.exceptions.ConnectionError,),
-        step=5, 
-        timeout=20
+        step=7, 
+        timeout=22
     )
     yield resp
 
