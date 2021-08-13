@@ -112,8 +112,8 @@ jobs:
           push: true
           tags: ${{ env.DOCKER_TAGS }}
       - name: Execute py script # logglytoken.py
-        env: 
+        env:
           CUSTOMER_TOKEN_LOGGLY: ${{ secrets.CUSTOMER_TOKEN_LOGGLY }}
         run: |
           echo "using Loggly TOKEN"
-          python logglytoken.py
+          python3 src/reactors/logglytoken.py
