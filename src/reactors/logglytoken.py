@@ -2,6 +2,8 @@
 
 import os
 import yaml
+import taccconfig
+import agavepy
 
 def parse_token():
     customer_token = os.environ.get("CUSTOMER_TOKEN_LOGGLY")
@@ -14,7 +16,7 @@ def parse_token():
     if cur_yaml:
         with open('config.yml', 'w') as yamlfile:
             yaml.safe_dump(cur_yaml, yamlfile)
-            
+
     print("parsed")
 
 parse_token()
