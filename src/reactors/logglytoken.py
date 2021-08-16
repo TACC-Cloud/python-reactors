@@ -1,9 +1,9 @@
 """Get LOGGLY CUSTOMER_TOKEN from Github Secrets and pass it to config.yml"""
 
 import os
-import yaml
 import taccconfig
 import agavepy
+import yaml
 
 def parse_token():
     customer_token = os.environ.get("CUSTOMER_TOKEN_LOGGLY")
