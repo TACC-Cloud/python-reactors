@@ -38,7 +38,7 @@ def test_loggly_log(R, caplog, capsys):
     r.logger.info(message)
     url = r.settings.loggly.url
     customer_token = r.settings.loggly.customer_token
-    url = url.replace("{customer_token}", self.customer_token)
+    url = url.replace("{customer_token}", customer_token)
     info_message = {
         'timestamp': 'test',
         'message': 'test log from postman',
