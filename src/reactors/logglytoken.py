@@ -3,7 +3,8 @@
 import os
 import taccconfig
 import agavepy
-import yaml
+import validators
+#import yaml
 
 def parse_token():
     customer_token = os.environ.get("CUSTOMER_TOKEN_LOGGLY")
