@@ -16,8 +16,16 @@ def R(R_tp_opt):
 
 
 @pytest.fixture
-def schema_test_dir():
-    return os.path.join(os.getcwd(), 'tests', 'data', 'abacoschemas')
+def tests_data_dir():
+    return os.path.join(os.getcwd(), 'tests', 'data')
+
+
+@pytest.fixture
+def static_paths(tests_data_dir):
+    return [
+        os.path.join(tests_data_dir, 'schemas', "AbacoMessageEmail.jsonschema"), 
+        os.path.join(tests_data_dir, 'schemas', "AbacoMessageSQS.jsonschema")
+    ]
 
 
 def test_validate_named_message_jsonschema(r):
@@ -57,29 +65,31 @@ def test_load_schema(reference, success):
             sch = jsonmessages.load_schema(reference)
 
 
-def test_find_schema_files(change_test_dir, schema_test_dir):
-    '''Test that >1 schema files can be discovered in the test environment'''
+def test_find_schema_files(change_test_dir, tests_data_dir):
+    '''Test that >1 schema files can be discovered in the test environment.
+    Expects schema files located in tests/data/schemas.
+    '''
     assert not jsonmessages.find_schema_files()
-    change_test_dir(schema_test_dir)
+    change_test_dir(tests_data_dir)
     schema_files = jsonmessages.find_schema_files()
     assert len(schema_files) >= 2
 
 
-def test_find_schema_files_static_paths(schema_test_dir):
+def test_find_schema_files_static_paths(static_paths):
     '''Test that >1 schema files can be discovered in the test environment
     when using `static_paths` kwarg.'''
-    schema_files = jsonmessages.find_schema_files(static_paths=[schema_test_dir])
+    schema_files = jsonmessages.find_schema_files(static_paths=static_paths)
     og_n_matches = len(schema_files)
     assert og_n_matches >= 2
 
 
-def test_find_schema_files_no_dup(change_test_dir, static_paths):
+def test_find_schema_files_no_dup(tests_data_dir, change_test_dir, static_paths):
     '''Test that >1 schema files added from `static_paths` kwarg are not 
     appended as duplicates if they were already found.
     '''
-    change_test_dir(schema_test_dir)
+    change_test_dir(tests_data_dir)
     no_static = jsonmessages.find_schema_files()
-    og_n_matches = len(schema_files)
+    og_n_matches = len(no_static)
     assert og_n_matches >= 2
 
     # check that matches are not added twice if using static_paths
