@@ -36,6 +36,7 @@ def test_validate_named_message_jsonschema(r):
     assert r.validate_message(message, schema='/message.jsonschema', permissive=False)
     assert r.validate_message(message, permissive=False)
 
+
 @pytest.mark.parametrize('message', (list(), str(), int()))
 def test_invalid_message_type(r, message):
     """Raises AssertionError if message is not type dict"""
