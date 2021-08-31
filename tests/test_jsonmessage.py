@@ -99,8 +99,13 @@ def test_find_schema_files_no_dup(tests_data_dir, change_test_dir, static_paths)
     assert len(w_matches) == og_n_matches
 
 
-def test_classify_simple_json_message(change_test_dir):
-    '''Test that simple JSON can be classified with the generic schema'''
+def test_classify_simple_json_message(change_test_dir, tests_data_dir):
+    '''Test that simple JSON can be classified with only the generic (Default) 
+    schema
+    '''
+    # discover our test message schemas
+    change_test_dir(tests_data_dir)
+
     message = json.loads('{"aljsydgflajsgd": "FKJHFKJLJHGL345678"}')
     matches = message_module.classify_message(message, permissive=True)
     logging.debug(f"matches: {pf(matches)}")
@@ -108,8 +113,11 @@ def test_classify_simple_json_message(change_test_dir):
     assert 'Default' in [m['$id'] for m in matches]
 
 
-def test_classify_email_json_message(change_test_dir):
+def test_classify_email_json_message(change_test_dir, tests_data_dir):
     '''Test that an email message can be classified with the generic and email message schema'''
+    # discover our test schemas
+    change_test_dir(tests_data_dir)
+
     message = json.loads('{"to": "tacc@email.tacc.cloud"}')
     matches = message_module.classify_message(message)
     logging.debug(f"matches: {pf(matches)}")
