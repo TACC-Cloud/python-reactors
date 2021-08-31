@@ -3,6 +3,8 @@ import pytest
 import json
 import jsonschema
 from reactors.validation import jsondoc as jsonmessages, message as message_module
+import logging
+from pprint import pformat as pf
 
 
 @pytest.fixture
@@ -101,18 +103,20 @@ def test_classify_simple_json_message(change_test_dir):
     '''Test that simple JSON can be classified with the generic schema'''
     message = json.loads('{"aljsydgflajsgd": "FKJHFKJLJHGL345678"}')
     matches = message_module.classify_message(message, permissive=True)
+    logging.debug(f"matches: {pf(matches)}")
     assert len(matches) == 1
-    assert 'abaco_json_message' in [m['$id'] for m in matches]
+    assert 'Default' in [m['$id'] for m in matches]
 
 
 def test_classify_email_json_message(change_test_dir):
     '''Test that an email message can be classified with the generic and email message schema'''
     message = json.loads('{"to": "tacc@email.tacc.cloud"}')
     matches = message_module.classify_message(message)
+    logging.debug(f"matches: {pf(matches)}")
     match_ids = list()
     for match in matches:
         assert isinstance(match, dict)
         match_ids.append(match['$id'])
+    assert 'Default' in [m['$id'] for m in matches]
     assert 'abaco_json_email' in [m['$id'] for m in matches]
-    assert 'abaco_json_message' in [m['$id'] for m in matches]
 
