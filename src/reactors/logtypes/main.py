@@ -65,7 +65,7 @@ class RedactingFormatter(object):
 def _get_logger(name, subname, log_level):
 
     logger_name = '.'.join([name, subname])
-    logger = logging.getLogger('myLogger')
+    logger = logging.getLogger(logger_name)
     logger.setLevel(log_level)
     return logger
 
