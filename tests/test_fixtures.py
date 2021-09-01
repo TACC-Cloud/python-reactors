@@ -1,5 +1,7 @@
 import os
+import json
 import pytest
+import requests
 from agavepy.agave import Agave
 from reactors.runtime import Reactor
 from collections.abc import Callable
@@ -82,6 +84,15 @@ class TestReactorFixtures:
         assert r_tp_opt.TAPIS_OPTIONAL is True
         assert r_tp_opt.client is None
 
+    def test_loggly_token(self, r_bare, loggly_url):
+        """Check that Loggly token in environment is valid."""
+        message = {
+            'timestamp': 'test',
+            'message': 'Hello from requests',
+            'level': 'INFO'
+        }
+        response = requests.post(url=loggly_url, data=json.dumps(message))
+        assert response.status_code == 200
 
 @pytest.mark.tapis_auth
 class TestLiveFixtures:
