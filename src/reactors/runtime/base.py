@@ -74,7 +74,7 @@ class BaseReactor(object):
         self.settings = read_config(update=True, env=True, namespace=namespace)
 
         # Initialize logging
-        self.loggers = AttrDict({'screen': None, 'slack': None})
+        self.loggers = AttrDict({'screen': None, 'slack': None, "loggly": None})
 
         # Fields to send with each structured log response
         log_fields = {'agent': self.uid,
@@ -108,6 +108,11 @@ class BaseReactor(object):
         self.loggers.slack = logtypes.get_slack_logger(
             self.uid, 'slack', settings=self.settings,
             redactions=redact_strings)
+
+        # Post logs to Loggly
+        self.loggers.loggly = logtypes.get_loggly_logger(
+            self.uid, 'loggly', settings=self.settings,
+            redactions=redact_strings, fields=log_fields)
 
         # Alias that allows r.logger to continue working
         self.logger = self.loggers.screen
