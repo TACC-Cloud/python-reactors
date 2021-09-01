@@ -1,10 +1,7 @@
 import pytest
 import os
 import sys
-<<<<<<< HEAD
-=======
 import requests
->>>>>>> 21a3dc7db5e0f3f093a0fe6b363ab83c6785f2fe
 
 from reactors.runtime import Reactor
 
@@ -26,14 +23,13 @@ def test_read_logtoken_config(r):
     '''Read the API token for log aggregation from config.yml'''
     assert 'token' in r.settings.logs
 
-<<<<<<< HEAD
 
 @pytest.mark.tapis_auth
 def test_read_loggly_config(r):
     '''Read the API token, URL for loggly aggregation from config.yml'''
     assert 'customer_token' in r.settings.loggly
     assert 'url' in r.settings.loggly
-=======
+
 # check for loggly customer_token field
 @pytest.mark.tapis_auth
 def test_read_logglytoken_config(r):
@@ -58,8 +54,6 @@ def test_loggly_log(R, caplog, capsys):
     response = requests.post(url=url, data=json.dumps(info_message))
     assert response.status_code == 200
 
->>>>>>> 21a3dc7db5e0f3f093a0fe6b363ab83c6785f2fe
-
 
 @pytest.mark.tapis_auth
 def test_non_null_config_settings(r):
@@ -74,7 +68,6 @@ def test_read_logtoken_env(R, monkeypatch):
     '''Read the API token for log aggregation from environment'''
     monkeypatch.setenv('_REACTOR_LOGS_TOKEN', 'VewyVewySekwit')
     monkeypatch.setenv('_REACTOR_LOGS_LEVEL', 'DEBUG')
-<<<<<<< HEAD
     # checking for LOGGLY
     monkeypatch.setenv('_REACTOR_LOGGLY_TOKEN', 'VewyVewySekwittgsEk')
     r = R()
@@ -93,10 +86,9 @@ def test_log_loggly(R, caplog, capsys):
     assert [message] == [rec.message for rec in caplog.records]
     assert message not in out
     assert message in err
-=======
     r = R()
     assert r.settings.logs.token == 'VewyVewySekwit'
->>>>>>> 21a3dc7db5e0f3f093a0fe6b363ab83c6785f2fe
+
 
 
 @pytest.mark.tapis_auth
