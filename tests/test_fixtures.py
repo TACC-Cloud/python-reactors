@@ -73,7 +73,3 @@ class TestLiveFixtures:
     for integration testing.
     """
     pass
-
-def test_loggly_token(R_bare):
-    r = R_bare()
-    assert "_REACTOR_LOGGLY_TOKEN" in r.settings
