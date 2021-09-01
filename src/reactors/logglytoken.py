@@ -7,7 +7,6 @@ import yaml
 
 def parse_token():
     customer_token = os.environ.get("CUSTOMER_TOKEN_LOGGLY")
-    print(customer_token)
 
     with open('src/reactors/config.yml', 'r') as yamlfile:
         cur_yaml = yaml.safe_load(yamlfile)
