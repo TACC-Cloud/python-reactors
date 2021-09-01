@@ -9,9 +9,13 @@ import json
 import os
 import time
 import logging
+import logging.config
 
+from os import path
 from .slack import SlackHandler
 from .logstash import LogstashPlaintextHandler
+from .loggly import LogglyHandler
+
 
 # don't redact strings less than this size
 MIN_REDACT_LEN = 4
@@ -61,7 +65,7 @@ class RedactingFormatter(object):
 def _get_logger(name, subname, log_level):
 
     logger_name = '.'.join([name, subname])
-    logger = logging.getLogger(logger_name)
+    logger = logging.getLogger('myLogger')
     logger.setLevel(log_level)
     return logger
 
@@ -86,6 +90,27 @@ def _get_logstash_formatter(name, subname, redactions, fields, timestamp):
     logstruct = {'timestamp': '%(asctime)s',
                  'message': '%(message)s',
                  'level': '%(levelname)s'}
+    for (k, v) in list(fields.items()):
+        logstruct[k] = v
+
+    JSON_FORMAT = json.dumps(logstruct, indent=None, separators=(',', ':'))
+    DATEFORMAT = "%Y-%m-%dT%H:%M:%SZ"
+
+    f = logging.Formatter(fmt=JSON_FORMAT, datefmt=DATEFORMAT)
+    f.converter = time.gmtime
+    f = RedactingFormatter(f, patterns=redactions)
+    return f
+
+
+
+def _get_loggly_formatter(name, subname, redactions, fields, timestamp):
+
+    logstruct = {'timestamp': '%(asctime)s',
+                 'message': '%(message)s',
+                 'level': '%(levelno)s',
+                 'lineNo': "%(lineno)d",
+                 "logRecordCreationTime": "%(created)f"}
+
     for (k, v) in list(fields.items()):
         logstruct[k] = v
 
@@ -169,6 +194,41 @@ def get_slack_logger(name, subname,
     slackHandler = SlackHandler(slacksettings)
     slackHandler.setFormatter(text_formatter)
     logger.addHandler(slackHandler)
+    return logger
+
+
+def get_loggly_logger(name,
+                      subname=None,
+                      settings={},
+                      redactions=[],
+                      fields={},
+                      timestamp=False):
+    '''Returns a logger object that can post to Loggly'''
+
+    log_level = settings.get('logs', {}).get('level', LOG_LEVEL)
+    logger = _get_logger(name=name, subname=subname,
+                         log_level=log_level)
+
+    # Create the STDERR logger
+    text_formatter = _get_formatter(name, subname, redactions, timestamp)
+    stderrHandler = logging.StreamHandler()
+    stderrHandler.setFormatter(text_formatter)
+    logger.addHandler(stderrHandler)
+
+    # Create NETWORK logger if log_token present
+    log_token = settings.get('loggly', {}).get('customer_token', None)
+    config = settings.get('loggly', None)
+    if log_token is not None and config is not None:
+        json_formatter = _get_loggly_formatter(name, subname,
+                                                 redactions,
+                                                 fields,
+                                                 timestamp)
+
+        networkHandler = LogglyHandler(config)
+        networkHandler.setFormatter(json_formatter)
+        logger.addHandler(networkHandler)
+
+    # TODO: Forward to loggly if token is set
     return logger
 
 
