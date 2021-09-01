@@ -56,7 +56,12 @@ jobs:
         run: python -m pip install -q --upgrade pip poetry
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-
+      - name: Execute py script # logglytoken.py
+        env:
+          CUSTOMER_TOKEN_LOGGLY: ${{ secrets.CUSTOMER_TOKEN_LOGGLY }}
+        run: |
+          echo "using Loggly TOKEN"
+          poetry run python3 src/reactors/logglytoken.py
       # Build and test dist
       - name: Run pytests
         run: |
@@ -111,9 +116,3 @@ jobs:
             BASE_IMAGE=${{ matrix.base-image }}
           push: true
           tags: ${{ env.DOCKER_TAGS }}
-      - name: Execute py script # logglytoken.py
-        env:
-          CUSTOMER_TOKEN_LOGGLY: ${{ secrets.CUSTOMER_TOKEN_LOGGLY }}
-        run: |
-          echo "using Loggly TOKEN"
-          poetry run python3 src/reactors/logglytoken.py
