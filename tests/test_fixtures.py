@@ -74,5 +74,6 @@ class TestLiveFixtures:
     """
     pass
 
-def test_loggly_token(r):
+def test_loggly_token(R_bare):
+    r = R_bare()
     assert "_REACTOR_LOGGLY_TOKEN" in r.settings
