@@ -23,8 +23,6 @@ def test_read_logtoken_config(r):
     '''Read the API token for log aggregation from config.yml'''
     assert 'token' in r.settings.logs
 
-def test_loggly_token(r):
-    assert "_REACTOR_LOGGLY_TOKEN" in r.settings
 
 @pytest.mark.tapis_auth
 def test_read_loggly_config(r):
@@ -39,7 +37,6 @@ def test_read_logglytoken_config(r):
     assert 'customer_token' in r.settings.loggly
 
 # check if post request to loggly returns 200 OK response
-@pytest.mark.tapis_auth
 def test_loggly_log(R, caplog, capsys):
     '''Verify logging to Loggly works'''
     message = 'Hello Loggly'
