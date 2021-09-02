@@ -197,40 +197,20 @@ def get_slack_logger(name, subname,
     return logger
 
 
-def get_loggly_logger(name,
-                      subname=None,
-                      settings={},
-                      redactions=[],
-                      fields={},
-                      timestamp=False):
-    '''Returns a logger object that can post to Loggly'''
+def get_loggly_logger(name, subname,
+                     settings={},
+                     redactions=[],
+                     timestamp=False):
 
+    '''Returns a logger object that can post to Slack'''
     log_level = settings.get('logs', {}).get('level', LOG_LEVEL)
-    logger = _get_logger(name=name, subname=subname,
-                         log_level=log_level)
-
-    # Create the STDERR logger
+    logger = _get_logger(name=name, subname=subname, log_level=log_level)
     text_formatter = _get_formatter(name, subname, redactions, timestamp)
-    stderrHandler = logging.StreamHandler()
-    stderrHandler.setFormatter(text_formatter)
-    logger.addHandler(stderrHandler)
-
-    # Create NETWORK logger if log_token present
-    log_token = settings.get('loggly', {}).get('customer_token', None)
-    config = settings.get('loggly', None)
-    if log_token is not None and config is not None:
-        json_formatter = _get_loggly_formatter(name, subname,
-                                                 redactions,
-                                                 fields,
-                                                 timestamp)
-
-        networkHandler = LogglyHandler(config)
-        networkHandler.setFormatter(json_formatter)
-        logger.addHandler(networkHandler)
-
-    # TODO: Forward to loggly if token is set
+    logglysettings = settings.get('loggly', {})
+    logglyHandler = SlackHandler(logglysettings)
+    logglyHandler.setFormatter(text_formatter)
+    logger.addHandler(logglyHandler)
     return logger
-
 
 def get_logger(name, subname=None, log_level=LOG_LEVEL, log_file=None,
                redactions=[], timestamp=False):
