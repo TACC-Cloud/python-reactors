@@ -210,6 +210,12 @@ def get_loggly_logger(name,
     log_level = settings.get('logs', {}).get('level', LOG_LEVEL)
     logger = _get_logger(name=name, subname=subname, log_level=log_level)
 
+    # Create the STDERR logger
+    text_formatter = _get_formatter(name, subname, redactions, timestamp)
+    stderrHandler = logging.StreamHandler()
+    stderrHandler.setFormatter(text_formatter)
+    logger.addHandler(stderrHandler)
+
     # Construct the Loggly URL
     config = settings.get('loggly', dict())
     url = config.get('url', '')
