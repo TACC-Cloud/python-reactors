@@ -23,4 +23,9 @@ def change_test_dir(request):
 
 @pytest.fixture
 def loggly_token():
-    return os.environ['_TEST_LOGGLY_CUSTOMER_TOKEN']
+    token = os.environ.get('_TEST_LOGGLY_CUSTOMER_TOKEN')
+    if token is None:
+        raise ValueError(
+            f"This fixture (loggly_token) requires that you pass " 
+            "a valid Loggly customer token in env var _TEST_LOGGLY_CUSTOMER_TOKEN")
+    return token
