@@ -550,7 +550,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.6"
-content-hash = "88c3856bcd993898f3dd8e4912715e89603e103efb8b98426014a137ba2f8a54"
+content-hash = "d29bc31b783af0253a7256bbc78033b9da3e2bc290d9060bfbb24248a4f90158"
 
 [metadata.files]
 agavepy = []
