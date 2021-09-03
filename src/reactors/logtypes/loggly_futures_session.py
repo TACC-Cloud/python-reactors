@@ -28,6 +28,7 @@ def response_hook_noop(resp, *args, **kwargs):
 
 class LogglyHandler(logging.Handler):
     """Send logs to Loggly HTTPS handler"""
+    EMIT_RESPONSE_HOOK = response_hook_noop
 
     def __init__(self, config):
         if not isinstance(config, dict):
@@ -62,7 +63,8 @@ class LogglyHandler(logging.Handler):
                 # As per https://github.com/ross/requests-futures#working-in-the-background
                 session.post(post_url, json=log_entry,
                              headers=headers,
-                             hooks={'response': response_hook_noop})
+                             hooks={'response': self.EMIT_RESPONSE_HOOK})
+                breakpoint()
             except (KeyboardInterrupt, SystemExit):
                 raise
             except Exception:
