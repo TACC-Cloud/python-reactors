@@ -29,25 +29,10 @@ def response_hook_noop(resp, *args, **kwargs):
 class LogglyHandler(logging.Handler):
     """Send logs to Loggly HTTPS handler"""
 
-    def __init__(self, config):
-        if not isinstance(config, dict):
-            config = {}
+    def __init__(self, url):
         super(LogglyHandler, self).__init__()
-        # assert not hasattr(self, 'config')
-        self.config = config
+        self.url = url
     
-    @property
-    def url(self):
-        """Form Loggly URL. User can supply either a loggly.customer_token, 
-        a loggly.url, or both if they format the loggly.url correctly for 
-        parsing below.
-        """
-        url = self.config.get('url', '')
-        customer_token = self.config.get('customer_token', '')
-        if not url:
-            url = 'https://logs-01.loggly.com/inputs/{customer_token}/tag/python'
-        return url.replace("{customer_token}", customer_token)
-
     def get_full_message(self, record):
         if record.exc_info:
             return '\n'.join(traceback.format_exception(*record.exc_info))
