@@ -32,17 +32,21 @@ class LogglyHandler(logging.Handler):
     def __init__(self, config):
         if not isinstance(config, dict):
             config = {}
-
-        # Form Loggly URL
-        # User can supply either a loggly.customer_token, a loggly.url, or
-        # both if they format the loggly.url correctly for parsing below
-        url = config.get('url', '')
-        customer_token = config.get('customer_token', '')
+        super(LogglyHandler, self).__init__()
+        # assert not hasattr(self, 'config')
+        self.config = config
+    
+    @property
+    def url(self):
+        """Form Loggly URL. User can supply either a loggly.customer_token, 
+        a loggly.url, or both if they format the loggly.url correctly for 
+        parsing below.
+        """
+        url = self.config.get('url', '')
+        customer_token = self.config.get('customer_token', '')
         if not url:
             url = 'https://logs-01.loggly.com/inputs/{customer_token}/tag/python'
-        self.url = url.replace("{customer_token}", customer_token)
-
-        super(LogglyHandler, self).__init__()
+        return url.replace("{customer_token}", customer_token)
 
     def get_full_message(self, record):
         if record.exc_info:
