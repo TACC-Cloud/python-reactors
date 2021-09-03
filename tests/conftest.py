@@ -5,7 +5,6 @@ from .fixtures.live import *
 from .fixtures.auth_v2 import *
 from .fixtures.reactor import *
 from .fixtures.monkeypatch import *
-from .fixtures.log import *
 
 
 @pytest.fixture(scope="function")
@@ -21,3 +20,7 @@ def change_test_dir(request):
     logging.debug(f"changing dir to {og}")
     os.chdir(og)
 
+
+@pytest.fixture
+def loggly_token():
+    return os.environ['_TEST_LOGGLY_CUSTOMER_TOKEN']
