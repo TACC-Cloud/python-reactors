@@ -29,15 +29,25 @@ def response_hook_noop(resp, *args, **kwargs):
 class LogglyHandler(logging.Handler):
     """Send logs to Loggly HTTPS handler"""
     EMIT_RESPONSE_HOOK = response_hook_noop
-    RAISE_ERRORS = True
+    RAISE_ERRORS = False
 
     def __init__(self, config):
         if not isinstance(config, dict):
             config = {}
         # https://logs-01.loggly.com/inputs/{customer_token}/tag/python
         # replace the {customer_token} with the real token here.
-        self.url = config.get('url')
-        self.customer_token = config.get('customer_token')
+
+        url = config.get('url')
+        customer_token = config.get('customer_token')
+        if url is None:
+            self.url = str()
+        else:
+            self.url = url
+        if customer_token is None:
+            self.customer_token = str()
+        else:
+            self.customer_token = customer_token
+
         self.url = self.url.replace("{customer_token}", self.customer_token)
         super(LogglyHandler, self).__init__()
 
@@ -59,10 +69,11 @@ class LogglyHandler(logging.Handler):
 
         headers = {'Content-type': 'application/json'}
 
+        assert 0
         if post_url is not None:
             try:
                 # As per https://github.com/ross/requests-futures#working-in-the-background
-                session.post(post_url, json=log_entry,
+                resp = session.post(post_url, json=log_entry,
                              headers=headers,
                              hooks={'response': self.EMIT_RESPONSE_HOOK})
             except (KeyboardInterrupt, SystemExit):

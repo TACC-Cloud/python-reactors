@@ -200,17 +200,18 @@ def get_slack_logger(name, subname,
 def get_loggly_logger(name, subname,
                      settings={},
                      redactions=[],
+                     fields={},
                      timestamp=False):
 
     '''Returns a logger object that can post to Slack'''
     log_level = settings.get('logs', {}).get('level', LOG_LEVEL)
     logger = _get_logger(name=name, subname=subname, log_level=log_level)
-    text_formatter = _get_formatter(name, subname, redactions, timestamp)
-    logglysettings = settings.get('loggly', {})
-    logglyHandler = SlackHandler(logglysettings)
+    text_formatter = _get_loggly_formatter(name, subname, redactions, fields, timestamp)
+    logglyHandler = LogglyHandler(settings.get('loggly', {}))
     logglyHandler.setFormatter(text_formatter)
     logger.addHandler(logglyHandler)
     return logger
+
 
 def get_logger(name, subname=None, log_level=LOG_LEVEL, log_file=None,
                redactions=[], timestamp=False):
