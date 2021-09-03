@@ -20,10 +20,11 @@ env:
   # DOCKER_PASSWORD and DOCKER_USER accessible via secrets
   DOCKER_ORG: tacc
   DOCKER_REPO: reactors
+  _REACTOR_LOGGLY_TOKEN: ${{ secrets.CUSTOMER_TOKEN_LOGGLY }}
 
 jobs:
   build-test-push:
-    name: Build, test, and push Docker image 
+    name: Build, test, and push Docker image
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 1
@@ -47,16 +48,15 @@ jobs:
           echo "LC_ALL=en_US.UTF-8" >> $GITHUB_ENV
           echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
           echo "LANGUAGE=en_US.UTF-8" >> $GITHUB_ENV
-      - name: Set up Python 
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - name: Install pip dependencies
-        run: python -m pip install -q --upgrade pip poetry 
+        run: python -m pip install -q --upgrade pip poetry
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-
       # Build and test dist
       - name: Run pytests
         run: |
@@ -96,7 +96,7 @@ jobs:
       # Push to DockerHub
       - name: Login to DockerHub
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}

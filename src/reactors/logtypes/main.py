@@ -65,7 +65,7 @@ class RedactingFormatter(object):
 def _get_logger(name, subname, log_level):
 
     logger_name = '.'.join([name, subname])
-    logger = logging.getLogger(logger_name)
+    logger = logging.getLogger('myLogger')
     logger.setLevel(log_level)
     return logger
 
@@ -197,19 +197,38 @@ def get_slack_logger(name, subname,
     return logger
 
 
-def get_loggly_logger(name, subname,
-                     settings={},
-                     redactions=[],
-                     fields={},
-                     timestamp=False):
+def get_loggly_logger(name,
+                      subname=None,
+                      settings={},
+                      redactions=[],
+                      fields={},
+                      timestamp=False):
+    '''Returns a logger object that can post to Loggly'''
 
-    '''Returns a logger object that can post to Slack'''
     log_level = settings.get('logs', {}).get('level', LOG_LEVEL)
-    logger = _get_logger(name=name, subname=subname, log_level=log_level)
-    text_formatter = _get_loggly_formatter(name, subname, redactions, fields, timestamp)
-    logglyHandler = LogglyHandler(settings.get('loggly', {}))
-    logglyHandler.setFormatter(text_formatter)
-    logger.addHandler(logglyHandler)
+    logger = _get_logger(name=name, subname=subname,
+                         log_level=log_level)
+
+    # Create the STDERR logger
+    text_formatter = _get_formatter(name, subname, redactions, timestamp)
+    stderrHandler = logging.StreamHandler()
+    stderrHandler.setFormatter(text_formatter)
+    logger.addHandler(stderrHandler)
+
+    # Create NETWORK logger if log_token present
+    log_token = settings.get('loggly', {}).get('customer_token', None)
+    config = settings.get('loggly', None)
+    if log_token is not None and config is not None:
+        json_formatter = _get_loggly_formatter(name, subname,
+                                                 redactions,
+                                                 fields,
+                                                 timestamp)
+
+        networkHandler = LogglyHandler(config)
+        networkHandler.setFormatter(json_formatter)
+        logger.addHandler(networkHandler)
+
+    # TODO: Forward to loggly if token is set
     return logger
 
 

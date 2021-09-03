@@ -25,7 +25,7 @@ def test_change_test_dir_reverted(request, change_test_dir):
     
 @pytest.mark.tapis_auth
 class TestAuthFixtures:
-    
+
     def test_client_v2(self, client_v2):
         """Test fixture `client_v2`"""
         assert isinstance(client_v2, Agave)
@@ -63,7 +63,7 @@ class TestAuthFixtures:
 
 @pytest.mark.tapis_auth
 class TestReactorFixtures:
-    
+
     def test_R_bare(self, R_bare):
         assert isinstance(R_bare, Callable)
         r = R_bare()

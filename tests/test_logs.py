@@ -1,6 +1,7 @@
 import pytest
 import os
 import sys
+import requests
 
 from reactors.runtime import Reactor
 

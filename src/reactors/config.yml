@@ -1,17 +1,17 @@
 logger:
-  client_key: ~
-  host: ~
-  path: ~
-  port: ~
+  client_key: null
+  host: null
+  path: null
+  port: null
   proto: https
-  uri: ~
+  uri: null
 loggly:
-  customer_token: ~
+  customer_token: null
   url: https://logs-01.loggly.com/inputs/{customer_token}/tag/python
 logs:
-  file: ~
+  file: null
   level: DEBUG
-  token: ~
+  token: null
 slack:
   channel: general
-  webhook: ~
+  webhook: null
