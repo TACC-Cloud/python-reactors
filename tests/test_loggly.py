@@ -3,6 +3,7 @@ from reactors.logtypes.loggly_futures_session import LogglyHandler
 import logging
 
 
+@pytest.mark.loggly_auth
 def test_loggly_handler(R_tp_opt, loggly_token, monkeypatch):
     """Reading Loggly customer token from env var, can POST to Loggly using the
     LogglyHandler.

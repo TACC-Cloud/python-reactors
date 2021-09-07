@@ -84,6 +84,7 @@ class TestReactorFixtures:
         assert r_tp_opt.TAPIS_OPTIONAL is True
         assert r_tp_opt.client is None
 
+    @pytest.mark.loggly_auth
     def test_loggly_token(self, r_bare, loggly_token):
         """Check that Loggly token in environment is valid."""
         message = {

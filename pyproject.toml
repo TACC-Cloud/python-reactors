@@ -33,4 +33,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.pytest.ini_options]
 markers = [
     "tapis_auth: require cached Agave/Tapis v2 auth",
+    "loggly_auth: requires a Loggly customer token set in env (_TEST_LOGGLY_CUSTOMER_TOKEN)",
 ]
