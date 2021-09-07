@@ -20,7 +20,6 @@ env:
   # DOCKER_PASSWORD and DOCKER_USER accessible via secrets
   DOCKER_ORG: tacc
   DOCKER_REPO: reactors
-  _REACTOR_LOGGLY_TOKEN: ${{ secrets.CUSTOMER_TOKEN_LOGGLY }}
 
 jobs:
   build-test-push:
@@ -59,6 +58,8 @@ jobs:
         uses: docker/setup-buildx-action@v1
       # Build and test dist
       - name: Run pytests
+        env:
+          _TEST_LOGGLY_CUSTOMER_TOKEN: ${{ secrets.CUSTOMER_TOKEN_LOGGLY }}
         run: |
           poetry install
           poetry run python3 -m pytest -k 'not tapis_auth'
