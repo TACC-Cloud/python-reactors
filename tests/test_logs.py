@@ -43,6 +43,7 @@ def test_loggly_log(R, caplog, capsys):
     r = R()
     r.logger.info(message)
     url = r.settings.loggly.url
+    print(r.settings.loggly)
     customer_token = r.settings.loggly.customer_token
     url = url.replace("{customer_token}", customer_token)
     info_message = {
