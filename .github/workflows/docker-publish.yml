@@ -59,7 +59,7 @@ jobs:
         env:
           CUSTOMER_TOKEN_LOGGLY: ${{ secrets.CUSTOMER_TOKEN_LOGGLY }}
         run: |
-          poetry run python3 logglytoken.py
+          poetry run python3 src/reactors/logglytoken.py
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       # Build and test dist
