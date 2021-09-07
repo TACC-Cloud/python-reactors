@@ -1,5 +1,7 @@
 """Derived Reactor class implementing inter-actor messages
 """
+import os
+import sys
 from agavepy.agave import Agave, AgaveError
 from requests.exceptions import HTTPError
 

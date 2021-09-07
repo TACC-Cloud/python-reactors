@@ -1,13 +1,31 @@
 import os
+import json
 import pytest
+import requests
 from agavepy.agave import Agave
 from reactors.runtime import Reactor
 from collections.abc import Callable
 
 
+def test_change_test_dir(change_test_dir):
+    dirname = os.path.join('tests', 'data')
+    assert os.path.isdir(dirname)
+    og = os.getcwd()
+    change_test_dir(dirname)
+    new = os.getcwd()
+    assert os.path.join(og, dirname) == new
+
+
+def test_change_test_dir_reverted(request, change_test_dir):
+    """Ensure that we are back in the invocation dir after
+    fixture `change_test_dir`.
+    """
+    assert os.path.normpath(os.getcwd()) == os.path.normpath(request.config.invocation_dir)
+
+    
 @pytest.mark.tapis_auth
 class TestAuthFixtures:
-    
+
     def test_client_v2(self, client_v2):
         """Test fixture `client_v2`"""
         assert isinstance(client_v2, Agave)
@@ -45,7 +63,7 @@ class TestAuthFixtures:
 
 @pytest.mark.tapis_auth
 class TestReactorFixtures:
-    
+
     def test_R_bare(self, R_bare):
         assert isinstance(R_bare, Callable)
         r = R_bare()
@@ -73,3 +91,19 @@ class TestLiveFixtures:
     for integration testing.
     """
     pass
+
+
+@pytest.mark.loggly_auth
+def test_loggly_token(loggly_token):
+    """Check that Loggly token in environment is valid."""
+    message = {
+        'timestamp': 'test',
+        'message': 'Hello from requests',
+        'level': 'INFO'
+    }
+    url = f'https://logs-01.loggly.com/inputs/{loggly_token}/tag/python'
+    response = requests.post(url=url, data=json.dumps(message))
+    assert response.status_code == 200, (
+        f"POST to Loggly returned status code {response.status_code}. "
+        f"The Loggly customer token might be invalid."
+    )

@@ -38,56 +38,57 @@ def fake_actor_id():
 
 
 @pytest.fixture(scope='session')
-def real_actor_id():
-    # TODO - Read this from os.environ as PYTEST_NONCES_ACTOR_ID
-    # return 'gO0JeWaBM4p3J'
-    return '4xvmNVBxeEDRN'
+def real_actor_id(actor_wc):
+    return actor_wc['id']
 
 
 @pytest.fixture(scope='session')
-def tenant_id():
-    # TODO = Read this from os.environ as PYTEST_NONCES_TENANT_ID
-    return 'sd2e'
+def tenant_id_url_safe(tenant_id):
+    return tenant_id.upper().replace('.', '-')
 
 
-def test_add_delete_nonce(real_actor_id, tenant_id):
-    '''Ensure various properties are present and the right class'''
-    r = Reactor()
+@pytest.fixture(scope='function')
+def r(r_bare):
+    return r_bare
+
+
+@pytest.mark.tapis_auth
+def test_add_list_delete_nonce(r, real_actor_id, tenant_id_url_safe):
+    '''Create a nonce for an upstream actor, list it, and delete it.'''
+    # can add
     nonce = r.add_nonce(permission='READ', maxuses=1, actorId=real_actor_id)
     assert 'id' in nonce
-    nonce_id = nonce.get('id')
-    assert nonce_id != ''
-    # Nonces include the tenant ID to allow for routing upstream of APIM
-    assert nonce_id.upper().startswith(tenant_id.upper())
-    deleted = r.delete_nonce(nonce_id, actorId=real_actor_id)
-    assert deleted is None
 
-
-def test_list_nonces(real_actor_id):
-    '''Ensure various properties are present and the right class'''
-    r = Reactor()
-    nonce = r.add_nonce(permission='READ', maxuses=1, actorId=real_actor_id)
+    # can get 
     nonce_id = nonce.get('id')
+    assert nonce_id
+    
+    # can list 
     nonces = r.list_nonces(actorId=real_actor_id)
     assert isinstance(nonces, list)
     count_nonces = len(nonces)
     assert count_nonces >= 1
-    r.delete_nonce(nonce_id, actorId=real_actor_id)
+
+    # can delete
+    # Nonces include the tenant ID to allow for routing upstream of APIM
+    assert nonce_id.startswith(tenant_id_url_safe)
+    deleted = r.delete_nonce(nonce_id, actorId=real_actor_id)
+    assert deleted is None
 
 
-def test_create_delete_webhook(real_actor_id, tenant_id):
-    '''Ensure various properties are present and the right class'''
-    r = Reactor()
+@pytest.mark.tapis_auth
+def test_create_delete_webhook(r, real_actor_id, tenant_id_url_safe):
+    '''Can create and delte webhook for an upstream actor'''
     webhook_uri = r.create_webhook(actorId=real_actor_id)
-    assert tenant_id in webhook_uri
+    assert tenant_id_url_safe in webhook_uri
     assert real_actor_id in webhook_uri
     r.delete_webhook(webhook_uri, actorId=real_actor_id)
 
 
-def test_delete_all_nonces(real_actor_id):
-    '''Ensure various properties are present and the right class'''
-    r = Reactor()
-    for a in range(0, 5):
+@pytest.mark.tapis_auth
+def test_delete_all_nonces(r, real_actor_id):
+    '''Can delete all nonces for a live actor'''
+    for a in range(5):
         r.add_nonce(permission='READ', maxuses=1, actorId=real_actor_id)
     nonces = r.list_nonces(actorId=real_actor_id)
     assert isinstance(nonces, list)

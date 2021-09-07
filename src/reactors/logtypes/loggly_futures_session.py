@@ -15,6 +15,7 @@ def bg_cb(sess, resp):
     """Noop the response so logging is fire-and-forget"""
     pass
 
+
 # As per https://github.com/ross/requests-futures#working-in-the-background
 
 
@@ -24,27 +25,14 @@ def response_hook_noop(resp, *args, **kwargs):
     pass
 
 
-class LogstashPlaintextHandler(logging.Handler):
-    """Py2-3.4 compatible method to send logs to LogStash HTTP handler"""
 
-    def __init__(self, config, client_secret):
-        # print("LogstashPlaintextHandler.futures_session")
-        if not isinstance(config, dict):
-            config = {}
+class LogglyHandler(logging.Handler):
+    """Send logs to Loggly HTTPS handler"""
 
-        # Construct default logstash URI
-        uri = config.get('uri') 
-        if uri is None:
-            uri = 'http://127.0.0.1'
-        fp = config.get('path')
-        if fp is None:
-            fp = '/logger'
-        self.uri = "{}{}".format(uri, fp)
-
-        self.client_key = config.get('client_key', 'xDEADBEEF')
-        self.token = client_secret
-        super(LogstashPlaintextHandler, self).__init__()
-
+    def __init__(self, url):
+        super(LogglyHandler, self).__init__()
+        self.url = url
+    
     def get_full_message(self, record):
         if record.exc_info:
             return '\n'.join(traceback.format_exception(*record.exc_info))
@@ -53,9 +41,7 @@ class LogstashPlaintextHandler(logging.Handler):
 
     def emit(self, record):
 
-        post_uri = self.uri
-        uname = self.client_key
-        passwd = self.token
+        post_url = self.url
         fmted = self.format(record)
 
         try:
@@ -65,12 +51,12 @@ class LogstashPlaintextHandler(logging.Handler):
 
         headers = {'Content-type': 'application/json'}
 
-        if post_uri is not None and passwd is not None:
+        if post_url is not None:
             try:
                 # As per https://github.com/ross/requests-futures#working-in-the-background
-                session.post(post_uri, auth=(uname, passwd), json=log_entry,
-                             headers=headers,
-                             hooks={'response': response_hook_noop})
+                self._resp = session.post(
+                    post_url, json=log_entry, headers=headers, 
+                    hooks={'response': response_hook_noop})
             except (KeyboardInterrupt, SystemExit):
                 raise
             except Exception:

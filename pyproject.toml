@@ -17,12 +17,14 @@ jsonschema = ">=3.0.0"
 hashids = ">=1.2.0"
 tacconfig = ">=0.5.4"
 validators = "^0.18.2"
+PyYAML = "^5.4.1"
 
 [tool.poetry.dev-dependencies]
 hypothesis = "^6.14.0"
 pytest = "^6.2.4"
 pytest-pythonpath = "^0.7.3"
 polling2 = "^0.4.7"
+pytest-cov = {version = "^2.12.1", python = ">=3.6,<4"}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -31,4 +33,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.pytest.ini_options]
 markers = [
     "tapis_auth: require cached Agave/Tapis v2 auth",
+    "loggly_auth: requires a Loggly customer token set in env (_TEST_LOGGLY_CUSTOMER_TOKEN)",
 ]

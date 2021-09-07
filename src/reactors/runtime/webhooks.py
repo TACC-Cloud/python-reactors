@@ -197,7 +197,8 @@ class Webhooks(BaseReactor):
             raise ValueError("URI doesn't map to actor {}".format(_actorId))
 
         try:
-            m = re.search('x-nonce=([A-Z0-9a-z\\.]+_[A-Z0-9a-z]+)', webhook)
+            m = re.search('x-nonce=([A-Z0-9a-z\\.\\-]+_[A-Z0-9a-z]+)', webhook)
+            # breakpoint()
             nonce_id = m.groups(0)[0]
             self.delete_nonce(nonceId=nonce_id, actorId=_actorId)
         except HTTPError as h:
