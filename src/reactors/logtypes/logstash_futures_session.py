@@ -31,12 +31,16 @@ class LogstashPlaintextHandler(logging.Handler):
         # print("LogstashPlaintextHandler.futures_session")
         if not isinstance(config, dict):
             config = {}
-        uri = config.get('uri', 'http://127.0.0.1')
-        path = config.get('path', '/logger')
-        if uri is None or path is None:
-            self.uri = None
-        else:
-            self.uri = uri + path
+
+        # Construct default logstash URI
+        uri = config.get('uri') 
+        if uri is None:
+            uri = 'http://127.0.0.1'
+        fp = config.get('path')
+        if fp is None:
+            fp = '/logger'
+        self.uri = "{}{}".format(uri, fp)
+
         self.client_key = config.get('client_key', 'xDEADBEEF')
         self.token = client_secret
         super(LogstashPlaintextHandler, self).__init__()
