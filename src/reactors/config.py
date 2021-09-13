@@ -1,6 +1,7 @@
 """Manages configuration from environment and files
 """
 import datetime
+from typing import List
 import os
 
 from tacconfig import config as tacconfig
@@ -97,22 +98,24 @@ def get_redaction_strings(redactions=None, agave_client=None, namespace=None):
             if len(agave_client._token) > 3:
                 envstrings.append(agave_client._token)
         except Exception:
-            pass
+            raise
 
         # Redact the Nonce if there is one
         try:
             nonce = os.environ.get('x-nonce')
             if nonce is not None and nonce != '':
-                envstrings.extend(nonce)
+                envstrings.append(nonce)
         except Exception:
-            pass
+            raise
 
         # Redact taccconfig environment overrides
         try:
             env_config_vals = tacconfig.get_env_config_vals(namespace=namespace)
+            # DEBUG
+            assert isinstance(env_config_vals, List)
             envstrings.extend(env_config_vals)
         except Exception:
-            pass
+            raise
 
         # De-duplicate
         envstrings = list(set(envstrings))
