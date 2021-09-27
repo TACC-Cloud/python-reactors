@@ -10,6 +10,7 @@ NAMESPACE = 'TACC'
 HERE = os.path.dirname(os.path.abspath(__file__))
 # Search path for config.yml is module path, /, /etc, pwd
 CONFIG_LOCS = [HERE, '/', '/etc', os.getcwd()]
+RAISE_ERR = False
 
 __all__ = ['parse_boolean', 'read_config', 'get_redaction_strings']
 
@@ -98,7 +99,8 @@ def get_redaction_strings(redactions=None, agave_client=None, namespace=None):
             if len(agave_client._token) > 3:
                 envstrings.append(agave_client._token)
         except Exception:
-            raise
+            if RAISE_ERR:
+                raise
 
         # Redact the Nonce if there is one
         try:
@@ -106,7 +108,8 @@ def get_redaction_strings(redactions=None, agave_client=None, namespace=None):
             if nonce is not None and nonce != '':
                 envstrings.append(nonce)
         except Exception:
-            raise
+            if RAISE_ERR:
+                raise
 
         # same for TAPIS_CLI_REGISTRY_PASSWORD
         try:
@@ -114,7 +117,8 @@ def get_redaction_strings(redactions=None, agave_client=None, namespace=None):
             if registry_pass is not None and registry_pass != '':
                 envstrings.append(registry_pass)
         except Exception:
-            raise
+            if RAISE_ERR:
+                raise
 
         # Redact taccconfig environment overrides
         try:
@@ -123,7 +127,8 @@ def get_redaction_strings(redactions=None, agave_client=None, namespace=None):
             assert isinstance(env_config_vals, List)
             envstrings.extend(env_config_vals)
         except Exception:
-            raise
+            if RAISE_ERR:
+                raise
 
         # De-duplicate
         envstrings = list(set(envstrings))
