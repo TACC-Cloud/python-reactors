@@ -10,6 +10,7 @@ import os
 import time
 import logging
 import logging.config
+from types import MethodType
 
 from os import path
 from .slack import SlackHandler
@@ -47,21 +48,23 @@ def get_log_file(name):
     return LOG_FILE
 
 
-class RedactingFormatter(object):
+class RedactingFormatter(logging.Formatter):
     """Specialized formatter used to sanitize log messages"""
-    def __init__(self, orig_formatter, patterns):
-        self.orig_formatter = orig_formatter
+    converter = time.gmtime
+
+    def __init__(self, *args, patterns=None, **kwargs):
+        super(RedactingFormatter, self).__init__(*args, **kwargs)
+        if patterns is None:
+            patterns = list()
         self._patterns = patterns
+        # self.orig_format = super(RedactingFormatter, self).format
 
     def format(self, record):
-        msg = self.orig_formatter.format(record)
+        msg = logging.Formatter.format(self, record)
         for pattern in self._patterns:
             if len(pattern) > MIN_REDACT_LEN:
                 msg = msg.replace(pattern, "*****")
         return msg
-
-    def __getattr__(self, attr):
-        return getattr(self.orig_formatter, attr)
 
 
 def _get_logger(name, subname, log_level):
@@ -80,10 +83,7 @@ def _get_formatter(name, subname, redactions, timestamp):
         LOG_FORMAT = "{} %(asctime)s %(levelname)s %(message)s".format(name)
 
     DATEFORMAT = "%Y-%m-%dT%H:%M:%SZ"
-    logging.Formatter.converter = time.gmtime
-    f = logging.Formatter(fmt=LOG_FORMAT, datefmt=DATEFORMAT)
-    f.converter = time.gmtime
-    f = RedactingFormatter(f, patterns=redactions)
+    f = RedactingFormatter(fmt=LOG_FORMAT, datefmt=DATEFORMAT, patterns=redactions)
     return f
 
 
@@ -98,9 +98,7 @@ def _get_logstash_formatter(name, subname, redactions, fields, timestamp):
     JSON_FORMAT = json.dumps(logstruct, indent=None, separators=(',', ':'))
     DATEFORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
-    f = logging.Formatter(fmt=JSON_FORMAT, datefmt=DATEFORMAT)
-    f.converter = time.gmtime
-    f = RedactingFormatter(f, patterns=redactions)
+    f = RedactingFormatter(fmt=JSON_FORMAT, datefmt=DATEFORMAT, patterns=redactions)
     return f
 
 
@@ -119,9 +117,7 @@ def _get_loggly_formatter(name, subname, redactions, fields, timestamp):
     JSON_FORMAT = json.dumps(logstruct, indent=None, separators=(',', ':'))
     DATEFORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
-    f = logging.Formatter(fmt=JSON_FORMAT, datefmt=DATEFORMAT)
-    f.converter = time.gmtime
-    f = RedactingFormatter(f, patterns=redactions)
+    f = RedactingFormatter(fmt=JSON_FORMAT, datefmt=DATEFORMAT, patterns=redactions)
     return f
 
 
@@ -165,22 +161,6 @@ def get_screen_logger(name,
 
     # TODO: Forward to log aggregator if token is set
     return logger
-
-
-# def get_stream_logger(name, subname, config, token,
-#                       log_level=LOG_LEVEL,
-#                       redactions=[],
-#                       timestamp=False,
-#                       fields={}):
-#     logger = _get_logger(name=name, subname=subname, log_level=LOG_LEVEL,
-#                          redactions=redactions)
-#     formatter = _get_logstash_formatter(name, subname,
-#                                         redactions, fields, timestamp)
-
-#     streamLogger = LogstashPlaintextHandler(config, token)
-#     streamLogger.setFormatter(formatter)
-#     logger.addHandler(streamLogger)
-#     return logger
 
 
 def get_slack_logger(name, subname,
@@ -243,4 +223,3 @@ def get_logger(name, subname=None, log_level=LOG_LEVEL, log_file=None,
     '''Legacy alias to get_stderr_logger'''
     return get_screen_logger(name, subname, log_level, redactions)
 
-# Verified Py3 compatible
