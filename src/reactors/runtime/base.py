@@ -105,14 +105,14 @@ class BaseReactor(object):
             fields=log_fields)
 
         # Post plaintext logs to Slack (if configured with a webhook)
-        # self.loggers.slack = logtypes.get_slack_logger(
-        #     self.uid, 'slack', settings=self.settings,
-        #     redactions=redact_strings)
+        self.loggers.slack = logtypes.get_slack_logger(
+            self.uid, 'slack', settings=self.settings,
+            redactions=redact_strings)
 
         # # Post logs to Loggly
-        # self.loggers.loggly = logtypes.get_loggly_logger(
-        #     self.uid, 'loggly', settings=self.settings,
-        #     redactions=redact_strings, fields=log_fields)
+        self.loggers.loggly = logtypes.get_loggly_logger(
+            self.uid, 'loggly', settings=self.settings,
+            redactions=redact_strings, fields=log_fields)
 
         # Alias that allows r.logger to continue working
         self.logger = self.loggers.screen

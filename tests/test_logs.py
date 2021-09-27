@@ -84,24 +84,23 @@ def test_log_redact_env(R, env_name, caplog, capsys, monkeypatch):
     assert 'VewyVewySekwit' in caplog.text
 
 
-# @pytest.mark.skip(reason="to be fixed on #34")
+# @pytest.mark.skip(reason="documented on #34")
 @pytest.mark.tapis_auth
 @pytest.mark.parametrize('attr_name', [
     'x-nonce',
     'TAPIS_CLI_REGISTRY_PASSWORD'
 ])
-def test_log_redact_attr(R, attr_name, monkeypatch):
+def test_log_redact_attr(R, attr_name, capsys, caplog, monkeypatch):
     '''Verify that certain attributes that usually contain secrets are redacted'''
     message = 'VewyVewySekwit'
     monkeypatch.setenv(attr_name, message)
     monkeypatch.setenv('_REACTOR_LOGS_LEVEL', 'DEBUG')
     r = R()
     r.loggers.screen.debug('context: {}'.format(r.context))
-    assert 0
-    # out, err = capsys.readouterr()
-    # assert message not in err
-    # assert message not in out
-    # assert message in caplog.text
+    out, err = capsys.readouterr()
+    assert message not in err
+    assert message not in out
+    assert message in caplog.text
 
 
 @pytest.mark.tapis_auth

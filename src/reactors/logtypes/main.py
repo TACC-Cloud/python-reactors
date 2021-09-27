@@ -113,10 +113,7 @@ def _get_logstash_formatter(name, subname, redactions, fields, timestamp):
     JSON_FORMAT = json.dumps(logstruct, indent=None, separators=(',', ':'))
     DATEFORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
-    raise NotImplementedError()
-    f = logging.Formatter(fmt=JSON_FORMAT, datefmt=DATEFORMAT)
-    f.converter = time.gmtime
-    f = RedactingFormatter(f, patterns=redactions)
+    f = RedactingFormatter(fmt=JSON_FORMAT, datefmt=DATEFORMAT, patterns=redactions)
     return f
 
 
@@ -135,10 +132,7 @@ def _get_loggly_formatter(name, subname, redactions, fields, timestamp):
     JSON_FORMAT = json.dumps(logstruct, indent=None, separators=(',', ':'))
     DATEFORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
-    raise NotImplementedError()
-    f = logging.Formatter(fmt=JSON_FORMAT, datefmt=DATEFORMAT)
-    f.converter = time.gmtime
-    f = RedactingFormatter(f, patterns=redactions)
+    f = RedactingFormatter(fmt=JSON_FORMAT, datefmt=DATEFORMAT, patterns=redactions)
     return f
 
 
