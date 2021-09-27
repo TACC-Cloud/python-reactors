@@ -84,11 +84,6 @@ def _get_formatter(name, subname, redactions, timestamp):
 
     DATEFORMAT = "%Y-%m-%dT%H:%M:%SZ"
     f = RedactingFormatter(fmt=LOG_FORMAT, datefmt=DATEFORMAT, patterns=redactions)
-    # f.converter = 
-    # breakpoint()
-    # f.format = MethodType(redact_decorator(f.format, patterns=redactions), f)
-    # f.format = redact_decorator(f.format, patterns=redactions)
-    # f = RedactingFormatter(f, patterns=redactions)
     return f
 
 
@@ -168,22 +163,6 @@ def get_screen_logger(name,
     return logger
 
 
-# def get_stream_logger(name, subname, config, token,
-#                       log_level=LOG_LEVEL,
-#                       redactions=[],
-#                       timestamp=False,
-#                       fields={}):
-#     logger = _get_logger(name=name, subname=subname, log_level=LOG_LEVEL,
-#                          redactions=redactions)
-#     formatter = _get_logstash_formatter(name, subname,
-#                                         redactions, fields, timestamp)
-
-#     streamLogger = LogstashPlaintextHandler(config, token)
-#     streamLogger.setFormatter(formatter)
-#     logger.addHandler(streamLogger)
-#     return logger
-
-
 def get_slack_logger(name, subname,
                      settings={},
                      redactions=[],
@@ -244,4 +223,3 @@ def get_logger(name, subname=None, log_level=LOG_LEVEL, log_file=None,
     '''Legacy alias to get_stderr_logger'''
     return get_screen_logger(name, subname, log_level, redactions)
 
-# Verified Py3 compatible
