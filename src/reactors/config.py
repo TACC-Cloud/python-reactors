@@ -10,7 +10,7 @@ NAMESPACE = 'TACC'
 HERE = os.path.dirname(os.path.abspath(__file__))
 # Search path for config.yml is module path, /, /etc, pwd
 CONFIG_LOCS = [HERE, '/', '/etc', os.getcwd()]
-RAISE_ERR = False
+RAISE_ERR = True
 
 __all__ = ['parse_boolean', 'read_config', 'get_redaction_strings']
 
