@@ -48,16 +48,6 @@ def get_log_file(name):
     return LOG_FILE
 
 
-def redact_decorator(func, patterns):
-    def wrapper_func(*args, **kwargs):
-        msg = func(*args, **kwargs)
-        for pattern in patterns:
-            if len(pattern) > MIN_REDACT_LEN:
-                msg = msg.replace(pattern, "*****")
-        # return msg
-    return wrapper_func
-
-
 class RedactingFormatter(logging.Formatter):
     """Specialized formatter used to sanitize log messages"""
     converter = time.gmtime
