@@ -84,7 +84,6 @@ def test_log_redact_env(R, env_name, caplog, capsys, monkeypatch):
     assert 'VewyVewySekwit' in caplog.text
 
 
-# @pytest.mark.skip(reason="documented on #34")
 @pytest.mark.tapis_auth
 @pytest.mark.parametrize('attr_name', [
     'x-nonce',

@@ -108,6 +108,14 @@ def get_redaction_strings(redactions=None, agave_client=None, namespace=None):
         except Exception:
             raise
 
+        # same for TAPIS_CLI_REGISTRY_PASSWORD
+        try:
+            registry_pass = os.environ.get('TAPIS_CLI_REGISTRY_PASSWORD')
+            if registry_pass is not None and registry_pass != '':
+                envstrings.append(registry_pass)
+        except Exception:
+            raise
+
         # Redact taccconfig environment overrides
         try:
             env_config_vals = tacconfig.get_env_config_vals(namespace=namespace)
