@@ -96,8 +96,9 @@ def get_redaction_strings(redactions=None, agave_client=None, namespace=None):
         
         # Fetch the current Oauth access token
         try:
-            if len(agave_client._token) > 3:
-                envstrings.append(agave_client._token)
+            token = getattr(agave_client, _token, '')
+            if token and len(token) > 3:
+                envstrings.append(token)
         except Exception:
             if RAISE_ERR:
                 raise
