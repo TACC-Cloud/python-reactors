@@ -95,7 +95,7 @@ def test_log_redact_attr(R, attr_name, capsys, caplog, monkeypatch):
     monkeypatch.setenv(attr_name, message)
     monkeypatch.setenv('_REACTOR_LOGS_LEVEL', 'DEBUG')
     r = R()
-    r.loggers.screen.debug('context: {}'.format(r.context))
+    r.logger.debug('context: {}'.format(r.context))
     out, err = capsys.readouterr()
     assert message not in err
     assert message not in out
