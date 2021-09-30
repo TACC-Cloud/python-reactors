@@ -5,10 +5,9 @@ import sys
 
 import petname
 from attrdict import AttrDict
-from reactors import agaveutils, logtypes
-from reactors.config import get_redaction_strings, parse_boolean, read_config
-from reactors.utils import get_host_ip, microseconds
-
+from .. import agaveutils, logtypes
+from ..config import get_redaction_strings, parse_boolean, read_config
+from ..utils import get_host_ip, microseconds
 from . import abaco, sessions
 
 
