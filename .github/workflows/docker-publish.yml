@@ -7,6 +7,8 @@ on:
       - main
     paths-ignore:
       - '**.md'
+      - 'docs'
+      - 'docsrc'
 
   pull_request:
     # run tests only for pull requests to `main`
@@ -14,6 +16,8 @@ on:
       - main
     paths-ignore:
       - '**.md'
+      - 'docs'
+      - 'docsrc'
 
 env:
   # Docker image
