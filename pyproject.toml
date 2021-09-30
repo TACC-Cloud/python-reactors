@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "reactors"
-version = "0.8.0"
-description = "Software development kit for Tapis actors"
+version = "1.0.0"
+description = "Software development kit for Tapis Actors"
 authors = ["Matthew W Vaughn", "Shweta Gopaulakrishnan", "Ethan Ho <eho@tacc.utexas.edu>"]
 license = "bsd-2-clause"
 include = ["src/**/*.yml", "src/**/*.jsonschema", "src/**/*.j2"]
@@ -9,7 +9,7 @@ include = ["src/**/*.yml", "src/**/*.jsonschema", "src/**/*.j2"]
 
 [tool.poetry.dependencies]
 python = ">=3.6"
-agavepy = {git = "https://github.com/TACC/agavepy", rev = "master"}
+agavepy = {version = "^1.*", allow-prereleases = true}
 requests_futures = ">=0.9.7"
 pytz = "^2021.1"
 petname = ">=2.2"

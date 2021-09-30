@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>reactors.runtime package &mdash; reactors_sdk 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="reactors.validation package" href="reactors.validation.html" />
+    <link rel="prev" title="reactors.logtypes package" href="reactors.logtypes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> reactors_sdk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">reactors</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="reactors.html">reactors package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="reactors.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="reactors.agaveutils.html">reactors.agaveutils package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reactors.cli.html">reactors.cli package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reactors.logtypes.html">reactors.logtypes package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">reactors.runtime package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reactors.validation.html">reactors.validation package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reactors.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors.html#module-reactors.config">reactors.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors.html#module-reactors.utils">reactors.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors.html#module-reactors.version">reactors.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors.html#module-reactors">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">reactors_sdk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">reactors</a> &raquo;</li>
+          <li><a href="reactors.html">reactors package</a> &raquo;</li>
+      <li>reactors.runtime package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api-ref/reactors.runtime.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="reactors-runtime-package">
+<h1>reactors.runtime package<a class="headerlink" href="#reactors-runtime-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-reactors.runtime.abaco">
+<span id="reactors-runtime-abaco-module"></span><h2>reactors.runtime.abaco module<a class="headerlink" href="#module-reactors.runtime.abaco" title="Permalink to this headline"></a></h2>
+<p>Abaco-related vars and helper functions</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.runtime.abaco.is_hashid">
+<span class="sig-prename descclassname"><span class="pre">reactors.runtime.abaco.</span></span><span class="sig-name descname"><span class="pre">is_hashid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.abaco.is_hashid" title="Permalink to this definition"></a></dt>
+<dd><p>Validates a string presented as an Abaco identifier</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.runtime.abaco.load_client">
+<span class="sig-prename descclassname"><span class="pre">reactors.runtime.abaco.</span></span><span class="sig-name descname"><span class="pre">load_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.abaco.load_client" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the current Tapis API client</p>
+<p>Returns the Abaco actor’s client if running deployed. Attempts to
+bootstrap a client from supplied credentials if running in local or
+debug mode.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.runtime.abaco.load_context">
+<span class="sig-prename descclassname"><span class="pre">reactors.runtime.abaco.</span></span><span class="sig-name descname"><span class="pre">load_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enable_mocks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.abaco.load_context" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.runtime.abaco.new_hashid">
+<span class="sig-prename descclassname"><span class="pre">reactors.runtime.abaco.</span></span><span class="sig-name descname"><span class="pre">new_hashid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.abaco.new_hashid" title="Permalink to this definition"></a></dt>
+<dd><p>Generates a valid Abaco-style hash id</p>
+</dd></dl>
+
+</section>
+<section id="module-reactors.runtime.base">
+<span id="reactors-runtime-base-module"></span><h2>reactors.runtime.base module<a class="headerlink" href="#module-reactors.runtime.base" title="Permalink to this headline"></a></h2>
+<p>Reactor base class</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="reactors.runtime.base.BaseReactor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reactors.runtime.base.</span></span><span class="sig-name descname"><span class="pre">BaseReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">redactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_REACTOR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tapis_optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.base.BaseReactor" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.base.BaseReactor.CONFIG_NAMESPACE">
+<span class="sig-name descname"><span class="pre">CONFIG_NAMESPACE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'_REACTOR'</span></em><a class="headerlink" href="#reactors.runtime.base.BaseReactor.CONFIG_NAMESPACE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.base.BaseReactor.EXIT_CODE">
+<span class="sig-name descname"><span class="pre">EXIT_CODE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#reactors.runtime.base.BaseReactor.EXIT_CODE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.base.BaseReactor.MOCK_ENABLED">
+<span class="sig-name descname"><span class="pre">MOCK_ENABLED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#reactors.runtime.base.BaseReactor.MOCK_ENABLED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.base.BaseReactor.NICKNAME_SEP">
+<span class="sig-name descname"><span class="pre">NICKNAME_SEP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'-'</span></em><a class="headerlink" href="#reactors.runtime.base.BaseReactor.NICKNAME_SEP" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.base.BaseReactor.NICKNAME_WORDS">
+<span class="sig-name descname"><span class="pre">NICKNAME_WORDS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#reactors.runtime.base.BaseReactor.NICKNAME_WORDS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.base.BaseReactor.TAPIS_OPTIONAL">
+<span class="sig-name descname"><span class="pre">TAPIS_OPTIONAL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#reactors.runtime.base.BaseReactor.TAPIS_OPTIONAL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.base.BaseReactor.elapsed">
+<span class="sig-name descname"><span class="pre">elapsed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.base.BaseReactor.elapsed" title="Permalink to this definition"></a></dt>
+<dd><p>Returns elapsed time in microseconds since Reactor was initialized</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.base.BaseReactor.on_failure">
+<span class="sig-name descname"><span class="pre">on_failure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failMessage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Failure'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exceptionObject</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.base.BaseReactor.on_failure" title="Permalink to this definition"></a></dt>
+<dd><p>Log message and exit 0</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.base.BaseReactor.on_success">
+<span class="sig-name descname"><span class="pre">on_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successMessage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Success'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.base.BaseReactor.on_success" title="Permalink to this definition"></a></dt>
+<dd><p>Log message and exit 0</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-reactors.runtime.messaging">
+<span id="reactors-runtime-messaging-module"></span><h2>reactors.runtime.messaging module<a class="headerlink" href="#module-reactors.runtime.messaging" title="Permalink to this headline"></a></h2>
+<p>Derived Reactor class implementing inter-actor messages</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="reactors.runtime.messaging.Messaging">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reactors.runtime.messaging.</span></span><span class="sig-name descname"><span class="pre">Messaging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">redactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_REACTOR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tapis_optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.messaging.Messaging" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reactors.runtime.base.BaseReactor" title="reactors.runtime.base.BaseReactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">reactors.runtime.base.BaseReactor</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.messaging.Messaging.MAX_ELAPSED">
+<span class="sig-name descname"><span class="pre">MAX_ELAPSED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">300</span></em><a class="headerlink" href="#reactors.runtime.messaging.Messaging.MAX_ELAPSED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.messaging.Messaging.MAX_RETRIES">
+<span class="sig-name descname"><span class="pre">MAX_RETRIES</span></span><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#reactors.runtime.messaging.Messaging.MAX_RETRIES" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.messaging.Messaging.RETRY_DELAY">
+<span class="sig-name descname"><span class="pre">RETRY_DELAY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1.0</span></em><a class="headerlink" href="#reactors.runtime.messaging.Messaging.RETRY_DELAY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.messaging.Messaging.RETRY_MAX_DELAY">
+<span class="sig-name descname"><span class="pre">RETRY_MAX_DELAY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">32.0</span></em><a class="headerlink" href="#reactors.runtime.messaging.Messaging.RETRY_MAX_DELAY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.messaging.Messaging.actor_property">
+<span class="sig-name descname"><span class="pre">actor_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actor_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.messaging.Messaging.actor_property" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve an actor property from Abaco API</p>
+<p>Parameters:
+property - str - Any top-level key in the Actor API model
+actorId   - str - Which actor (if not self) to fetch. Defaults to</p>
+<blockquote>
+<div><p>the actor’s own ID, allowing introspection.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.messaging.Messaging.message_provenance">
+<span class="sig-name descname"><span class="pre">message_provenance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senderTags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.messaging.Messaging.message_provenance" title="Permalink to this definition"></a></dt>
+<dd><p>Captures provenance attributes for current execution</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.messaging.Messaging.message_vars">
+<span class="sig-name descname"><span class="pre">message_vars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">passed_envs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sender_envs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">senderTags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.messaging.Messaging.message_vars" title="Permalink to this definition"></a></dt>
+<dd><p>Private method to merge user- and platform-specific environments</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.messaging.Messaging.resolve_alias">
+<span class="sig-name descname"><span class="pre">resolve_alias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alias</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.messaging.Messaging.resolve_alias" title="Permalink to this definition"></a></dt>
+<dd><p>Look up the identifier for a alias string</p>
+<dl class="simple">
+<dt>Arguments</dt><dd><p>alias (str): An alias, actorId, appId, or the me/self shortcut</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: The resolved identifier</p>
+</dd>
+</dl>
+<p>On error:
+Returns value of text</p>
+<dl class="simple">
+<dt>Note:</dt><dd><p>Does basic optimization of returning an app ID or abaco actorId
+if they are passed, as we can safely assume those are not aliases.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.messaging.Messaging.send_message">
+<span class="sig-name descname"><span class="pre">send_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actorId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignoreErrors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">senderTags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retryMaxAttempts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retryDelay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.messaging.Messaging.send_message" title="Permalink to this definition"></a></dt>
+<dd><p>Send a message to an Abaco actor by ID or alias</p>
+<dl class="simple">
+<dt>Arguments:</dt><dd><p>actorId (str): An actorId or alias
+message (str/dict) : Message to send</p>
+</dd>
+<dt>Keyword Arguments:</dt><dd><p>ignoreErrors: bool -  only mark failures by logging not exception
+environment: dict - environment variables to pass as url params
+senderTags: bool - send provenance and session as urlparams with message
+retryDelay: int - seconds between retries on send failure
+retryMax: int - number of times (up to global MAX_RETRIES) to retry
+sync: bool - not implemented - wait for message to execute</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: The executionId of the resulting execution</p>
+</dd>
+<dt>Raises:</dt><dd><p>AgaveError: Raised if ignoreErrors is True</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-reactors.runtime.reactor">
+<span id="reactors-runtime-reactor-module"></span><h2>reactors.runtime.reactor module<a class="headerlink" href="#module-reactors.runtime.reactor" title="Permalink to this headline"></a></h2>
+<p>Composition of mix-in classes into Reactor class</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="reactors.runtime.reactor.Reactor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reactors.runtime.reactor.</span></span><span class="sig-name descname"><span class="pre">Reactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">redactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_REACTOR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tapis_optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.reactor.Reactor" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reactors.runtime.messaging.Messaging" title="reactors.runtime.messaging.Messaging"><code class="xref py py-class docutils literal notranslate"><span class="pre">reactors.runtime.messaging.Messaging</span></code></a>, <a class="reference internal" href="#reactors.runtime.validating.Validation" title="reactors.runtime.validating.Validation"><code class="xref py py-class docutils literal notranslate"><span class="pre">reactors.runtime.validating.Validation</span></code></a>, <a class="reference internal" href="#reactors.runtime.webhooks.Webhooks" title="reactors.runtime.webhooks.Webhooks"><code class="xref py py-class docutils literal notranslate"><span class="pre">reactors.runtime.webhooks.Webhooks</span></code></a></p>
+</dd></dl>
+
+</section>
+<section id="module-reactors.runtime.sessions">
+<span id="reactors-runtime-sessions-module"></span><h2>reactors.runtime.sessions module<a class="headerlink" href="#module-reactors.runtime.sessions" title="Permalink to this headline"></a></h2>
+<p>Code having to do with actor sessions</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.runtime.sessions.get_session">
+<span class="sig-prename descclassname"><span class="pre">reactors.runtime.sessions.</span></span><span class="sig-name descname"><span class="pre">get_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.sessions.get_session" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-reactors.runtime.validating">
+<span id="reactors-runtime-validating-module"></span><h2>reactors.runtime.validating module<a class="headerlink" href="#module-reactors.runtime.validating" title="Permalink to this headline"></a></h2>
+<p>Derived Reactor class implementing validations</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="reactors.runtime.validating.Validation">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reactors.runtime.validating.</span></span><span class="sig-name descname"><span class="pre">Validation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">redactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_REACTOR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tapis_optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.validating.Validation" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reactors.runtime.base.BaseReactor" title="reactors.runtime.base.BaseReactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">reactors.runtime.base.BaseReactor</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.validating.Validation.AUTO_VALIDATE_BINARY">
+<span class="sig-name descname"><span class="pre">AUTO_VALIDATE_BINARY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#reactors.runtime.validating.Validation.AUTO_VALIDATE_BINARY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.validating.Validation.AUTO_VALIDATE_CONTEXT">
+<span class="sig-name descname"><span class="pre">AUTO_VALIDATE_CONTEXT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#reactors.runtime.validating.Validation.AUTO_VALIDATE_CONTEXT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.validating.Validation.AUTO_VALIDATE_MESSAGE">
+<span class="sig-name descname"><span class="pre">AUTO_VALIDATE_MESSAGE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#reactors.runtime.validating.Validation.AUTO_VALIDATE_MESSAGE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.validating.Validation.classify_binary">
+<span class="sig-name descname"><span class="pre">classify_binary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.validating.Validation.classify_binary" title="Permalink to this definition"></a></dt>
+<dd><p>Determine what kind of binary was sent</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.validating.Validation.classify_context">
+<span class="sig-name descname"><span class="pre">classify_context</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.validating.Validation.classify_context" title="Permalink to this definition"></a></dt>
+<dd><p>Determine which schemas match the current context</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.validating.Validation.classify_message">
+<span class="sig-name descname"><span class="pre">classify_message</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.validating.Validation.classify_message" title="Permalink to this definition"></a></dt>
+<dd><p>Determine which schemas match the current JSON message</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.validating.Validation.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">check_context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_binary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.validating.Validation.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Perform all validations using default settings</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.validating.Validation.validate_binary">
+<span class="sig-name descname"><span class="pre">validate_binary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.validating.Validation.validate_binary" title="Permalink to this definition"></a></dt>
+<dd><p>(Stub) Verify Actor binary FIFO contents</p>
+<p>Positional arguments:</p>
+<dl class="simple">
+<dt>Keyword arguments:</dt><dd><p>validator - func - user function for validating a binary [binary.validator_function]
+permissive - bool - swallow validation errors [True]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.validating.Validation.validate_context">
+<span class="sig-name descname"><span class="pre">validate_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.validating.Validation.validate_context" title="Permalink to this definition"></a></dt>
+<dd><p>Validate Actor context using a JSON schema</p>
+<p>Positional arguments:</p>
+<dl class="simple">
+<dt>Keyword arguments:</dt><dd><p>schema - str - override path to a JSON schema file [/schemas/context.jsonschema]
+permissive - bool - swallow validation errors [True]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.validating.Validation.validate_message">
+<span class="sig-name descname"><span class="pre">validate_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.validating.Validation.validate_message" title="Permalink to this definition"></a></dt>
+<dd><p>Validate Actor message against a JSON schema</p>
+<p>Positional arguments:</p>
+<dl class="simple">
+<dt>Keyword arguments:</dt><dd><p>message - dict - representation of a JSON message
+schema - str - override path to a JSON schema file [/schemas/message.jsonschema]
+permissive - bool - swallow validation errors [True]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-reactors.runtime.webhooks">
+<span id="reactors-runtime-webhooks-module"></span><h2>reactors.runtime.webhooks module<a class="headerlink" href="#module-reactors.runtime.webhooks" title="Permalink to this headline"></a></h2>
+<p>Derived Reactor class implementing webhooks and nonces</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="reactors.runtime.webhooks.Webhooks">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reactors.runtime.webhooks.</span></span><span class="sig-name descname"><span class="pre">Webhooks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">redactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_REACTOR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tapis_optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.webhooks.Webhooks" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reactors.runtime.base.BaseReactor" title="reactors.runtime.base.BaseReactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">reactors.runtime.base.BaseReactor</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.webhooks.Webhooks.DEFAULT_NONCE_MAX_USES">
+<span class="sig-name descname"><span class="pre">DEFAULT_NONCE_MAX_USES</span></span><em class="property"> <span class="pre">=</span> <span class="pre">-1</span></em><a class="headerlink" href="#reactors.runtime.webhooks.Webhooks.DEFAULT_NONCE_MAX_USES" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reactors.runtime.webhooks.Webhooks.DEFAULT_NONCE_PERMISSION">
+<span class="sig-name descname"><span class="pre">DEFAULT_NONCE_PERMISSION</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'EXECUTE'</span></em><a class="headerlink" href="#reactors.runtime.webhooks.Webhooks.DEFAULT_NONCE_PERMISSION" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.webhooks.Webhooks.add_nonce">
+<span class="sig-name descname"><span class="pre">add_nonce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">permission</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'READ'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxuses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actorId</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.webhooks.Webhooks.add_nonce" title="Permalink to this definition"></a></dt>
+<dd><p>Add a new nonce.</p>
+<dl class="simple">
+<dt>Positional arguments:</dt><dd><p>None</p>
+</dd>
+<dt>Keyword arguments:</dt><dd><p>username: str - a valid TACC.cloud username or role account
+permission: str - a valid Abaco permission level
+maxuses: int (-1,inf) - maximum number of uses for a given nonce
+actorId: str - an Abaco actor ID. Defaults to self.uid if not set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.webhooks.Webhooks.create_webhook">
+<span class="sig-name descname"><span class="pre">create_webhook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">permission</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'EXECUTE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxuses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actorId</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.webhooks.Webhooks.create_webhook" title="Permalink to this definition"></a></dt>
+<dd><p>Create an actor/messages URI for use with external integrations</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.webhooks.Webhooks.delete_all_nonces">
+<span class="sig-name descname"><span class="pre">delete_all_nonces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actorId</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.webhooks.Webhooks.delete_all_nonces" title="Permalink to this definition"></a></dt>
+<dd><p>Delete all nonces from an actor</p>
+<dl class="simple">
+<dt>Keyword arguments:</dt><dd><p>actorId: str - an Abaco actor ID. Defaults to self.uid if not set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.webhooks.Webhooks.delete_nonce">
+<span class="sig-name descname"><span class="pre">delete_nonce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nonceId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actorId</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.webhooks.Webhooks.delete_nonce" title="Permalink to this definition"></a></dt>
+<dd><p>Delete an specific nonce by its ID</p>
+<dl class="simple">
+<dt>Positional arguments:</dt><dd><p>nonceId: str - a valid TACC.cloud username or role account</p>
+</dd>
+<dt>Keyword arguments:</dt><dd><p>actorId: str - an Abaco actor ID. Defaults to self.uid if not set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.webhooks.Webhooks.delete_webhook">
+<span class="sig-name descname"><span class="pre">delete_webhook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">webhook</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actorId</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.webhooks.Webhooks.delete_webhook" title="Permalink to this definition"></a></dt>
+<dd><p>‘Delete’ an actor-specific webhook by deleting its nonce</p>
+<p>A key assumption is that webhook was constructed by create_webhook or
+its equivalent, as this method sensitive to case and url structure</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.webhooks.Webhooks.get_nonce">
+<span class="sig-name descname"><span class="pre">get_nonce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nonceId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actorId</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.webhooks.Webhooks.get_nonce" title="Permalink to this definition"></a></dt>
+<dd><p>Get an specific nonce by its ID</p>
+<dl class="simple">
+<dt>Positional arguments:</dt><dd><p>nonceId: str - a valid TACC.cloud username or role account</p>
+</dd>
+<dt>Keyword arguments:</dt><dd><p>actorId: str - an Abaco actor ID. Defaults to self.uid if not set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reactors.runtime.webhooks.Webhooks.list_nonces">
+<span class="sig-name descname"><span class="pre">list_nonces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actorId</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.runtime.webhooks.Webhooks.list_nonces" title="Permalink to this definition"></a></dt>
+<dd><p>List all nonces</p>
+<dl class="simple">
+<dt>Positional arguments:</dt><dd><p>None</p>
+</dd>
+<dt>Keyword arguments:</dt><dd><p>actorId: str - an Abaco actor ID. Defaults to self.uid if not set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-reactors.runtime">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-reactors.runtime" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="reactors.logtypes.html" class="btn btn-neutral float-left" title="reactors.logtypes package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="reactors.validation.html" class="btn btn-neutral float-right" title="reactors.validation package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Matthew Vaughn, Ethan Ho, Shweta Gopaulakrishnan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

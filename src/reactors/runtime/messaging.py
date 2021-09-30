@@ -2,11 +2,13 @@
 """
 import os
 import sys
+from time import sleep
 from agavepy.agave import Agave, AgaveError
 from requests.exceptions import HTTPError
 
 from . import abaco, sessions
 from .base import BaseReactor
+from .. import agaveutils
 
 
 class Messaging(BaseReactor):
@@ -202,13 +204,11 @@ class Messaging(BaseReactor):
                 self.logger.error(exception_err.format(resolved_actor_id))
 
             attempts = attempts + 1
-            # random-skew exponential backoff with limit
             if attempts <= retryMaxAttempts:
                 self.logger.debug('pause {} sec then try again'.format(retry))
                 sleep(retry)
-                retry = retry * (1.0 + random())
-                if retry > RETRY_MAX_DELAY:
-                    retry = RETRY_MAX_DELAY
+                if retry > self.RETRY_MAX_DELAY:
+                    retry = self.RETRY_MAX_DELAY
 
         # Maximum attempts have passed and execution_id was not returned
         if ignoreErrors:

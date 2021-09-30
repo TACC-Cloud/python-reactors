@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>reactors.validation package &mdash; python-reactors 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="reactors.runtime package" href="reactors.runtime.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> python-reactors
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">reactors</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="reactors.html">reactors package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="reactors.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="reactors.agaveutils.html">reactors.agaveutils package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reactors.cli.html">reactors.cli package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reactors.logtypes.html">reactors.logtypes package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reactors.runtime.html">reactors.runtime package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">reactors.validation package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reactors.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors.html#module-reactors.config">reactors.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors.html#module-reactors.utils">reactors.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors.html#module-reactors.version">reactors.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors.html#module-reactors">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">python-reactors</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">reactors</a> &raquo;</li>
+          <li><a href="reactors.html">reactors package</a> &raquo;</li>
+      <li>reactors.validation package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api-ref/reactors.validation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="reactors-validation-package">
+<h1>reactors.validation package<a class="headerlink" href="#reactors-validation-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-reactors.validation.binary">
+<span id="reactors-validation-binary-module"></span><h2>reactors.validation.binary module<a class="headerlink" href="#module-reactors.validation.binary" title="Permalink to this headline"></a></h2>
+<p>Implements binary validation</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.binary.classify_binary">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.binary.</span></span><span class="sig-name descname"><span class="pre">classify_binary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.binary.classify_binary" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.binary.validate">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.binary.</span></span><span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.binary.validate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.binary.validate_binary">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.binary.</span></span><span class="sig-name descname"><span class="pre">validate_binary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.binary.validate_binary" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-reactors.validation.context">
+<span id="reactors-validation-context-module"></span><h2>reactors.validation.context module<a class="headerlink" href="#module-reactors.validation.context" title="Permalink to this headline"></a></h2>
+<p>Implements context validation</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.context.classify_context">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.context.</span></span><span class="sig-name descname"><span class="pre">classify_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schemas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_allowed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_allowed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.context.classify_context" title="Permalink to this definition"></a></dt>
+<dd><p>Classifies which (if any) provided JSON schemas a context matches.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.context.validate">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.context.</span></span><span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.context.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Verifies that a context is valid</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.context.validate_context">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.context.</span></span><span class="sig-name descname"><span class="pre">validate_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_formats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.context.validate_context" title="Permalink to this definition"></a></dt>
+<dd><p>Validates that a document conforms to the given context JSON schema.</p>
+<dl class="simple">
+<dt>Arguments</dt><dd><p>context (dict): Abaco context loaded as a dictionary
+schema (str|dict): JSON schema as a dictionary
+check_formats (bool): Whether to enforce format validation
+permissive (bool): Whether to return False rather than raise an Exception on error</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: Whether the validation succeeded</p>
+</dd>
+<dt>On error:</dt><dd><p>Returns jsonschema.ValidationError</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-reactors.validation.jsondoc">
+<span id="reactors-validation-jsondoc-module"></span><h2>reactors.validation.jsondoc module<a class="headerlink" href="#module-reactors.validation.jsondoc" title="Permalink to this headline"></a></h2>
+<p>Classes and functions for working with and validating JSON messages</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.jsondoc.classify_document">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.jsondoc.</span></span><span class="sig-name descname"><span class="pre">classify_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schemas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_allowed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_allowed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.jsondoc.classify_document" title="Permalink to this definition"></a></dt>
+<dd><p>Classifies which (if any) provided JSON schemas a document matches.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.jsondoc.find_schema_files">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.jsondoc.</span></span><span class="sig-name descname"><span class="pre">find_schema_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'schemas'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_glob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.jsonschema'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.jsondoc.find_schema_files" title="Permalink to this definition"></a></dt>
+<dd><p>Searches defined filesystem locations for JSON schema files</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="reactors.validation.jsondoc.formatChecker">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reactors.validation.jsondoc.</span></span><span class="sig-name descname"><span class="pre">formatChecker</span></span><a class="headerlink" href="#reactors.validation.jsondoc.formatChecker" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">jsonschema._format.FormatChecker</span></code></p>
+<p>Enables python-jsonschema to validate <code class="docutils literal notranslate"><span class="pre">format</span></code> fields</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.jsondoc.id_for_schema">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.jsondoc.</span></span><span class="sig-name descname"><span class="pre">id_for_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema_as_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.jsondoc.id_for_schema" title="Permalink to this definition"></a></dt>
+<dd><p>Generates a hash-based identifier for a schema document</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.jsondoc.is_default">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.jsondoc.</span></span><span class="sig-name descname"><span class="pre">is_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema_as_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.jsondoc.is_default" title="Permalink to this definition"></a></dt>
+<dd><p>Return true if a JSONschema is the built-in default</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.jsondoc.load_schema">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.jsondoc.</span></span><span class="sig-name descname"><span class="pre">load_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inject_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_additional_properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.jsondoc.load_schema" title="Permalink to this definition"></a></dt>
+<dd><p>Loads a schema from a URL, file path, or dictionary</p>
+<dl class="simple">
+<dt>Arguments</dt><dd><p>schema (str|dict): Schema reference
+inject_id (bool): Whether to force the schema to contain an $id property
+force_additional_properties (bool): Whether to force the schema to accept additional properties</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: A dictionary containing the JSON schema</p>
+</dd>
+<dt>On error:</dt><dd><p>Returns value of text</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.jsondoc.load_schemas">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.jsondoc.</span></span><span class="sig-name descname"><span class="pre">load_schemas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schemas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inject_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_additional_properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.jsondoc.load_schemas" title="Permalink to this definition"></a></dt>
+<dd><p>Loads list of schema URLs, file paths, and dictionaries</p>
+<dl class="simple">
+<dt>Arguments</dt><dd><p>schemas (list): List of schema references
+inject_id (bool): Whether to force the schema to contain an $id property
+force_additional_properties (bool): Whether to force the schema to accept additional properties</p>
+</dd>
+<dt>Returns:</dt><dd><p>list: A list of JSON schemas</p>
+</dd>
+<dt>On error:</dt><dd><p>N/A</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.jsondoc.schema_from_url">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.jsondoc.</span></span><span class="sig-name descname"><span class="pre">schema_from_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inject_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.jsondoc.schema_from_url" title="Permalink to this definition"></a></dt>
+<dd><p>Fetches a schema document from a URL.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.jsondoc.schema_id">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.jsondoc.</span></span><span class="sig-name descname"><span class="pre">schema_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.jsondoc.schema_id" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the identifier from a JSON schema.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.jsondoc.schema_ids">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.jsondoc.</span></span><span class="sig-name descname"><span class="pre">schema_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schemas</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.jsondoc.schema_ids" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the identifiers from a list of JSON schemas</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.jsondoc.validate_document">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.jsondoc.</span></span><span class="sig-name descname"><span class="pre">validate_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_formats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.jsondoc.validate_document" title="Permalink to this definition"></a></dt>
+<dd><p>Validates that a document conforms to the given JSON schema.</p>
+<dl class="simple">
+<dt>Arguments</dt><dd><p>message (dict): JSON document loaded as a dictionary
+schema (str|dict): JSON schema as a dictionary
+check_formats (bool): Whether to enforce format validation
+permissive (bool): Whether to return False rather than raise an Exception on error</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: Whether the validation succeeded</p>
+</dd>
+<dt>On error:</dt><dd><p>Returns jsonschema.ValidationError</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.jsondoc.vars_from_schema">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.jsondoc.</span></span><span class="sig-name descname"><span class="pre">vars_from_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_private</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">private_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.jsondoc.vars_from_schema" title="Permalink to this definition"></a></dt>
+<dd><p>Transforms a JSON schema into list of dict representations</p>
+<p>Note: This does not (and cannot) resolve JSON $ref subproperties</p>
+</dd></dl>
+
+</section>
+<section id="module-reactors.validation.message">
+<span id="reactors-validation-message-module"></span><h2>reactors.validation.message module<a class="headerlink" href="#module-reactors.validation.message" title="Permalink to this headline"></a></h2>
+<p>Implements JSON message validation</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.message.classify_message">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.message.</span></span><span class="sig-name descname"><span class="pre">classify_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schemas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_allowed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_allowed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.message.classify_message" title="Permalink to this definition"></a></dt>
+<dd><p>Classifies which (if any) provided JSON schemas a message matches.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.message.find_message_schema_files">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.message.</span></span><span class="sig-name descname"><span class="pre">find_message_schema_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'message_schemas'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_glob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.jsonschema'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['/message_schemas/default.jsonschema',</span> <span class="pre">'/message_schemas/message.jsonschema',</span> <span class="pre">'/schemas/message.jsonschema',</span> <span class="pre">'/message.jsonschema',</span> <span class="pre">'/Users/eho/tacc/projects/sd2e/python-reactors/src/reactors/validation/message.jsonschema']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.message.find_message_schema_files" title="Permalink to this definition"></a></dt>
+<dd><p>Searches defined filesystem locations for JSON schema files defining Abaco message formats</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.message.validate">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.message.</span></span><span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.message.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Verifies that a message is valid according to one of the schemas</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactors.validation.message.validate_message">
+<span class="sig-prename descclassname"><span class="pre">reactors.validation.message.</span></span><span class="sig-name descname"><span class="pre">validate_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_formats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.validation.message.validate_message" title="Permalink to this definition"></a></dt>
+<dd><p>Validates that a message conforms to the given message JSON schema.</p>
+<dl class="simple">
+<dt>Arguments</dt><dd><p>message (dict): Abaco message loaded as a dictionary
+schema (str|dict): JSON schema as a dictionary
+check_formats (bool): Whether to enforce format validation
+permissive (bool): Whether to return False rather than raise an Exception on error</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: Whether the validation succeeded</p>
+</dd>
+<dt>On error:</dt><dd><p>Returns jsonschema.ValidationError</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-reactors.validation">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-reactors.validation" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="reactors.runtime.html" class="btn btn-neutral float-left" title="reactors.runtime package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Matthew Vaughn, Ethan Ho, Shweta Gopaulakrishnan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
