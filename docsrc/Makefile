@@ -5,6 +5,7 @@
 # from the environment for the first two.
 GRAPHVIZ_DOT_ARGS ?= -D graphviz_dot_args="-Gratio=compress"
 SPHINXOPTS    ?= $(GRAPHVIZ_DOT_ARGS)
+SPHINXAUTOBUILD ?= sphinx-autobuild
 SPHINXBUILD   ?= sphinx-build
 PKGDIR        ?= ../src/reactors
 SOURCEDIR     = .
@@ -30,3 +31,5 @@ api-ref:
 clean:
 	rm -rf $(GITHUB_DIR)/* $(BUILDDIR)/*
 
+livehtml:
+	@$(SPHINXAUTOBUILD) -b html $(SPHINXOPTS) "$(SOURCEDIR)" "$(BUILDDIR)/html"

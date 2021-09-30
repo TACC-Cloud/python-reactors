@@ -8,7 +8,15 @@ Welcome to Reactors SDK documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: API Reference:
+   :caption: Reactors SDK
+
+   getting-started/index.md
+   logging/index.md
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API Reference
 
    api-ref/modules.rst
 
