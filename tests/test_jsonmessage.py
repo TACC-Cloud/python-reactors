@@ -110,7 +110,7 @@ def test_classify_simple_json_message(change_test_dir, tests_data_dir):
     message = json.loads('{"aljsydgflajsgd": "FKJHFKJLJHGL345678"}')
     matches = message_module.classify_message(message, permissive=True)
     logging.debug(f"matches: {pf(matches)}")
-    assert len(matches) == 1
+    assert len(matches) >= 1
     assert 'Default' in [m['$id'] for m in matches]
 
 

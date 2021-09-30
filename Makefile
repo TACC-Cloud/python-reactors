@@ -2,7 +2,7 @@ PYTHON ?= python3
 PREF_SHELL ?= bash
 GITREF=$(shell git rev-parse --short HEAD)
 GITREF_FULL=$(shell git rev-parse HEAD)
-PYTEST_OPTS ?= -s -vvv
+PYTEST_OPTS ?= -k 'not loggly_auth'
 PYTEST_DIR ?= tests
 DOT_ENV ?= ./.env
 
@@ -21,9 +21,13 @@ IMAGE_DOCKER ?= $(IMAGE_ORG)/$(IMAGE_NAME):$(IMAGE_TAG)
 ####################################
 # Build Docker image
 ####################################
-.PHONY: image
+.PHONY: image build
 
-image: Dockerfile 
+build:
+	rm -rf dist
+	poetry build
+
+image: Dockerfile build
 	docker build -t $(IMAGE_DOCKER) -f $< .
 
 ####################################
@@ -31,19 +35,19 @@ image: Dockerfile
 ####################################
 .PHONY: pytest-docker test-cli-docker tests shell clean 
 
-tests: test-cli-docker pytest-docker pytest-native
+tests: pytest-native test-cli-docker pytest-docker 
 
 pytest-native tox:
-	tox --
+	tox -- $(PYTEST_OPTS) $(PYTEST_DIR)
 
 pytest-docker: clean image 
 	docker run --rm -t \
 		-v ${HOME}/.agave:/root/.agave \
 		-v ${PWD}/tests/data/abacoschemas:/schemas:ro \
 		-v ${PWD}/tests/data/message.jsonschema:/message.jsonschema:ro \
-		-v ${PWD}/$(PYTEST_DIR):/tmp/$(PKG)-$(VERSION)/$(PYTEST_DIR) \
+		-v ${PWD}/$(PYTEST_DIR):/mnt/ephemeral-01/$(PYTEST_DIR) \
 		$(IMAGE_DOCKER) \
-		bash -c "(python3 -m pip install -q pytest polling2 && python3 -m pytest $(PYTEST_OPTS) /tmp/$(PKG)-$(VERSION)/$(PYTEST_DIR))"
+		bash -c "(python3 -m pip install -q pytest polling2 && python3 -m pytest $(PYTEST_OPTS) /mnt/ephemeral-01/$(PYTEST_DIR))"
 
 test-cli-docker: clean image 
 	docker run --rm -t \
@@ -68,3 +72,6 @@ clean:
 
 docs:
 	cd docsrc && make html
+
+livehtml:
+	cd docsrc && make livehtml
