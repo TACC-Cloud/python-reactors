@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "reactors"
-version = "0.8.0"
-description = "Software development kit for Tapis actors"
+version = "1.0.0"
+description = "Software development kit for Tapis Actors"
 authors = ["Matthew W Vaughn", "Shweta Gopaulakrishnan", "Ethan Ho <eho@tacc.utexas.edu>"]
 license = "bsd-2-clause"
 include = ["src/**/*.yml", "src/**/*.jsonschema", "src/**/*.j2"]

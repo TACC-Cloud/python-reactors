@@ -20,11 +20,11 @@ sys.path.insert(0, module_path)
 # -- Project information -----------------------------------------------------
 
 project = 'reactors_sdk'
-copyright = '2020, Matthew Vaughn, Ethan Ho, Shweta Gopaulakrishnan'
+copyright = '2021, Matthew Vaughn, Ethan Ho, Shweta Gopaulakrishnan'
 author = 'Matthew Vaughn, Ethan Ho, Shweta Gopaulakrishnan'
 
 # The full version, including alpha/beta/rc tags
-release = '0.7.0'
+release = '1.0.0'
 
 # -- General configuration ---------------------------------------------------
 
