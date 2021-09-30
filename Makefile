@@ -43,7 +43,7 @@ pytest-docker: clean image
 		-v ${PWD}/tests/data/message.jsonschema:/message.jsonschema:ro \
 		-v ${PWD}/$(PYTEST_DIR):/tmp/$(PKG)-$(VERSION)/$(PYTEST_DIR) \
 		$(IMAGE_DOCKER) \
-		bash -c "(python3 -m pip install -q pytest && python3 -m pytest $(PYTEST_OPTS) /tmp/$(PKG)-$(VERSION)/$(PYTEST_DIR))"
+		bash -c "(python3 -m pip install -q pytest polling2 && python3 -m pytest $(PYTEST_OPTS) /tmp/$(PKG)-$(VERSION)/$(PYTEST_DIR))"
 
 test-cli-docker: clean image 
 	docker run --rm -t \
