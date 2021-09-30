@@ -8,48 +8,18 @@ Subpackages
    :maxdepth: 4
 
    reactors.agaveutils
-   reactors.aliases
+   reactors.cli
    reactors.logtypes
+   reactors.runtime
+   reactors.validation
 
 Submodules
 ----------
 
-reactors.jsonmessages module
-----------------------------
+reactors.config module
+----------------------
 
-.. automodule:: reactors.jsonmessages
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-reactors.process module
------------------------
-
-.. automodule:: reactors.process
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-reactors.runtime module
------------------------
-
-.. automodule:: reactors.runtime
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-reactors.storage module
------------------------
-
-.. automodule:: reactors.storage
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-reactors.uniqueid module
-------------------------
-
-.. automodule:: reactors.uniqueid
+.. automodule:: reactors.config
    :members:
    :undoc-members:
    :show-inheritance:

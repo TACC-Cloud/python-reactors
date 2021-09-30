@@ -4,21 +4,21 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>reactors.agaveutils package &#8212; reactors_sdk 0.7.0 documentation</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>reactors.agaveutils package &#8212; reactors_sdk 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="reactors.aliases package" href="reactors.aliases.html" />
+    <link rel="next" title="reactors.cli package" href="reactors.cli.html" />
     <link rel="prev" title="reactors package" href="reactors.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -31,12 +31,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="reactors.aliases.html" title="reactors.aliases package"
+          <a href="reactors.cli.html" title="reactors.cli package"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="reactors.html" title="reactors package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">reactors_sdk 0.7.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">reactors_sdk 1.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >reactors</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="reactors.html" accesskey="U">reactors package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">reactors.agaveutils package</a></li> 
@@ -48,17 +48,17 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="reactors-agaveutils-package">
+  <section id="reactors-agaveutils-package">
 <h1>reactors.agaveutils package<a class="headerlink" href="#reactors-agaveutils-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
+<section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-reactors.agaveutils.entity">
+</section>
+<section id="module-reactors.agaveutils.entity">
 <span id="reactors-agaveutils-entity-module"></span><h2>reactors.agaveutils.entity module<a class="headerlink" href="#module-reactors.agaveutils.entity" title="Permalink to this headline">¶</a></h2>
 <p>Functions for working with Agave namespace entities</p>
 <dl class="py function">
-<dt id="reactors.agaveutils.entity.is_appid">
-<code class="sig-prename descclassname">reactors.agaveutils.entity.</code><code class="sig-name descname">is_appid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">textString</span></em>, <em class="sig-param"><span class="n">useApi</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">agaveClient</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.entity.is_appid" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.entity.is_appid">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.entity.</span></span><span class="sig-name descname"><span class="pre">is_appid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">textString</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useApi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agaveClient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.entity.is_appid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate whether textString is an Agave appId</p>
 <p>Positional parameters:
 textString: str - the candidate text string</p>
@@ -67,20 +67,20 @@ useApi: bool - try looking the Id up via apps.get
 agaveClient: Agave client - required for useApi</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-reactors.agaveutils.files">
+</section>
+<section id="module-reactors.agaveutils.files">
 <span id="reactors-agaveutils-files-module"></span><h2>reactors.agaveutils.files module<a class="headerlink" href="#module-reactors.agaveutils.files" title="Permalink to this headline">¶</a></h2>
 <p>Helper functions for common filesystem operations with Agave</p>
 <dl class="py function">
-<dt id="reactors.agaveutils.files.agave_download_file">
-<code class="sig-prename descclassname">reactors.agaveutils.files.</code><code class="sig-name descname">agave_download_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agaveClient</span></em>, <em class="sig-param"><span class="n">agaveAbsolutePath</span></em>, <em class="sig-param"><span class="n">systemId</span></em>, <em class="sig-param"><span class="n">localFilename</span><span class="o">=</span><span class="default_value">'downloaded'</span></em>, <em class="sig-param"><span class="n">sync</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">timeOut</span><span class="o">=</span><span class="default_value">300</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.agave_download_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.files.agave_download_file">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.files.</span></span><span class="sig-name descname"><span class="pre">agave_download_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agaveClient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agaveAbsolutePath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">systemId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">localFilename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'downloaded'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeOut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.agave_download_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Download an Agave-hosted file to cwd()</p>
 <p>Currently, always a synchronous task.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.files.agave_mkdir">
-<code class="sig-prename descclassname">reactors.agaveutils.files.</code><code class="sig-name descname">agave_mkdir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agaveClient</span></em>, <em class="sig-param"><span class="n">dirName</span></em>, <em class="sig-param"><span class="n">systemId</span></em>, <em class="sig-param"><span class="n">basePath</span><span class="o">=</span><span class="default_value">'/'</span></em>, <em class="sig-param"><span class="n">sync</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">timeOut</span><span class="o">=</span><span class="default_value">300</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.agave_mkdir" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.files.agave_mkdir">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.files.</span></span><span class="sig-name descname"><span class="pre">agave_mkdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agaveClient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">systemId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basePath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeOut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.agave_mkdir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a directory dirName on a storage system at basePath</p>
 <p>Like mkdir -p this is imdepotent. It will create the child path
 tree so long as paths are specified correctly, but will do
@@ -88,8 +88,8 @@ nothing if all directories are already in place.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.files.agave_upload_file">
-<code class="sig-prename descclassname">reactors.agaveutils.files.</code><code class="sig-name descname">agave_upload_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agaveClient</span></em>, <em class="sig-param"><span class="n">agaveDestPath</span></em>, <em class="sig-param"><span class="n">systemId</span></em>, <em class="sig-param"><span class="n">uploadFile</span></em>, <em class="sig-param"><span class="n">sync</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">timeOut</span><span class="o">=</span><span class="default_value">300</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.agave_upload_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.files.agave_upload_file">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.files.</span></span><span class="sig-name descname"><span class="pre">agave_upload_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agaveClient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agaveDestPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">systemId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uploadFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeOut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.agave_upload_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upload a file to Agave-managed remote storage.</p>
 <p>If sync is True, the function will wait for the upload to
 complete before returning. Raises exceptions on importData
@@ -97,8 +97,8 @@ or timeout errors.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.files.get">
-<code class="sig-prename descclassname">reactors.agaveutils.files.</code><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agaveClient</span></em>, <em class="sig-param"><span class="n">agaveAbsolutePath</span></em>, <em class="sig-param"><span class="n">systemId</span></em>, <em class="sig-param"><span class="n">localFilename</span></em>, <em class="sig-param"><span class="n">retries</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">delay</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">multiplier</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.get" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.files.get">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.files.</span></span><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agaveClient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agaveAbsolutePath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">systemId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">localFilename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiplier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>files-get with retry and exponential backoff</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -119,8 +119,8 @@ or timeout errors.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.files.mkdir">
-<code class="sig-prename descclassname">reactors.agaveutils.files.</code><code class="sig-name descname">mkdir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agaveClient</span></em>, <em class="sig-param"><span class="n">dirName</span></em>, <em class="sig-param"><span class="n">systemId</span></em>, <em class="sig-param"><span class="n">basePath</span><span class="o">=</span><span class="default_value">'/'</span></em>, <em class="sig-param"><span class="n">retries</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">delay</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">multiplier</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.mkdir" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.files.mkdir">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.files.</span></span><span class="sig-name descname"><span class="pre">mkdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agaveClient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">systemId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basePath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiplier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.mkdir" title="Permalink to this definition">¶</a></dt>
 <dd><p>files-mkdir with retry and exponential backoff</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -141,157 +141,157 @@ or timeout errors.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.files.process_agave_httperror">
-<code class="sig-prename descclassname">reactors.agaveutils.files.</code><code class="sig-name descname">process_agave_httperror</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">http_error_object</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.process_agave_httperror" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.files.process_agave_httperror">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.files.</span></span><span class="sig-name descname"><span class="pre">process_agave_httperror</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">http_error_object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.process_agave_httperror" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.files.put">
-<code class="sig-prename descclassname">reactors.agaveutils.files.</code><code class="sig-name descname">put</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agaveClient</span></em>, <em class="sig-param"><span class="n">agaveDestPath</span></em>, <em class="sig-param"><span class="n">systemId</span></em>, <em class="sig-param"><span class="n">uploadFile</span></em>, <em class="sig-param"><span class="n">retries</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">delay</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">multiplier</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.put" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.files.put">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.files.</span></span><span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agaveClient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agaveDestPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">systemId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uploadFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiplier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.put" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.files.random">
-<code class="sig-prename descclassname">reactors.agaveutils.files.</code><code class="sig-name descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; x in the interval [0, 1).<a class="headerlink" href="#reactors.agaveutils.files.random" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.files.random">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.files.</span></span><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">interval</span> <span class="pre">[0,</span> <span class="pre">1).</span></span></span><a class="headerlink" href="#reactors.agaveutils.files.random" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.files.wait_for_file_status">
-<code class="sig-prename descclassname">reactors.agaveutils.files.</code><code class="sig-name descname">wait_for_file_status</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agaveClient</span></em>, <em class="sig-param"><span class="n">agaveWatchPath</span></em>, <em class="sig-param"><span class="n">systemId</span></em>, <em class="sig-param"><span class="n">maxTime</span><span class="o">=</span><span class="default_value">300</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.wait_for_file_status" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.files.wait_for_file_status">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.files.</span></span><span class="sig-name descname"><span class="pre">wait_for_file_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agaveClient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agaveWatchPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">systemId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxTime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.files.wait_for_file_status" title="Permalink to this definition">¶</a></dt>
 <dd><p>Synchronously wait for a file’s status to reach a terminal state.</p>
 <p>Returns an exception and the final state if it timeout is exceeded. Uses
 exponential backoff to avoid overloading the files server with poll
 requests. Returns True on success.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-reactors.agaveutils.reactors">
+</section>
+<section id="module-reactors.agaveutils.reactors">
 <span id="reactors-agaveutils-reactors-module"></span><h2>reactors.agaveutils.reactors module<a class="headerlink" href="#module-reactors.agaveutils.reactors" title="Permalink to this headline">¶</a></h2>
 <p>Functions for working with TACC Reactors</p>
 <dl class="py function">
-<dt id="reactors.agaveutils.reactors.message_reactor">
-<code class="sig-prename descclassname">reactors.agaveutils.reactors.</code><code class="sig-name descname">message_reactor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agaveClient</span></em>, <em class="sig-param"><span class="n">actorId</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">environment</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">ignoreErrors</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sync</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">senderTags</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">timeOut</span><span class="o">=</span><span class="default_value">300</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.reactors.message_reactor" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.reactors.message_reactor">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.reactors.</span></span><span class="sig-name descname"><span class="pre">message_reactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agaveClient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actorId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignoreErrors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">senderTags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeOut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.reactors.message_reactor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send a message to an Abaco actor by its ID</p>
 <p>Returns execution ID. If ignoreErrors is True, this is fire-and-forget.
 Otherwise, failures raise an Exception to handled by the caller.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-reactors.agaveutils.recursive">
+</section>
+<section id="module-reactors.agaveutils.recursive">
 <span id="reactors-agaveutils-recursive-module"></span><h2>reactors.agaveutils.recursive module<a class="headerlink" href="#module-reactors.agaveutils.recursive" title="Permalink to this headline">¶</a></h2>
 <p>Recursively apply permission grants using AgavePy</p>
 <dl class="py class">
-<dt id="reactors.agaveutils.recursive.PemAgent">
-<em class="property">class </em><code class="sig-prename descclassname">reactors.agaveutils.recursive.</code><code class="sig-name descname">PemAgent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agaveClient</span></em>, <em class="sig-param"><span class="n">loglevel</span><span class="o">=</span><span class="default_value">'INFO'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.recursive.PemAgent" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.recursive.PemAgent">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.recursive.</span></span><span class="sig-name descname"><span class="pre">PemAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agaveClient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loglevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'INFO'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.recursive.PemAgent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Specialized Agave class for doing recursive pem management</p>
 <dl class="py method">
-<dt id="reactors.agaveutils.recursive.PemAgent.enumerate2">
-<code class="sig-name descname">enumerate2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sequence</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.recursive.PemAgent.enumerate2" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.recursive.PemAgent.enumerate2">
+<span class="sig-name descname"><span class="pre">enumerate2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.recursive.PemAgent.enumerate2" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="reactors.agaveutils.recursive.PemAgent.grant">
-<code class="sig-name descname">grant</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">system</span></em>, <em class="sig-param"><span class="n">abspath</span></em>, <em class="sig-param"><span class="n">username</span><span class="o">=</span><span class="default_value">'world'</span></em>, <em class="sig-param"><span class="n">pem</span><span class="o">=</span><span class="default_value">'READ'</span></em>, <em class="sig-param"><span class="n">recursive</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">permissive</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.recursive.PemAgent.grant" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.recursive.PemAgent.grant">
+<span class="sig-name descname"><span class="pre">grant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">abspath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'world'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'READ'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.recursive.PemAgent.grant" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recursively crawl abspath and grant pem</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reactors.agaveutils.recursive.PemAgent.listdir">
-<code class="sig-name descname">listdir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">system</span></em>, <em class="sig-param"><span class="n">fpath</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.recursive.PemAgent.listdir" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.recursive.PemAgent.listdir">
+<span class="sig-name descname"><span class="pre">listdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.recursive.PemAgent.listdir" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="reactors.agaveutils.recursive.PemAgent.updatepem">
-<code class="sig-name descname">updatepem</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">system</span></em>, <em class="sig-param"><span class="n">fpath</span></em>, <em class="sig-param"><span class="n">username</span></em>, <em class="sig-param"><span class="n">pem</span></em>, <em class="sig-param"><span class="n">rec</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">permissive</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.recursive.PemAgent.updatepem" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.recursive.PemAgent.updatepem">
+<span class="sig-name descname"><span class="pre">updatepem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.recursive.PemAgent.updatepem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send an pems update request</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reactors.agaveutils.recursive.PemAgent.walk">
-<code class="sig-name descname">walk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span></em>, <em class="sig-param"><span class="n">dirs</span></em>, <em class="sig-param"><span class="n">files</span></em>, <em class="sig-param"><span class="n">system</span></em>, <em class="sig-param"><span class="n">username</span></em>, <em class="sig-param"><span class="n">pem</span><span class="o">=</span><span class="default_value">'READ'</span></em>, <em class="sig-param"><span class="n">rec</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.recursive.PemAgent.walk" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.recursive.PemAgent.walk">
+<span class="sig-name descname"><span class="pre">walk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'READ'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.recursive.PemAgent.walk" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.recursive.random">
-<code class="sig-prename descclassname">reactors.agaveutils.recursive.</code><code class="sig-name descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; x in the interval [0, 1).<a class="headerlink" href="#reactors.agaveutils.recursive.random" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.recursive.random">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.recursive.</span></span><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">interval</span> <span class="pre">[0,</span> <span class="pre">1).</span></span></span><a class="headerlink" href="#reactors.agaveutils.recursive.random" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</div>
-<div class="section" id="module-reactors.agaveutils.uri">
+</section>
+<section id="module-reactors.agaveutils.uri">
 <span id="reactors-agaveutils-uri-module"></span><h2>reactors.agaveutils.uri module<a class="headerlink" href="#module-reactors.agaveutils.uri" title="Permalink to this headline">¶</a></h2>
 <p>Functions for working with Agave, HTTP, and TACC S3 URIs</p>
 <dl class="py function">
-<dt id="reactors.agaveutils.uri.agave_uri_from_http">
-<code class="sig-prename descclassname">reactors.agaveutils.uri.</code><code class="sig-name descname">agave_uri_from_http</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">httpURI</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.uri.agave_uri_from_http" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.uri.agave_uri_from_http">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.uri.</span></span><span class="sig-name descname"><span class="pre">agave_uri_from_http</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">httpURI</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.uri.agave_uri_from_http" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert an HTTP(s) URI to its agave:// format
 * Do not use yet</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.uri.from_agave_uri">
-<code class="sig-prename descclassname">reactors.agaveutils.uri.</code><code class="sig-name descname">from_agave_uri</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uri</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Validate</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.uri.from_agave_uri" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.uri.from_agave_uri">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.uri.</span></span><span class="sig-name descname"><span class="pre">from_agave_uri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Validate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.uri.from_agave_uri" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse an Agave URI into a tuple (systemId, directoryPath, fileName)</p>
 <p>Validation that it points to a real resource is not implemented. The
 same caveats about validation apply here as in to_agave_uri()</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.uri.from_tacc_s3_uri">
-<code class="sig-prename descclassname">reactors.agaveutils.uri.</code><code class="sig-name descname">from_tacc_s3_uri</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uri</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Validate</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.uri.from_tacc_s3_uri" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.uri.from_tacc_s3_uri">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.uri.</span></span><span class="sig-name descname"><span class="pre">from_tacc_s3_uri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Validate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.uri.from_tacc_s3_uri" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse a TACC S3 URI into a tuple (systemId, directoryPath, (fileName))</p>
 <p>Validation that it points to a real resource is not implemented. The
 same caveats about validation apply here as in to_agave_uri()</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.uri.http_uri_from_agave">
-<code class="sig-prename descclassname">reactors.agaveutils.uri.</code><code class="sig-name descname">http_uri_from_agave</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agaveURI</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linkType</span><span class="o">=</span><span class="default_value">'media'</span></em>, <em class="sig-param"><span class="n">userName</span><span class="o">=</span><span class="default_value">'public'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.uri.http_uri_from_agave" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.uri.http_uri_from_agave">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.uri.</span></span><span class="sig-name descname"><span class="pre">http_uri_from_agave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agaveURI</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linkType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'media'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">userName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'public'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.uri.http_uri_from_agave" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an http(s) media URL for data movement or download
 * Do not use yet.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.uri.to_agave_uri">
-<code class="sig-prename descclassname">reactors.agaveutils.uri.</code><code class="sig-name descname">to_agave_uri</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">systemId</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dirPath</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fileName</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">validate</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.uri.to_agave_uri" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.uri.to_agave_uri">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.uri.</span></span><span class="sig-name descname"><span class="pre">to_agave_uri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">systemId</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirPath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.uri.to_agave_uri" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct an Agave URI for system ID, path, (filename)</p>
 <p>Validation that URI points to a real resource is not implemented.
 Should we choose to do this, it will be expensive since it will
 involve at least one API call.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-reactors.agaveutils.utils">
+</section>
+<section id="module-reactors.agaveutils.utils">
 <span id="reactors-agaveutils-utils-module"></span><h2>reactors.agaveutils.utils module<a class="headerlink" href="#module-reactors.agaveutils.utils" title="Permalink to this headline">¶</a></h2>
 <p>Helper functions for working with Agave and Reactors APIs</p>
 <p><code class="docutils literal notranslate"><span class="pre">`python</span>
 <span class="pre">from</span> <span class="pre">agaveutils</span> <span class="pre">import</span> <span class="pre">*</span>
 <span class="pre">`</span></code></p>
 <dl class="py function">
-<dt id="reactors.agaveutils.utils.get_api_server">
-<code class="sig-prename descclassname">reactors.agaveutils.utils.</code><code class="sig-name descname">get_api_server</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.utils.get_api_server" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.utils.get_api_server">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.utils.</span></span><span class="sig-name descname"><span class="pre">get_api_server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.utils.get_api_server" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get current API server URI</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.utils.get_api_token">
-<code class="sig-prename descclassname">reactors.agaveutils.utils.</code><code class="sig-name descname">get_api_token</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.utils.get_api_token" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.utils.get_api_token">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.utils.</span></span><span class="sig-name descname"><span class="pre">get_api_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.utils.get_api_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get API access_token</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reactors.agaveutils.utils.get_api_username">
-<code class="sig-prename descclassname">reactors.agaveutils.utils.</code><code class="sig-name descname">get_api_username</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.utils.get_api_username" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reactors.agaveutils.utils.get_api_username">
+<span class="sig-prename descclassname"><span class="pre">reactors.agaveutils.utils.</span></span><span class="sig-name descname"><span class="pre">get_api_username</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reactors.agaveutils.utils.get_api_username" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get current API username</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-reactors.agaveutils">
+</section>
+<section id="module-reactors.agaveutils">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-reactors.agaveutils" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -319,8 +319,8 @@ involve at least one API call.</p>
   <p class="topless"><a href="reactors.html"
                         title="previous chapter">reactors package</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="reactors.aliases.html"
-                        title="next chapter">reactors.aliases package</a></p>
+  <p class="topless"><a href="reactors.cli.html"
+                        title="next chapter">reactors.cli package</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -332,7 +332,7 @@ involve at least one API call.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -352,20 +352,20 @@ involve at least one API call.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="reactors.aliases.html" title="reactors.aliases package"
+          <a href="reactors.cli.html" title="reactors.cli package"
              >next</a> |</li>
         <li class="right" >
           <a href="reactors.html" title="reactors package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">reactors_sdk 0.7.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">reactors_sdk 1.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >reactors</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="reactors.html" >reactors package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">reactors.agaveutils package</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Matthew Vaughn, Ethan Ho, Shweta Gopaulakrishnan.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+        &#169; Copyright 2021, Matthew Vaughn, Ethan Ho, Shweta Gopaulakrishnan.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
     </div>
   </body>
 </html>

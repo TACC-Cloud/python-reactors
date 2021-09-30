@@ -4,18 +4,26 @@ reactors.logtypes package
 Submodules
 ----------
 
-reactors.logtypes.logstash module
----------------------------------
+reactors.logtypes.loggly module
+-------------------------------
 
-.. automodule:: reactors.logtypes.logstash
+.. automodule:: reactors.logtypes.loggly
    :members:
    :undoc-members:
    :show-inheritance:
 
-reactors.logtypes.logstash\_asyncio module
-------------------------------------------
+reactors.logtypes.loggly\_futures\_session module
+-------------------------------------------------
 
-.. automodule:: reactors.logtypes.logstash_asyncio
+.. automodule:: reactors.logtypes.loggly_futures_session
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+reactors.logtypes.logstash module
+---------------------------------
+
+.. automodule:: reactors.logtypes.logstash
    :members:
    :undoc-members:
    :show-inheritance:
