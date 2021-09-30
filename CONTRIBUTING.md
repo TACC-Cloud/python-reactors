@@ -22,7 +22,9 @@ When you're done, submit a pull request and for one of the maintainers to check 
 
 ### Tests
 
-Package-level unit tests are written in pytest and we ask that you run them via [tox][1] in a [poetry][2] virtual environment. To run all package-level unit tests, which require [tox][1] and [poetry][2] installed and in your `$PATH`, issue: `tox`. Tox will pass positional arguments to pytest, e.g. `tox -- --pdb -xk 'test_can_send_message'`
+GitHub Actions CI will automatically run package tests on pull requests and pushes to `main` branch. Therefore, the recommended method of testing is to simply create a new pull request.
+
+Package-level unit tests are written in pytest and we ask that you run them via [tox][1] in a [poetry][2] virtual environment if running locally. To run all package-level unit tests, which require [tox][1] and [poetry][2] installed and in your `$PATH`, issue: `tox`. Tox will pass positional arguments to pytest, e.g. `tox -- --pdb -xk 'test_can_send_message'`
 
 This repository also maintains a [base Docker image](./Dockerfile) for Tapis Actors. To run unit tests and check CLI usage in the Docker environment, issue:
 
